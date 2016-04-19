@@ -1,8 +1,8 @@
-package model.ptvobjects;
+package main.ptvobjects;
 
 import org.json.simple.JSONObject;
 
-import model.JSONHelper;
+import main.JSONHelper;
 
 public class PtvTimetable extends PtvObject {
   private PtvPlatform platform;

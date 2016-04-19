@@ -1,4 +1,4 @@
-package model;
+package main;
 
 import org.json.simple.JSONObject;
 

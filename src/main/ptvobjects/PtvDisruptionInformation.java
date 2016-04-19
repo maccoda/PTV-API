@@ -1,4 +1,4 @@
-package model.ptvobjects;
+package main.ptvobjects;
 
 import java.util.Date;
 

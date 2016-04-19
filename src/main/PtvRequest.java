@@ -1,4 +1,5 @@
-package model;
+package main;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,9 +15,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import model.ptvobjects.PtvHealth;
-import model.ptvobjects.PtvRouteType;
-import model.ptvobjects.PtvTimetable;
+import main.ptvobjects.PtvHealth;
+import main.ptvobjects.PtvRouteType;
+import main.ptvobjects.PtvTimetable;
 
 /**
  * Class to form required data for sending of PTV API request.
