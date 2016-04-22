@@ -43,7 +43,7 @@ public class PtvTimetable extends PtvObject {
     run = new PtvRun();
     run.populateFields((JSONObject) object.get("run"));
     flags = JSONHelper.parseStringValue(object, "flags");
-    timeTimetableUtc = JSONHelper.parseStringValue(object, "time_table_utc");
+    timeTimetableUtc = JSONHelper.parseStringValue(object, "time_timetable_utc");
     timeRealtimeUtc = JSONHelper.parseStringValue(object, "time_realtime_utc");
     // TODO work out what to do with the distruptions
 

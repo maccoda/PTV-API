@@ -36,7 +36,7 @@ public class PtvRun extends PtvObject {
     routeType = getRouteTypeFromObject(object);
     runId = object.get("run_id").toString();
     numSkipped = JSONHelper.parseIntegerValue(object, "num_skipped");
-    destinationId = object.get("desitination_id").toString();
+    destinationId = object.get("destination_id").toString();
     destinationName = object.get("destination_name").toString();
 
   }
