@@ -20,7 +20,7 @@ public class PtvDirectionTest {
 
   /**
    * Create mock JSON object.
-   * 
+   *
    * @throws Exception
    *           fucked up
    */

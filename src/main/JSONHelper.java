@@ -4,7 +4,6 @@ import org.json.simple.JSONObject;
 
 public class JSONHelper {
 
-  // TODO Refactor all objects to use only these methods to tidy things up
   /*
    * IDEA Add in a constructor to parse the object or something to put all the
    * JSON handling code in here, then the methods will have to not be static and
