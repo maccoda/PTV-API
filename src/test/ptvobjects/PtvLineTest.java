@@ -19,7 +19,7 @@ public class PtvLineTest {
 
   /**
    * Create mock JSON object.
-   * 
+   *
    * @throws Exception
    *           fucked up
    */
@@ -52,7 +52,7 @@ public class PtvLineTest {
     line.populateFields(object);
 
     assertTrue(line.getRouteType().equals(PtvRouteType.Train));
-    assertTrue(line.getLineId().equals("6"));
+    assertTrue(line.getLineId().equals(6));
     assertTrue(line.getLineName().equals("Frankston"));
     assertTrue(line.getLineNumber().equals("Frankston"));
     assertTrue(line.getLineNameShort().equals("Frankston"));

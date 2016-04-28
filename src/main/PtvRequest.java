@@ -70,7 +70,7 @@ public class PtvRequest {
 
   }
 
-  public PtvTimetable performBroadNextDestinationRequest(PtvRouteType mode, int stopId, int limit) {
+  public PtvTimetableValues performBroadNextDestinationRequest(PtvRouteType mode, int stopId, int limit) {
     // Request URL = /v2/mode/%@/stop/%@/departures/by-destination/limit/%
     StringBuilder uri = new StringBuilder().append("/v2");
     // Add the transport mode as the index value
@@ -82,12 +82,12 @@ public class PtvRequest {
     // Add the limit of services to show
     uri.append("/limt/" + limit);
 
-    PtvTimetable result = null;
+    PtvTimetableValues result = null;
     try {
       JSONObject object = buildAndSendApiRequest(uri.toString());
 
       // Decode the object returned
-      result = new PtvTimetable();
+      result = new PtvTimetableValues();
       result.populateFields(object);
 
     } catch (Exception e) {

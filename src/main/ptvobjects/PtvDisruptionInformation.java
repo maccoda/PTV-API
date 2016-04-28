@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
-public class PtvDisruptionInformation extends PtvObject {
+public class PtvDisruptionInformation implements PtvObject {
   private String distuptionId;
   private String title;
   private String url;

@@ -4,12 +4,12 @@ import org.json.simple.JSONObject;
 
 import main.JSONHelper;
 
-public class PtvPlatform extends PtvObject {
-  private String realtimeId;
+public class PtvPlatform implements PtvObject {
+  private int realtimeId;
   private PtvStop stop;
   private PtvDirection direction;
 
-  public String getRealtimeId() {
+  public int getRealtimeId() {
     return realtimeId;
   }
 
@@ -23,7 +23,7 @@ public class PtvPlatform extends PtvObject {
 
   @Override
   public void populateFields(JSONObject object) {
-    realtimeId = JSONHelper.parseStringValue(object, "realtime_id");
+    realtimeId = JSONHelper.parseIntegerValue(object, "realtime_id");
     stop = new PtvStop();
     stop.populateFields((JSONObject) object.get("stop"));
     direction = new PtvDirection();

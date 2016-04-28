@@ -2,9 +2,9 @@ package main.ptvobjects;
 
 import org.json.simple.JSONObject;
 
-public class PtvLine extends PtvObject {
+public class PtvLine implements PtvObject {
   private PtvRouteType routeType;
-  private String lineId;
+  private int lineId;
   private String lineName;
   private String lineNumber;
   private String lineNameShort;
@@ -14,7 +14,7 @@ public class PtvLine extends PtvObject {
     return routeType;
   }
 
-  public String getLineId() {
+  public int getLineId() {
     return lineId;
   }
 
@@ -36,19 +36,12 @@ public class PtvLine extends PtvObject {
 
   @Override
   public void populateFields(JSONObject object) {
-    int routeTypeId = Integer.parseInt((object.get("route_type").toString()));
-    for (PtvRouteType type : PtvRouteType.values()) {
-      if (routeTypeId == type.getId()) {
-        routeType = type;
-        break;
-      }
-    }
-
-    lineId = object.get("line_id").toString();
-    lineName = object.get("line_name").toString();
-    lineNumber = object.get("line_number").toString();
-    lineNameShort = object.get("line_name_short").toString();
-    lineNumberLong = object.get("line_number_long").toString();
+    routeType = JSONHelper.getRouteTypeFromObject(object);
+    lineId = JSONHelper.parseIntegerValue(object, "line_id");
+    lineName = JSONHelper.parseStringValue(object, "line_name");
+    lineNumber = JSONHelper.parseStringValue(object, "line_number");
+    lineNameShort = JSONHelper.parseStringValue(object, "line_name_short");
+    lineNumberLong = JSONHelper.parseStringValue(object, "line_number_long");
 
   }
 

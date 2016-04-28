@@ -64,23 +64,23 @@ public class PtvTimetableValuesTest {
     PtvTimetable timetable = values.getTimetable(0);
 
     PtvPlatform platform = timetable.getPlatform();
-    assertTrue(platform.getRealtimeId().equals("0"));
+    assertTrue(platform.getRealtimeId().equals(0));
     PtvStop stop = platform.getStop();
     assertEquals(0.0, stop.getDistance(), 0.1);
     assertTrue(stop.getSuburb().equals("East Melbourne"));
     assertTrue(stop.getRouteType().equals(PtvRouteType.Train));
-    assertTrue(stop.getStopId().equals("1104"));
+    assertTrue(stop.getStopId().equals(1104));
     assertTrue(stop.getLocationName().equals("Jolimont-MCG"));
     assertEquals(-37.81653, stop.getLat(), 0.1);
     assertEquals(144.9841, stop.getLon(), 0.1);
 
     PtvDirection direction = platform.getDirection();
-    assertTrue(direction.getLineDirId().equals("38"));
-    assertTrue(direction.getDirectionId().equals("5"));
+    assertTrue(direction.getLineDirId().equals(38));
+    assertTrue(direction.getDirectionId().equals(5));
     assertTrue(direction.getDirectionName().equals("South Morang"));
     PtvLine line = direction.getLine();
     assertTrue(line.getRouteType().equals(PtvRouteType.Train));
-    assertTrue(line.getLineId().equals("5"));
+    assertTrue(line.getLineId().equals(5));
     assertTrue(line.getLineName().equals("South Morang"));
     assertTrue(line.getLineNumber().equals("South Morang"));
     assertTrue(line.getLineNameShort().equals("South Morang"));

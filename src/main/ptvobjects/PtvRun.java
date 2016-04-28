@@ -4,18 +4,18 @@ import org.json.simple.JSONObject;
 
 import main.JSONHelper;
 
-public class PtvRun extends PtvObject {
+public class PtvRun implements PtvObject {
   private PtvRouteType routeType;
-  private String runId;
+  private int runId;
   private int numSkipped;
-  private String destinationId;
+  private int destinationId;
   private String destinationName;
 
   public PtvRouteType getRouteType() {
     return routeType;
   }
 
-  public String getRunId() {
+  public int getRunId() {
     return runId;
   }
 
@@ -23,7 +23,7 @@ public class PtvRun extends PtvObject {
     return numSkipped;
   }
 
-  public String getDestinationId() {
+  public int getDestinationId() {
     return destinationId;
   }
 
@@ -33,11 +33,11 @@ public class PtvRun extends PtvObject {
 
   @Override
   public void populateFields(JSONObject object) {
-    routeType = getRouteTypeFromObject(object);
-    runId = object.get("run_id").toString();
+    routeType = JSONHelper.getRouteTypeFromObject(object);
+    runId = JSONHelper.parseIntegerValue(object, "run_id");
     numSkipped = JSONHelper.parseIntegerValue(object, "num_skipped");
-    destinationId = object.get("destination_id").toString();
-    destinationName = object.get("destination_name").toString();
+    destinationId = JSONHelper.parseStringValue(object, "destination_id");
+    destinationName = JSONHelper.parseStringValue(object, "destination_name");
 
   }
 

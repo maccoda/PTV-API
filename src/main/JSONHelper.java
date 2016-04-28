@@ -26,4 +26,14 @@ public class JSONHelper {
     return Float.parseFloat(object.get(key).toString());
   }
 
+  public PtvRouteType getRouteTypeFromObject(JSONObject object) {
+    int routeTypeId = JSONHelper.parseIntegerValue(object, "route_type");
+    for (PtvRouteType type : PtvRouteType.values()) {
+      if (routeTypeId == type.getId()) {
+        return type;
+      }
+    }
+    return null;
+  }
+
 }

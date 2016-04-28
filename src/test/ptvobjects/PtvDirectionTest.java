@@ -53,13 +53,13 @@ public class PtvDirectionTest {
 
     dir.populateFields(object);
 
-    assertTrue(dir.getLineDirId().equals("0"));
-    assertTrue(dir.getDirectionId().equals("6"));
+    assertTrue(dir.getLineDirId().equals(0));
+    assertTrue(dir.getDirectionId().equals(6));
     assertTrue(dir.getDirectionName().equals("Frankston"));
 
     PtvLine line = dir.getLine();
     assertTrue(line.getRouteType().equals(PtvRouteType.Train));
-    assertTrue(line.getLineId().equals("6"));
+    assertTrue(line.getLineId().equals(6));
     assertTrue(line.getLineName().equals("Frankston"));
     assertTrue(line.getLineNumber().equals("Frankston"));
     assertTrue(line.getLineNameShort().equals("Frankston"));

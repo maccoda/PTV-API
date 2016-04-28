@@ -8,7 +8,7 @@ import main.JSONHelper;
  * @author dmaccora
  *
  */
-public class PtvHealth extends PtvObject {
+public class PtvHealth implements PtvObject {
   private boolean securityToken, clientClock, memcache, database;
 
   public boolean isSecurityToken() {

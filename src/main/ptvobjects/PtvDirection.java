@@ -2,18 +2,18 @@ package main.ptvobjects;
 
 import org.json.simple.JSONObject;
 
-public class PtvDirection extends PtvObject {
+public class PtvDirection implements PtvObject {
 
-  private String lineDirId;
-  private String directionId;
+  private int lineDirId;
+  private int directionId;
   private String directionName;
   private PtvLine line;
 
-  public String getLineDirId() {
+  public int getLineDirId() {
     return lineDirId;
   }
 
-  public String getDirectionId() {
+  public int getDirectionId() {
     return directionId;
   }
 
@@ -27,8 +27,8 @@ public class PtvDirection extends PtvObject {
 
   @Override
   public void populateFields(JSONObject object) {
-    lineDirId = object.get("linedir_id").toString();
-    directionId = object.get("direction_id").toString();
+    lineDirId = JSONHelper.parseIntegerValue(object, "linedir_id");
+    directionId = JSONHelper.parseIntegerValue(object, "direction_id");
     directionName = object.get("direction_name").toString();
     line = new PtvLine();
     line.populateFields((JSONObject) object.get("line"));
