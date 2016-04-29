@@ -2,11 +2,13 @@ package main.ptvobjects;
 
 import org.json.simple.JSONObject;
 
+import main.JSONHelper;
+
 public class PtvDirection implements PtvObject {
 
-  private int lineDirId;
-  private int directionId;
-  private String directionName;
+  private int     lineDirId;
+  private int     directionId;
+  private String  directionName;
   private PtvLine line;
 
   public int getLineDirId() {

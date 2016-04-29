@@ -2,13 +2,15 @@ package main.ptvobjects;
 
 import org.json.simple.JSONObject;
 
+import main.JSONHelper;
+
 public class PtvLine implements PtvObject {
   private PtvRouteType routeType;
-  private int lineId;
-  private String lineName;
-  private String lineNumber;
-  private String lineNameShort;
-  private String lineNumberLong;
+  private int          lineId;
+  private String       lineName;
+  private String       lineNumber;
+  private String       lineNameShort;
+  private String       lineNumberLong;
 
   public PtvRouteType getRouteType() {
     return routeType;

@@ -6,10 +6,10 @@ import main.JSONHelper;
 
 public class PtvRun implements PtvObject {
   private PtvRouteType routeType;
-  private int runId;
-  private int numSkipped;
-  private int destinationId;
-  private String destinationName;
+  private int          runId;
+  private int          numSkipped;
+  private int          destinationId;
+  private String       destinationName;
 
   public PtvRouteType getRouteType() {
     return routeType;
@@ -36,7 +36,7 @@ public class PtvRun implements PtvObject {
     routeType = JSONHelper.getRouteTypeFromObject(object);
     runId = JSONHelper.parseIntegerValue(object, "run_id");
     numSkipped = JSONHelper.parseIntegerValue(object, "num_skipped");
-    destinationId = JSONHelper.parseStringValue(object, "destination_id");
+    destinationId = JSONHelper.parseIntegerValue(object, "destination_id");
     destinationName = JSONHelper.parseStringValue(object, "destination_name");
 
   }

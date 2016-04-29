@@ -5,12 +5,15 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import java.lang.Iterable;
-/** This class is just a wrapper of the array that holds each of the Timetable entries */
 
-public class PtvTimetableValues implements PtvObject implements Iterable<PtvTimetable> {
+/**
+ * This class is just a wrapper of the array that holds each of the Timetable
+ * entries
+ */
+
+public class PtvTimetableValues implements PtvObject {
   private List<PtvTimetable> values;
-  private int currentIndex;
+  private int                currentIndex;
 
   public PtvTimetableValues() {
     values = new ArrayList<>();
@@ -24,19 +27,18 @@ public class PtvTimetableValues implements PtvObject implements Iterable<PtvTime
     throw new IndexOutOfBoundsException();
   }
 
-  //TODO This should allow iteration over allo the elements
-@Override
-public PtvTimetable next() {
-  PtvTimetable result = values.get(currentIndex);
-  currentIndex++;
-  return result;
-}
+  // TODO This should allow iteration over allo the elements
+  public PtvTimetable next() {
+    PtvTimetable result = values.get(currentIndex);
+    currentIndex++;
+    return result;
+  }
 
-@Override
-public void first() {
-  currentIndex = 0;
-  return values.get(currentIndex);
-}
+  public PtvTimetable first() {
+    currentIndex = 0;
+    return values.get(currentIndex);
+  }
+
   @Override
   public void populateFields(JSONObject object) {
     JSONArray array = (JSONArray) object.get("values");

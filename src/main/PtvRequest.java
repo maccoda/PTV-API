@@ -17,7 +17,7 @@ import org.json.simple.parser.JSONParser;
 
 import main.ptvobjects.PtvHealth;
 import main.ptvobjects.PtvRouteType;
-import main.ptvobjects.PtvTimetable;
+import main.ptvobjects.PtvTimetableValues;
 
 /**
  * Class to form required data for sending of PTV API request.
@@ -28,7 +28,7 @@ import main.ptvobjects.PtvTimetable;
 public class PtvRequest {
   private final String baseUrl = "http://timetableapi.ptv.vic.gov.au";
   private final String privateKey;
-  private final int developerId;
+  private final int    developerId;
 
   public PtvRequest(String privateKey, int developerId) {
     this.privateKey = privateKey;
@@ -70,7 +70,8 @@ public class PtvRequest {
 
   }
 
-  public PtvTimetableValues performBroadNextDestinationRequest(PtvRouteType mode, int stopId, int limit) {
+  public PtvTimetableValues performBroadNextDestinationRequest(PtvRouteType mode, int stopId,
+      int limit) {
     // Request URL = /v2/mode/%@/stop/%@/departures/by-destination/limit/%
     StringBuilder uri = new StringBuilder().append("/v2");
     // Add the transport mode as the index value

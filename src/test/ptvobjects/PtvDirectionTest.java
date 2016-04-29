@@ -1,5 +1,6 @@
 package test.ptvobjects;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.json.simple.JSONObject;
@@ -53,13 +54,13 @@ public class PtvDirectionTest {
 
     dir.populateFields(object);
 
-    assertTrue(dir.getLineDirId().equals(0));
-    assertTrue(dir.getDirectionId().equals(6));
+    assertEquals(0, dir.getLineDirId());
+    assertEquals(6, dir.getDirectionId());
     assertTrue(dir.getDirectionName().equals("Frankston"));
 
     PtvLine line = dir.getLine();
     assertTrue(line.getRouteType().equals(PtvRouteType.Train));
-    assertTrue(line.getLineId().equals(6));
+    assertEquals(6, line.getLineId());
     assertTrue(line.getLineName().equals("Frankston"));
     assertTrue(line.getLineNumber().equals("Frankston"));
     assertTrue(line.getLineNameShort().equals("Frankston"));
