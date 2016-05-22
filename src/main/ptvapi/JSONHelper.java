@@ -1,8 +1,8 @@
-package main;
+package main.ptvapi;
 
 import org.json.simple.JSONObject;
 
-import main.ptvobjects.PtvRouteType;
+import main.ptvapi.ptvobjects.PtvRouteType;
 
 public class JSONHelper {
 
@@ -13,7 +13,7 @@ public class JSONHelper {
    */
 
   public static boolean parseBooleanValue(JSONObject object, String key) {
-    return Boolean.parseBoolean((String) object.get(key));
+    return Boolean.parseBoolean(object.get(key).toString());
   }
 
   public static int parseIntegerValue(JSONObject object, String key) {

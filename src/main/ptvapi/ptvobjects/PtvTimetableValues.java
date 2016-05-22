@@ -1,4 +1,4 @@
-package main.ptvobjects;
+package main.ptvapi.ptvobjects;
 
 import java.util.ArrayList;
 import java.util.List;

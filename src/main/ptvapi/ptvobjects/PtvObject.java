@@ -1,8 +1,6 @@
-package main.ptvobjects;
+package main.ptvapi.ptvobjects;
 
 import org.json.simple.JSONObject;
-
-import main.JSONHelper;
 
 public interface PtvObject {
 

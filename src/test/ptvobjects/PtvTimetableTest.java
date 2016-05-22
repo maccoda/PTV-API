@@ -11,12 +11,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.ptvobjects.PtvDirection;
-import main.ptvobjects.PtvLine;
-import main.ptvobjects.PtvPlatform;
-import main.ptvobjects.PtvRouteType;
-import main.ptvobjects.PtvStop;
-import main.ptvobjects.PtvTimetable;
+import main.ptvapi.ptvobjects.PtvDirection;
+import main.ptvapi.ptvobjects.PtvLine;
+import main.ptvapi.ptvobjects.PtvPlatform;
+import main.ptvapi.ptvobjects.PtvRouteType;
+import main.ptvapi.ptvobjects.PtvStop;
+import main.ptvapi.ptvobjects.PtvTimetable;
 
 public class PtvTimetableTest {
 

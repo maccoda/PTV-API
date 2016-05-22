@@ -1,8 +1,8 @@
-package main.ptvobjects;
+package main.ptvapi.ptvobjects;
 
 import org.json.simple.JSONObject;
 
-import main.JSONHelper;
+import main.ptvapi.JSONHelper;
 
 public class PtvPlatform implements PtvObject {
   private int realtimeId;

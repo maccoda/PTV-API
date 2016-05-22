@@ -1,8 +1,8 @@
-package main.ptvobjects;
+package main.ptvapi.ptvobjects;
 
 import org.json.simple.JSONObject;
 
-import main.JSONHelper;
+import main.ptvapi.JSONHelper;
 
 public class PtvTimetable implements PtvObject {
   private PtvPlatform                platform;
@@ -65,7 +65,6 @@ public class PtvTimetable implements PtvObject {
 
     timeRealtimeUtc = JSONHelper.parseStringValue(object, "time_realtime_utc");
     // TODO work out what to do with the distruptions
-
   }
 
 }

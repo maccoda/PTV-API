@@ -1,4 +1,4 @@
-package main.ptvobjects;
+package main.ptvapi.ptvobjects;
 
 public enum PtvRouteType {
   Train(0), Tram(1), Bus(2), VLine(3), NightBus(4);

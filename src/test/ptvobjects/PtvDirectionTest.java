@@ -11,9 +11,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.ptvobjects.PtvDirection;
-import main.ptvobjects.PtvLine;
-import main.ptvobjects.PtvRouteType;
+import main.ptvapi.ptvobjects.PtvDirection;
+import main.ptvapi.ptvobjects.PtvLine;
+import main.ptvapi.ptvobjects.PtvRouteType;
 
 public class PtvDirectionTest {
 
