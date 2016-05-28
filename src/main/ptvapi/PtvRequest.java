@@ -164,7 +164,6 @@ public class PtvRequest {
 
       while ((line = reader.readLine()) != null) {
         jsonResponse.append(line);
-        System.out.println(line);
       }
     } catch (IOException e) {
       Logger.getLogger(this.getClass().getSimpleName()).log(Level.SEVERE,
@@ -186,29 +185,6 @@ public class PtvRequest {
    * @throws Exception
    *
    */
-  private String buildApiUrlMine(final String uri) throws Exception {
-    String HMAC_SHA1_ALGORITHM = "HmacSHA1";
-    StringBuffer uriWithDeveloperId = new StringBuffer().append(uri)
-        .append(uri.contains("?") ? "&" : "?").append("devid=" + developerId);
-    byte[] keyBytes = privateKey.getBytes();
-    byte[] uriBytes = uriWithDeveloperId.toString().getBytes();
-    Key signingKey = new SecretKeySpec(keyBytes, HMAC_SHA1_ALGORITHM);
-    Mac mac = Mac.getInstance(HMAC_SHA1_ALGORITHM);
-    mac.init(signingKey);
-    byte[] signatureBytes = mac.doFinal(uriBytes);
-    StringBuffer signature = new StringBuffer(signatureBytes.length * 2);
-    for (byte signatureByte : signatureBytes) {
-      int intVal = signatureByte & 0xff;
-      if (intVal < 0x10) {
-        signature.append("0");
-      }
-      signature.append(Integer.toHexString(intVal));
-    }
-    StringBuffer url = new StringBuffer(baseUrl).append(uri).append(uri.contains("?") ? "&" : "?")
-        .append("devid=" + developerId).append("&signature=" + signature.toString().toUpperCase());
-    return url.toString();
-  }
-
   public String buildApiUrl(final String baseURL, final String privateKey, final String uri,
       final int developerId) throws Exception {
     String HMAC_SHA1_ALGORITHM = "HmacSHA1";
@@ -298,7 +274,6 @@ public class PtvRequest {
     StringBuffer url = new StringBuffer(baseURL).append(uri).append(uri.contains("?") ? "&" : "?")
         .append("devid=" + developerId)
         .append("&signature=" + generateSignature(privateKey, uri, developerId));
-    System.out.println("Calling new one");
     return url.toString();
 
   }

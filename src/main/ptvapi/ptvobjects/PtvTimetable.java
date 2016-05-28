@@ -59,9 +59,6 @@ public class PtvTimetable implements PtvObject {
 
     timetableUtc = new GregorianCalendar(year, month, day, hour, minutes, seconds);
 
-    System.out.println(timetableUtc.get(Calendar.HOUR) + ":" + timetableUtc.get(Calendar.MINUTE)
-        + ":" + timetableUtc.get(Calendar.SECOND));
-
     // This can be null by API standards
     try {
       timeRealtimeUtc = JSONHelper.parseStringValue(object, "time_realtime_utc");
