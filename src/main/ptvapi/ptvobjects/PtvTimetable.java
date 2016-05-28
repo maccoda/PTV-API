@@ -1,15 +1,19 @@
 package main.ptvapi.ptvobjects;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.json.simple.JSONObject;
 
 import main.ptvapi.JSONHelper;
 
 public class PtvTimetable implements PtvObject {
-  private PtvPlatform                platform;
-  private PtvRun                     run;
-  private String                     flags;
-  private String                     timeTimetableUtc;
-  private String                     timeRealtimeUtc;
+  private PtvPlatform platform;
+  private PtvRun run;
+  private String flags;
+  private String timeTimetableUtc;
+  private String timeRealtimeUtc;
+  private Calendar timetableUtc;
   private PtvDisruptionInformation[] disruptions;
 
   public PtvPlatform getPlatform() {
@@ -24,8 +28,8 @@ public class PtvTimetable implements PtvObject {
     return flags;
   }
 
-  public String getTimeTimetableUtc() {
-    return timeTimetableUtc;
+  public Calendar getTimeTimetableUtc() {
+    return timetableUtc;
   }
 
   public String getTimeRealtimeUtc() {
@@ -43,27 +47,27 @@ public class PtvTimetable implements PtvObject {
     run = new PtvRun();
     run.populateFields((JSONObject) object.get("run"));
     flags = JSONHelper.parseStringValue(object, "flags");
-    // TODO I think this would be better if it were parsed to a Date object for
-    // easier use
+
     timeTimetableUtc = JSONHelper.parseStringValue(object, "time_timetable_utc");
-    // IDEA Substrings to find the time
-    // TODO Check if substring is inclusive of the last index herte i have
-    // assumed so
     int year = Integer.parseInt(timeTimetableUtc.substring(0, 4));
-    System.out.println(year);
     int month = Integer.parseInt(timeTimetableUtc.substring(5, 7));
-    System.out.println(month);
     int day = Integer.parseInt(timeTimetableUtc.substring(8, 10));
-    System.out.println(day);
 
     int hour = Integer.parseInt(timeTimetableUtc.substring(11, 13));
-    System.out.println(hour);
     int minutes = Integer.parseInt(timeTimetableUtc.substring(14, 16));
-    System.out.println(minutes);
     int seconds = Integer.parseInt(timeTimetableUtc.substring(17, 19));
-    System.out.println(seconds);
 
-    timeRealtimeUtc = JSONHelper.parseStringValue(object, "time_realtime_utc");
+    timetableUtc = new GregorianCalendar(year, month, day, hour, minutes, seconds);
+
+    System.out.println(timetableUtc.get(Calendar.HOUR) + ":" + timetableUtc.get(Calendar.MINUTE)
+        + ":" + timetableUtc.get(Calendar.SECOND));
+
+    // This can be null by API standards
+    try {
+      timeRealtimeUtc = JSONHelper.parseStringValue(object, "time_realtime_utc");
+    } catch (NullPointerException e) {
+      timeRealtimeUtc = " ";
+    }
     // TODO work out what to do with the distruptions
   }
 

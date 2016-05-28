@@ -27,6 +27,10 @@ public class PtvHealth implements PtvObject {
     return database;
   }
 
+  public boolean isAllGood() {
+    return securityToken && clientClock && memcache && database;
+  }
+
   @Override
   public void populateFields(JSONObject object) {
     securityToken = JSONHelper.parseBooleanValue((JSONObject) object, "securityTokenOK");

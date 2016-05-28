@@ -34,7 +34,7 @@ import main.ptvapi.ptvobjects.PtvTimetableValues;
 public class PtvRequest {
   private final String baseUrl = "http://timetableapi.ptv.vic.gov.au";
   private final String privateKey;
-  private final int    developerId;
+  private final int developerId;
 
   public PtvRequest(String privateKey, int developerId) {
     this.privateKey = privateKey;
@@ -90,17 +90,19 @@ public class PtvRequest {
     // Add the other part
     uri.append("/departures/by-destination");
     // Add the limit of services to show
-    uri.append("/limt/" + limit);
+    uri.append("/limit/" + limit);
 
     PtvTimetableValues result = null;
     try {
       JSONObject object = buildAndSendApiRequest(uri.toString());
 
       // Decode the object returned
+      Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "Populating fields");
       result = new PtvTimetableValues();
       result.populateFields(object);
 
     } catch (Exception e) {
+      e.printStackTrace();
       throw new RuntimeException();
     }
     return result;
@@ -139,7 +141,7 @@ public class PtvRequest {
       return result;
     } catch (Exception e) {
       Logger.getLogger(this.getClass().getSimpleName()).log(Level.SEVERE,
-          "Error in building API query");
+          "Error in building and sending API query");
       throw new Exception(e.getMessage());
     }
   }

@@ -13,7 +13,7 @@ import org.json.simple.JSONObject;
 
 public class PtvTimetableValues implements PtvObject {
   private List<PtvTimetable> values;
-  private int                currentIndex;
+  private int currentIndex;
 
   public PtvTimetableValues() {
     values = new ArrayList<>();
@@ -27,7 +27,6 @@ public class PtvTimetableValues implements PtvObject {
     throw new IndexOutOfBoundsException();
   }
 
-  // TODO This should allow iteration over allo the elements
   public PtvTimetable next() {
     PtvTimetable result = values.get(currentIndex);
     currentIndex++;
