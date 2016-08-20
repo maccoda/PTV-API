@@ -1,4 +1,4 @@
-package test.ptvobjects;
+package test.ptvapi.ptvobjects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -25,20 +25,17 @@ public class PtvTimetableValuesTest {
 
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
-    testString = "{" + "\"values\":[" + "{" + "\"platform\":{" + "\"realtime_id\":0,"
-        + "\"stop\": {" + "\"distance\":0.0," + "\"suburb\": \"East Melbourne\","
-        + "\"transport_type\": \"train\"," + "\"route_type\": 0," + "\"stop_id\":1104,"
-        + "\"location_name\": \"Jolimont-MCG\"," + "\"lat\":-37.81653," + "\"lon\":144.9841" + "},"
-        + "\"direction\": {" + "\"linedir_id\": 38," + "\"direction_id\": 5,"
+    testString = "{" + "\"values\":[" + "{" + "\"platform\":{" + "\"realtime_id\":0," + "\"stop\": {"
+        + "\"distance\":0.0," + "\"suburb\": \"East Melbourne\"," + "\"transport_type\": \"train\","
+        + "\"route_type\": 0," + "\"stop_id\":1104," + "\"location_name\": \"Jolimont-MCG\"," + "\"lat\":-37.81653,"
+        + "\"lon\":144.9841" + "}," + "\"direction\": {" + "\"linedir_id\": 38," + "\"direction_id\": 5,"
         + "\"direction_name\":\"South Morang\"," + "\"line\": {" + "\"transport_type\":\"train\","
         + "\"route_type\": 0," + "\"line_id\":5," + "\"line_name\":\"South Morang\","
-        + "\"line_number\":\"South Morang\"," + "\"line_name_short\":\"South Morang\","
-        + "\"line_number_long\":\"\"" + "}" + "}" + "}," + "\"run\":{"
-        + "\"transport_type\":\"train\"," + "\"route_type\":0," + "\"run_id\":15716,"
-        + "\"num_skipped\":0," + "\"destination_id\":1041,"
-        + "\"destination_name\":\"Clifton Hill\"" + "},"
-        + "\"time_timetable_utc\": \"2016-03-16T01:51:00Z\"," + "\"time_realtime_utc\": \"null\","
-        + "\"flags\":\"\"," + "\"disruptions\":\"\"" + "}" + "]" + "}";
+        + "\"line_number\":\"South Morang\"," + "\"line_name_short\":\"South Morang\"," + "\"line_number_long\":\"\""
+        + "}" + "}" + "}," + "\"run\":{" + "\"transport_type\":\"train\"," + "\"route_type\":0," + "\"run_id\":15716,"
+        + "\"num_skipped\":0," + "\"destination_id\":1041," + "\"destination_name\":\"Clifton Hill\"" + "},"
+        + "\"time_timetable_utc\": \"2016-03-16T01:51:00Z\"," + "\"time_realtime_utc\": \"null\"," + "\"flags\":\"\","
+        + "\"disruptions\":\"\"" + "}" + "]" + "}";
   }
 
   @AfterClass

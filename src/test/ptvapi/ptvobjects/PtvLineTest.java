@@ -1,4 +1,4 @@
-package test.ptvobjects;
+package test.ptvapi.ptvobjects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
