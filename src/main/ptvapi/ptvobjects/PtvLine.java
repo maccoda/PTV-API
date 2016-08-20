@@ -2,7 +2,7 @@ package main.ptvapi.ptvobjects;
 
 import org.json.simple.JSONObject;
 
-import main.ptvapi.JSONHelper;
+import main.ptvapi.util.JSONHelper;
 
 public class PtvLine implements PtvObject {
   private PtvRouteType routeType;

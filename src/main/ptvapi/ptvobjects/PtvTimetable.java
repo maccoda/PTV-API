@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 
 import org.json.simple.JSONObject;
 
-import main.ptvapi.JSONHelper;
+import main.ptvapi.util.JSONHelper;
 
 public class PtvTimetable implements PtvObject {
   private PtvPlatform platform;

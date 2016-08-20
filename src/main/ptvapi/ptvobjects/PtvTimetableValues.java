@@ -16,7 +16,7 @@ public class PtvTimetableValues implements PtvObject {
   private int currentIndex;
 
   public PtvTimetableValues() {
-    values = new ArrayList<>();
+    values = new ArrayList<PtvTimetable>();
     currentIndex = 0;
   }
 

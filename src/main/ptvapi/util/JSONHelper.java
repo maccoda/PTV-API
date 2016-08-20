@@ -1,16 +1,10 @@
-package main.ptvapi;
+package main.ptvapi.util;
 
 import org.json.simple.JSONObject;
 
 import main.ptvapi.ptvobjects.PtvRouteType;
 
 public class JSONHelper {
-
-  /*
-   * IDEA Add in a constructor to parse the object or something to put all the
-   * JSON handling code in here, then the methods will have to not be static and
-   * can use the provided JSON object, thus one less argument
-   */
 
   public static boolean parseBooleanValue(JSONObject object, String key) {
     return Boolean.parseBoolean(object.get(key).toString());
@@ -28,6 +22,13 @@ public class JSONHelper {
     return Float.parseFloat(object.get(key).toString());
   }
 
+  /**
+   * Converts route type from integer value as received from PTV to enum type.
+   * 
+   * @param object
+   *          - JSON object containing the route type.
+   * @return Enum value of that integer
+   */
   public static PtvRouteType getRouteTypeFromObject(JSONObject object) {
     int routeTypeId = JSONHelper.parseIntegerValue(object, "route_type");
     for (PtvRouteType type : PtvRouteType.values()) {
