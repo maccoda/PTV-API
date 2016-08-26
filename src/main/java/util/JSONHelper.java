@@ -1,8 +1,8 @@
-package main.ptvapi.util;
+package main.java.util;
 
 import org.json.simple.JSONObject;
 
-import main.ptvapi.ptvobjects.PtvRouteType;
+import main.java.ptvobjects.PtvRouteType;
 
 public class JSONHelper {
 

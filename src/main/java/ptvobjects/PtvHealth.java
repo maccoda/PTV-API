@@ -1,8 +1,8 @@
-package main.ptvapi.ptvobjects;
+package main.java.ptvobjects;
 
 import org.json.simple.JSONObject;
 
-import main.ptvapi.util.JSONHelper;
+import main.java.util.JSONHelper;
 
 /**
  * @author dmaccora

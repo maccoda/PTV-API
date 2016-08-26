@@ -1,10 +1,11 @@
-package main.ptvapi.ptvobjects;
+package main.java.ptvobjects;
 
 import java.util.Date;
 
 import org.json.simple.JSONObject;
 
 public class PtvDisruptionInformation implements PtvObject {
+
   private String distuptionId;
   private String title;
   private String url;

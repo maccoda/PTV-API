@@ -1,11 +1,11 @@
-package main.ptvapi.ptvobjects;
+package main.java.ptvobjects;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.json.simple.JSONObject;
 
-import main.ptvapi.util.JSONHelper;
+import main.java.util.JSONHelper;
 
 public class PtvTimetable implements PtvObject {
   private PtvPlatform platform;

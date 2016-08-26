@@ -1,4 +1,4 @@
-package test.ptvapi.ptvobjects;
+package test.java.ptvobjects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,11 +11,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.ptvapi.ptvobjects.PtvDirection;
-import main.ptvapi.ptvobjects.PtvLine;
-import main.ptvapi.ptvobjects.PtvRouteType;
+import main.java.ptvobjects.PtvLine;
+import main.java.ptvobjects.PtvRouteType;
 
-public class PtvDirectionTest {
+public class PtvLineTest {
 
   static String testString;
 
@@ -27,10 +26,9 @@ public class PtvDirectionTest {
    */
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
-    testString = "{\"linedir_id\": 0, \"direction_id\": 6, \"direction_name\":\"Frankston\", "
-        + "\"line\":{\"route_type\": 0, \"line_id\": 6, "
+    testString = "{\"route_type\": 0, \"line_id\": 6, "
         + "\"line_name\": \"Frankston\", \"line_number\": \"Frankston\", "
-        + "\"line_name_short\": \"Frankston\", \"line_number_long\": \"\"}}";
+        + "\"line_name_short\": \"Frankston\", \"line_number_long\": \"\"}";
   }
 
   @AfterClass
@@ -47,18 +45,13 @@ public class PtvDirectionTest {
 
   @Test
   public void testPopulateFields() throws Exception {
-    PtvDirection dir = new PtvDirection();
+    PtvLine line = new PtvLine();
 
     JSONParser parser = new JSONParser();
     JSONObject object = (JSONObject) parser.parse(testString);
 
-    dir.populateFields(object);
+    line.populateFields(object);
 
-    assertEquals(0, dir.getLineDirId());
-    assertEquals(6, dir.getDirectionId());
-    assertTrue(dir.getDirectionName().equals("Frankston"));
-
-    PtvLine line = dir.getLine();
     assertTrue(line.getRouteType().equals(PtvRouteType.Train));
     assertEquals(6, line.getLineId());
     assertTrue(line.getLineName().equals("Frankston"));

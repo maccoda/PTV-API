@@ -1,4 +1,4 @@
-package test.ptvapi.util;
+package test.java.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -7,8 +7,8 @@ import org.json.simple.JSONObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.ptvapi.ptvobjects.PtvRouteType;
-import main.ptvapi.util.JSONHelper;
+import main.java.ptvobjects.PtvRouteType;
+import main.java.util.JSONHelper;
 
 /**
  * @author D. Maccora

@@ -1,4 +1,4 @@
-package main.ptvapi.ptvobjects;
+package main.java.ptvobjects;
 
 import org.json.simple.JSONObject;
 

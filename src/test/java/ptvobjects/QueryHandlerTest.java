@@ -1,4 +1,4 @@
-package test.ptvapi.ptvobjects;
+package test.java.ptvobjects;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.ptvapi.util.QueryHandler;
+import main.java.util.QueryHandler;
 
 /**
  * @author D. Maccora

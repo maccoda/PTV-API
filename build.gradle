@@ -37,7 +37,7 @@ sourceSets {
 jar {
 	manifest {
 		attributes(
-			'Main-Class': 'main.ptvapi.Driver'
+			'Main-Class': 'main.java.Driver'
 		)
 	}
 }

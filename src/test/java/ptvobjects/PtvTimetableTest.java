@@ -1,4 +1,4 @@
-package test.ptvapi.ptvobjects;
+package test.java.ptvobjects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,12 +11,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.ptvapi.ptvobjects.PtvDirection;
-import main.ptvapi.ptvobjects.PtvLine;
-import main.ptvapi.ptvobjects.PtvPlatform;
-import main.ptvapi.ptvobjects.PtvRouteType;
-import main.ptvapi.ptvobjects.PtvStop;
-import main.ptvapi.ptvobjects.PtvTimetable;
+import main.java.ptvobjects.PtvDirection;
+import main.java.ptvobjects.PtvLine;
+import main.java.ptvobjects.PtvPlatform;
+import main.java.ptvobjects.PtvRouteType;
+import main.java.ptvobjects.PtvStop;
+import main.java.ptvobjects.PtvTimetable;
 
 public class PtvTimetableTest {
 
