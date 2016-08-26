@@ -55,6 +55,7 @@ public class QueryHandler {
   public String sendQuery(String apiCall) {
     String line;
     StringBuilder jsonResponse = new StringBuilder();
+    Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "sendQuery::Sending query: " + apiCall);
 
     try {
       URL url = new URL(apiCall);

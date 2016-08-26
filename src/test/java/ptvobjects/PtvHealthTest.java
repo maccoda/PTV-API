@@ -43,13 +43,13 @@ public class PtvHealthTest {
   @SuppressWarnings("unchecked")
   @Test
   public void isAllGoodBranchesTest() {
-    PtvHealth health = new PtvHealth();
 
     JSONObject object = new JSONObject();
     object.put("securityTokenOK", true);
     object.put("databaseOK", true);
     object.put("clientClockOK", true);
     object.put("memcacheOK", true);
+    PtvHealth health = new PtvHealth();
 
     health.populateFields(object);
     assertTrue(health.isAllGood());

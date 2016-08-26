@@ -1,4 +1,4 @@
-package test.java.ptvobjects;
+package test.java.util;
 
 import static org.junit.Assert.assertTrue;
 
@@ -61,11 +61,19 @@ public class QueryHandlerTest {
   public void parseQueryTest() {
     final String input = "{\"securityTokenOK\":false,\n\"clientClockOK\":false,\n\"memcacheOK\":true,\n\"databaseOK\":true,}";
     final JSONObject result = new QueryHandler(key, developerId).parseQueryResult(input);
-    System.out.println(result.get("securityTokenOK"));
     assertTrue(result.get("securityTokenOK").toString().equals("false"));
     assertTrue(result.get("clientClockOK").toString().equals("false"));
     assertTrue(result.get("memcacheOK").toString().equals("true"));
     assertTrue(result.get("databaseOK").toString().equals("true"));
+  }
+
+  @Test
+  public void sendQueryTest() {
+    QueryHandler handler = new QueryHandler(key, developerId);
+    String rootDir = System.getProperty("user.dir");
+    String result = handler.sendQuery("file://" + rootDir + "/src/test/resources/testResponse.json");
+    final String input = "{\"securityTokenOK\":false,\"clientClockOK\":false,\"memcacheOK\":true,\"databaseOK\":true,}";
+    assertTrue(input.equals(result));
   }
 
 }
