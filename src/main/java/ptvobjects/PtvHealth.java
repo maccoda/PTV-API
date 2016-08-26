@@ -5,10 +5,14 @@ import org.json.simple.JSONObject;
 import main.java.util.JSONHelper;
 
 /**
- * @author dmaccora
+ * Health object as defined by PTV. This object is used to check the connection with the API as well
+ * as check time and credentials provided.
+ * 
+ * @author D. Maccora
  *
  */
 public class PtvHealth implements PtvObject {
+
   private boolean securityToken, clientClock, memcache, database;
 
   public boolean isSecurityToken() {
@@ -33,10 +37,10 @@ public class PtvHealth implements PtvObject {
 
   @Override
   public void populateFields(JSONObject object) {
-    securityToken = JSONHelper.parseBooleanValue((JSONObject) object, "securityTokenOK");
-    clientClock = JSONHelper.parseBooleanValue((JSONObject) object, "clientClockOK");
-    memcache = JSONHelper.parseBooleanValue((JSONObject) object, "memcacheOK");
-    database = JSONHelper.parseBooleanValue((JSONObject) object, "databaseOK");
+    securityToken = JSONHelper.parseBooleanValue(object, "securityTokenOK");
+    clientClock = JSONHelper.parseBooleanValue(object, "clientClockOK");
+    memcache = JSONHelper.parseBooleanValue(object, "memcacheOK");
+    database = JSONHelper.parseBooleanValue(object, "databaseOK");
 
   }
 

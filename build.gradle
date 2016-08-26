@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'jacoco'
 // Added to provide compatibility with Android 4.x.x
 //sourceCompatibility = 1.6
 //targetCompatibility = 1.6
@@ -18,21 +19,6 @@ dependencies {
  *  compile files('<realtive_path>')
  *}
  */
-
-
-// Change the project layout
-sourceSets {
-  main {
-    java {
-      srcDir 'src/main'
-    }
-  }
-  test {
-    java {
-      srcDir 'src/test'
-    }
-  }
-}
 
 jar {
 	manifest {
