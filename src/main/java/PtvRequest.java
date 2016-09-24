@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import org.json.simple.JSONObject;
 
+import main.java.exception.RequestException;
 import main.java.ptvobjects.PtvHealth;
 import main.java.ptvobjects.PtvRouteType;
 import main.java.ptvobjects.PtvTimetableValues;
@@ -34,18 +35,21 @@ public class PtvRequest {
    *
    * @return Health status report of the PTV services.
    */
-  public PtvHealth performHealthCheck() {
+  public PtvHealth performHealthCheck() throws RequestException {
     final String uri = "/v2/healthcheck";
 
     PtvHealth result;
     StringBuilder builder = new StringBuilder().append(uri);
     builder.append("?timestamp=");
     builder.append(getCurrentTimeIso8061Utc());
-    JSONObject healthObject = buildAndSendApiRequest(builder.toString());
-
-    result = new PtvHealth();
-    result.populateFields(healthObject);
-    return result;
+    try {
+      JSONObject healthObject = buildAndSendApiRequest(builder.toString());
+      result = new PtvHealth();
+      result.populateFields(healthObject);
+      return result;
+    } catch (Exception e) {
+      throw new RequestException("performHealthCheck::unable to build and send request");
+    }
 
   }
 
@@ -74,7 +78,8 @@ public class PtvRequest {
    *          - Upper limit on departures returned
    * @return - Array of PTVTimetables for each departure
    */
-  public PtvTimetableValues performBroadNextDepartureRequest(PtvRouteType mode, int stopId, int limit) {
+  public PtvTimetableValues performBroadNextDepartureRequest(PtvRouteType mode, int stopId, int limit)
+      throws RequestException {
     // Request URL = /v2/mode/%@/stop/%@/departures/by-destination/limit/%
     StringBuilder uri = new StringBuilder().append("/v2");
     // Add the transport mode as the index value
@@ -96,8 +101,7 @@ public class PtvRequest {
       result.populateFields(object);
 
     } catch (Exception e) {
-      e.printStackTrace();
-      throw new RuntimeException("performBroadNextDepartureRequest::Unable to build and send API request");
+      throw new RequestException("performBroadNextDepartureRequest::Unable to build and send API request");
     }
     return result;
   }
