@@ -1,10 +1,11 @@
-package main.java.ptvobjects;
+package ptvobjects;
 
 import org.json.simple.JSONObject;
 
-import main.java.util.JSONHelper;
+import util.JSONHelper;
 
 public class PtvStop implements PtvObject {
+
   private float distance;
   private String suburb;
   private PtvRouteType routeType;

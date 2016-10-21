@@ -1,8 +1,8 @@
-package main.java.ptvobjects;
+package ptvobjects;
 
 import org.json.simple.JSONObject;
 
-import main.java.util.JSONHelper;
+import util.JSONHelper;
 
 /**
  * Health object as defined by PTV. This object is used to check the connection with the API as well

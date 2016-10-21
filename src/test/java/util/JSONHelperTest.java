@@ -1,4 +1,4 @@
-package test.java.util;
+package util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -7,8 +7,7 @@ import org.json.simple.JSONObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.java.ptvobjects.PtvRouteType;
-import main.java.util.JSONHelper;
+import ptvobjects.PtvRouteType;
 
 /**
  * @author D. Maccora

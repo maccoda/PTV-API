@@ -1,19 +1,21 @@
-package main.java.ptvobjects;
+package ptvobjects;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.json.simple.JSONObject;
 
-import main.java.util.JSONHelper;
+import util.JSONHelper;
 
 public class PtvTimetable implements PtvObject {
+
   private PtvPlatform platform;
   private PtvRun run;
   private String flags;
   private String timeTimetableUtc;
   private String timeRealtimeUtc;
   private Calendar timetableUtc;
+  private Calendar realtimeUtc;
   private PtvDisruptionInformation[] disruptions;
 
   public PtvPlatform getPlatform() {
@@ -32,8 +34,8 @@ public class PtvTimetable implements PtvObject {
     return timetableUtc;
   }
 
-  public String getTimeRealtimeUtc() {
-    return timeRealtimeUtc;
+  public Calendar getRealtimeUtc() {
+    return realtimeUtc;
   }
 
   public PtvDisruptionInformation[] getDisruptions() {
@@ -49,23 +51,32 @@ public class PtvTimetable implements PtvObject {
     flags = JSONHelper.parseStringValue(object, "flags");
 
     timeTimetableUtc = JSONHelper.parseStringValue(object, "time_timetable_utc");
-    int year = Integer.parseInt(timeTimetableUtc.substring(0, 4));
-    int month = Integer.parseInt(timeTimetableUtc.substring(5, 7));
-    int day = Integer.parseInt(timeTimetableUtc.substring(8, 10));
-
-    int hour = Integer.parseInt(timeTimetableUtc.substring(11, 13));
-    int minutes = Integer.parseInt(timeTimetableUtc.substring(14, 16));
-    int seconds = Integer.parseInt(timeTimetableUtc.substring(17, 19));
-
-    timetableUtc = new GregorianCalendar(year, month, day, hour, minutes, seconds);
-
     // This can be null by API standards
     try {
       timeRealtimeUtc = JSONHelper.parseStringValue(object, "time_realtime_utc");
     } catch (NullPointerException e) {
-      timeRealtimeUtc = " ";
+      timeRealtimeUtc = null;
     }
-    // TODO work out what to do with the distruptions
+    timetableUtc = parseCalendarTime(timeTimetableUtc);
+    if (timeRealtimeUtc != null) {
+      realtimeUtc = parseCalendarTime(timeRealtimeUtc);
+    } else {
+      realtimeUtc = null;
+    }
+
+    // TODO work out what to do with the disruptions
+  }
+
+  private Calendar parseCalendarTime(String input) {
+    int year = Integer.parseInt(input.substring(0, 4));
+    int month = Integer.parseInt(input.substring(5, 7));
+    int day = Integer.parseInt(input.substring(8, 10));
+
+    int hour = Integer.parseInt(input.substring(11, 13));
+    int minutes = Integer.parseInt(input.substring(14, 16));
+    int seconds = Integer.parseInt(input.substring(17, 19));
+
+    return new GregorianCalendar(year, month, day, hour, minutes, seconds);
   }
 
 }

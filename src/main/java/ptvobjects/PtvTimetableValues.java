@@ -1,4 +1,4 @@
-package main.java.ptvobjects;
+package ptvobjects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- * This class is just a wrapper of the array that holds each of the Timetable
- * entries
+ * This class is just a wrapper of the array that holds each of the Timetable entries
  */
 
 public class PtvTimetableValues implements PtvObject {
+
   private List<PtvTimetable> values;
   private int currentIndex;
 

@@ -1,4 +1,4 @@
-package main.java;
+package core;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -9,11 +9,11 @@ import java.util.logging.Logger;
 
 import org.json.simple.JSONObject;
 
-import main.java.exception.RequestException;
-import main.java.ptvobjects.PtvHealth;
-import main.java.ptvobjects.PtvRouteType;
-import main.java.ptvobjects.PtvTimetableValues;
-import main.java.util.QueryHandler;
+import exception.RequestException;
+import ptvobjects.PtvHealth;
+import ptvobjects.PtvRouteType;
+import ptvobjects.PtvTimetableValues;
+import util.QueryHandler;
 
 /**
  * Class to form required data for sending of PTV API request.

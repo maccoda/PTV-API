@@ -1,4 +1,4 @@
-package test.java.util;
+package util;
 
 import static org.junit.Assert.assertTrue;
 
@@ -8,8 +8,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import main.java.util.QueryHandler;
 
 /**
  * @author D. Maccora

@@ -1,4 +1,4 @@
-package test.java.ptvobjects;
+package ptvobjects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -10,14 +10,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import main.java.ptvobjects.PtvDirection;
-import main.java.ptvobjects.PtvLine;
-import main.java.ptvobjects.PtvPlatform;
-import main.java.ptvobjects.PtvRouteType;
-import main.java.ptvobjects.PtvStop;
-import main.java.ptvobjects.PtvTimetable;
-import main.java.ptvobjects.PtvTimetableValues;
 
 public class PtvTimetableValuesTest {
 
@@ -34,7 +26,7 @@ public class PtvTimetableValuesTest {
         + "\"line_number\":\"South Morang\"," + "\"line_name_short\":\"South Morang\"," + "\"line_number_long\":\"\""
         + "}" + "}" + "}," + "\"run\":{" + "\"transport_type\":\"train\"," + "\"route_type\":0," + "\"run_id\":15716,"
         + "\"num_skipped\":0," + "\"destination_id\":1041," + "\"destination_name\":\"Clifton Hill\"" + "},"
-        + "\"time_timetable_utc\": \"2016-03-16T01:51:00Z\"," + "\"time_realtime_utc\": \"null\"," + "\"flags\":\"\","
+        + "\"time_timetable_utc\": \"2016-03-16T01:51:00Z\"," + "\"time_realtime_utc\": null," + "\"flags\":\"\","
         + "\"disruptions\":\"\"" + "}" + "]" + "}";
   }
 

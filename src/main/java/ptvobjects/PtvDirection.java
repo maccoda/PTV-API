@@ -1,8 +1,8 @@
-package main.java.ptvobjects;
+package ptvobjects;
 
 import org.json.simple.JSONObject;
 
-import main.java.util.JSONHelper;
+import util.JSONHelper;
 
 public class PtvDirection implements PtvObject {
 

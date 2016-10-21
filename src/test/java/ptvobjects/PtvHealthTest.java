@@ -1,4 +1,4 @@
-package test.java.ptvobjects;
+package ptvobjects;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -7,8 +7,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
-
-import main.java.ptvobjects.PtvHealth;
 
 /**
  * @author D. Maccora
