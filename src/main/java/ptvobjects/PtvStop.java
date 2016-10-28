@@ -14,6 +14,10 @@ public class PtvStop implements PtvObject {
   private float lat;
   private float lon;
 
+  PtvStop(JSONObject object) {
+    populateFields(object);
+  }
+
   public float getDistance() {
     return distance;
   }
@@ -42,8 +46,7 @@ public class PtvStop implements PtvObject {
     return lon;
   }
 
-  @Override
-  public void populateFields(JSONObject object) {
+  private void populateFields(JSONObject object) {
     distance = JSONHelper.parseFloatValue(object, "distance");
     suburb = JSONHelper.parseStringValue(object, "suburb");
     routeType = JSONHelper.getRouteTypeFromObject(object);
@@ -51,7 +54,6 @@ public class PtvStop implements PtvObject {
     locationName = JSONHelper.parseStringValue(object, "location_name");
     lat = JSONHelper.parseFloatValue(object, "lat");
     lon = JSONHelper.parseFloatValue(object, "lon");
-
   }
 
 }

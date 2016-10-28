@@ -55,12 +55,11 @@ public class PtvTimetableTest {
 
     @Test
     public void testPopulateFields() throws Exception {
-        PtvTimetable timetable = new PtvTimetable();
 
         JSONParser parser = new JSONParser();
         JSONObject object = (JSONObject) parser.parse(testString);
 
-        timetable.populateFields(object);
+        PtvTimetable timetable = new PtvTimetable(object);
 
         PtvPlatform platform = timetable.getPlatform();
         assertEquals(0, platform.getRealtimeId());

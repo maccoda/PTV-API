@@ -10,6 +10,10 @@ public class PtvPlatform implements PtvObject {
   private PtvStop stop;
   private PtvDirection direction;
 
+  PtvPlatform(JSONObject object) {
+    populateFields(object);
+  }
+
   public int getRealtimeId() {
     return realtimeId;
   }
@@ -22,14 +26,10 @@ public class PtvPlatform implements PtvObject {
     return direction;
   }
 
-  @Override
-  public void populateFields(JSONObject object) {
+  private void populateFields(JSONObject object) {
     realtimeId = JSONHelper.parseIntegerValue(object, "realtime_id");
-    stop = new PtvStop();
-    stop.populateFields((JSONObject) object.get("stop"));
-    direction = new PtvDirection();
-    direction.populateFields((JSONObject) object.get("direction"));
-
+    stop = new PtvStop((JSONObject) object.get("stop"));
+    direction = new PtvDirection((JSONObject) object.get("direction"));
   }
 
 }

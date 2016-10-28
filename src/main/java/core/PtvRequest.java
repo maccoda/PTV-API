@@ -44,8 +44,7 @@ public class PtvRequest {
     builder.append(getCurrentTimeIso8061Utc());
     try {
       JSONObject healthObject = buildAndSendApiRequest(builder.toString());
-      result = new PtvHealth();
-      result.populateFields(healthObject);
+      result = new PtvHealth(healthObject);
       return result;
     } catch (Exception e) {
       throw new RequestException("performHealthCheck::unable to build and send request");
@@ -97,8 +96,7 @@ public class PtvRequest {
 
       // Decode the object returned
       Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "Populating fields");
-      result = new PtvTimetableValues();
-      result.populateFields(object);
+      result = new PtvTimetableValues(object);
 
     } catch (Exception e) {
       throw new RequestException("performBroadNextDepartureRequest::Unable to build and send API request");

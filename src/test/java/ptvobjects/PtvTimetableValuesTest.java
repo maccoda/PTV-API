@@ -44,12 +44,11 @@ public class PtvTimetableValuesTest {
 
   @Test
   public void test() throws Exception {
-    PtvTimetableValues values = new PtvTimetableValues();
 
     JSONParser parser = new JSONParser();
     JSONObject object = (JSONObject) parser.parse(testString);
 
-    values.populateFields(object);
+    PtvTimetableValues values = new PtvTimetableValues(object);
 
     PtvTimetable timetable = values.getTimetable(0);
 

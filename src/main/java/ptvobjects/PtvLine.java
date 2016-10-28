@@ -13,6 +13,10 @@ public class PtvLine implements PtvObject {
   private String lineNameShort;
   private String lineNumberLong;
 
+  PtvLine(JSONObject object) {
+    populateFields(object);
+  }
+
   public PtvRouteType getRouteType() {
     return routeType;
   }
@@ -37,8 +41,8 @@ public class PtvLine implements PtvObject {
     return lineNumberLong;
   }
 
-  @Override
-  public void populateFields(JSONObject object) {
+
+  private void populateFields(JSONObject object) {
     routeType = JSONHelper.getRouteTypeFromObject(object);
     lineId = JSONHelper.parseIntegerValue(object, "line_id");
     lineName = JSONHelper.parseStringValue(object, "line_name");

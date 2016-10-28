@@ -5,7 +5,7 @@ public enum PtvRouteType {
 
   private int id;
 
-  private PtvRouteType(int id) {
+  PtvRouteType(int id) {
     this.id = id;
   }
 

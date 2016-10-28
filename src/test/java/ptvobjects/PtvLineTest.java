@@ -42,12 +42,11 @@ public class PtvLineTest {
 
   @Test
   public void testPopulateFields() throws Exception {
-    PtvLine line = new PtvLine();
 
     JSONParser parser = new JSONParser();
     JSONObject object = (JSONObject) parser.parse(testString);
 
-    line.populateFields(object);
+    PtvLine line = new PtvLine(object);
 
     assertTrue(line.getRouteType().equals(PtvRouteType.Train));
     assertEquals(6, line.getLineId());

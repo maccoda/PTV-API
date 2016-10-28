@@ -43,12 +43,10 @@ public class PtvDirectionTest {
 
   @Test
   public void testPopulateFields() throws Exception {
-    PtvDirection dir = new PtvDirection();
 
     JSONParser parser = new JSONParser();
     JSONObject object = (JSONObject) parser.parse(testString);
-
-    dir.populateFields(object);
+    PtvDirection dir = new PtvDirection(object);
 
     assertEquals(0, dir.getLineDirId());
     assertEquals(6, dir.getDirectionId());

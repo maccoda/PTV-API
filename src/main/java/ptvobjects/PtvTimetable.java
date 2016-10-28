@@ -12,11 +12,13 @@ public class PtvTimetable implements PtvObject {
   private PtvPlatform platform;
   private PtvRun run;
   private String flags;
-  private String timeTimetableUtc;
-  private String timeRealtimeUtc;
   private Calendar timetableUtc;
   private Calendar realtimeUtc;
   private PtvDisruptionInformation[] disruptions;
+
+  PtvTimetable(JSONObject object) {
+    populateFields(object);
+  }
 
   public PtvPlatform getPlatform() {
     return platform;
@@ -42,16 +44,14 @@ public class PtvTimetable implements PtvObject {
     return disruptions;
   }
 
-  @Override
   public void populateFields(JSONObject object) {
-    platform = new PtvPlatform();
-    platform.populateFields((JSONObject) object.get("platform"));
-    run = new PtvRun();
-    run.populateFields((JSONObject) object.get("run"));
+    platform = new PtvPlatform((JSONObject) object.get("platform"));
+    run = new PtvRun((JSONObject) object.get("run"));
     flags = JSONHelper.parseStringValue(object, "flags");
 
-    timeTimetableUtc = JSONHelper.parseStringValue(object, "time_timetable_utc");
+    String timeTimetableUtc = JSONHelper.parseStringValue(object, "time_timetable_utc");
     // This can be null by API standards
+    String timeRealtimeUtc;
     try {
       timeRealtimeUtc = JSONHelper.parseStringValue(object, "time_realtime_utc");
     } catch (NullPointerException e) {

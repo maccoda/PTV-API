@@ -19,7 +19,6 @@ public class PtvHealthTest {
 
   @Test
   public void populateFieldtest() {
-    PtvHealth health = new PtvHealth();
 
     JSONParser parser = new JSONParser();
     JSONObject object = new JSONObject();
@@ -28,8 +27,7 @@ public class PtvHealthTest {
     } catch (ParseException e) {
       fail("Parse Exception");
     }
-
-    health.populateFields(object);
+    PtvHealth health = new PtvHealth(object);
 
     assertTrue(!health.isSecurityToken());
     assertTrue(!health.isClientClock());
@@ -47,32 +45,31 @@ public class PtvHealthTest {
     object.put("databaseOK", true);
     object.put("clientClockOK", true);
     object.put("memcacheOK", true);
-    PtvHealth health = new PtvHealth();
+    PtvHealth health = new PtvHealth(object);
 
-    health.populateFields(object);
     assertTrue(health.isAllGood());
 
     object.put("securityTokenOK", false);
 
-    health.populateFields(object);
+    health = new PtvHealth(object);
     assertTrue(!health.isAllGood());
 
     object.put("securityTokenOK", true);
     object.put("databaseOK", false);
 
-    health.populateFields(object);
+    health = new PtvHealth(object);
     assertTrue(!health.isAllGood());
 
     object.put("databaseOK", true);
     object.put("clientClockOK", false);
 
-    health.populateFields(object);
+    health = new PtvHealth(object);
     assertTrue(!health.isAllGood());
 
     object.put("clientClockOK", true);
     object.put("memcacheOK", false);
 
-    health.populateFields(object);
+    health = new PtvHealth(object);
     assertTrue(!health.isAllGood());
 
   }

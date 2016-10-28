@@ -1,9 +1,21 @@
 *.class
 bin/
+
+# Eclipse generated files
 .project
-.gradle/
 .settings/
+
+# Gradle
+.gradle/
 build/
+
+# Intellij generated files
+.idea/
+*.iml
+
+# Gradle wrapper
+gradle/
+gradlew*
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
