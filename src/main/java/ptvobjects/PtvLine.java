@@ -13,7 +13,7 @@ public class PtvLine implements PtvObject {
   private String lineNameShort;
   private String lineNumberLong;
 
-  PtvLine(JSONObject object) {
+  public PtvLine(JSONObject object) {
     populateFields(object);
   }
 
