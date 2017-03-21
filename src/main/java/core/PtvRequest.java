@@ -1,6 +1,7 @@
 package core;
 
 import exception.RequestException;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import ptvobjects.PtvHealth;
 import ptvobjects.PtvLine;

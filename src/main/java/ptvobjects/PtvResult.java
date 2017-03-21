@@ -23,10 +23,10 @@ public class PtvResult {
         // Cannot be bothered looking into reflection just going to do a case
         switch (result) {
         case STOP:
-            obj = new PtvStop(object.get("result"));
+            obj = new PtvStop((JSONObject) object.get("result"));
             break;
         case LINE:
-            obj = new PtvLine(object.get("result"));
+            obj = new PtvLine((JSONObject) object.get("result"));
             break;
         default:
             throw new RuntimeException("Unknown reuslt type");

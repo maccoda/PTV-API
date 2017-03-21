@@ -90,7 +90,7 @@ public class QueryHandler {
     } catch (ParseException e) {
       Logger.getLogger(this.getClass().getSimpleName()).log(Level.WARNING,
           "buildAndSendApiRequest::Error parsing the response. Response received: " + queryResult);
-      return result = new T();
+      return result = null;
     }
   }
 
