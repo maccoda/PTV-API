@@ -3,10 +3,7 @@ package core;
 import exception.RequestException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import ptvobjects.PtvHealth;
-import ptvobjects.PtvLine;
-import ptvobjects.PtvRouteType;
-import ptvobjects.PtvTimetableValues;
+import ptvobjects.*;
 import util.QueryHandler;
 
 import java.text.DateFormat;
@@ -102,28 +99,24 @@ public class PtvRequest {
     return result;
   }
 
-  public JSONArray performStopsNearbyRequest(int latitute, int longitude) {
+  public PtvResultList performStopsNearbyRequest(double latitute, double longitude) throws RequestException{
     // TODO Actually do something here.
     StringBuilder uri = new StringBuilder().append("/v2");
     uri.append("/nearme");
     uri.append("/latitude/" + latitute);
     uri.append("/longitude/" + longitude);
 
-    // The returned type here is a result of stops. Have not implemented anything to handle
-    // result types so will need to do so.
-    // TODO Need to make an array type to use generics
-    // PtvTimetableValues result;
-    // try {
-    //   JSONObject object = buildAndSendApiRequest(uri.toString());
+     PtvResultList result;
+     try {
+       JSONArray object = buildAndSendApiRequest(uri.toString());
 
-    //   // Decode the object returned
-    //   Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "Populating fields");
-    //   result = new PtvTimetableValues(object);
+       Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "Populating fields for PtvResultList");
+       result = new PtvResultList(object);
 
-    // } catch (Exception e) {
-    //   throw new RequestException("performBroadNextDepartureRequest::Unable to build and send API request");
-    // }
-    return null;
+     } catch (Exception e) {
+       throw new RequestException("performBroadNextDepartureRequest::Unable to build and send API request");
+     }
+    return result;
   }
 
   /**
