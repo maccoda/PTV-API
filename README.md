@@ -1,7 +1,7 @@
 # PTV-API
-[![BuildStatus](https://travis-ci.org/maccoda/PTV-API.svg?branch=master)](https://travis-ci.org/maccoda/PTV-API)
+
+[![BuildStatus](https://travis-ci.org/maccoda/PTV-API.svg?branch=master)](https://travis-ci.org/Skorpus/PTV-API)
 [![GitHub tag](https://img.shields.io/github/tag/maccoda/PTV-API.svg?maxAge=2592000)]()
-[![Codecov](https://img.shields.io/codecov/c/github/maccoda/PTV-API.svg)]()
 
 A library to make simple interface to the Public Transport Victoria API in Java.
 
