@@ -1,11 +1,9 @@
 package core;
 
 import exception.RequestException;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import ptvobjects.PtvHealth;
-import ptvobjects.PtvLine;
-import ptvobjects.PtvRouteType;
-import ptvobjects.PtvTimetableValues;
+import ptvobjects.*;
 import util.QueryHandler;
 
 import java.text.DateFormat;
@@ -75,7 +73,7 @@ public class PtvRequest {
    * @return - Array of PTVTimetables for each departure
    */
   public PtvTimetableValues performBroadNextDepartureRequest(PtvRouteType mode, int stopId, int limit)
-          throws RequestException {
+      throws RequestException {
     // Request URL = /v2/mode/%@/stop/%@/departures/by-destination/limit/%
     StringBuilder uri = new StringBuilder().append("/v2");
     // Add the transport mode as the index value
@@ -98,6 +96,26 @@ public class PtvRequest {
     } catch (Exception e) {
       throw new RequestException("performBroadNextDepartureRequest::Unable to build and send API request");
     }
+    return result;
+  }
+
+  public PtvResultList performStopsNearbyRequest(double latitute, double longitude) throws RequestException{
+    // TODO Actually do something here.
+    StringBuilder uri = new StringBuilder().append("/v2");
+    uri.append("/nearme");
+    uri.append("/latitude/" + latitute);
+    uri.append("/longitude/" + longitude);
+
+     PtvResultList result;
+     try {
+       JSONArray object = buildAndSendApiRequest(uri.toString());
+
+       Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "Populating fields for PtvResultList");
+       result = new PtvResultList(object);
+
+     } catch (Exception e) {
+       throw new RequestException("performBroadNextDepartureRequest::Unable to build and send API request");
+     }
     return result;
   }
 
@@ -131,7 +149,6 @@ public class PtvRequest {
     return result;
   }
 
-
   /**
    * Build the complete API query by appending the developer ID and signature for any request. It
    * then sends this query to the API and parses the response into a JSON object. In the case of a
@@ -141,7 +158,7 @@ public class PtvRequest {
    *
    * @return - JSON object response.
    */
-  private JSONObject buildAndSendApiRequest(String uri) {
+  private <T> T buildAndSendApiRequest(String uri) {
     String finalUri = queryHandler.buildQuery(uri);
     String response = queryHandler.sendQuery(finalUri);
     return queryHandler.parseQueryResult(response);

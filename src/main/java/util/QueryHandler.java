@@ -80,16 +80,17 @@ public class QueryHandler {
    *          - Result from API request.
    * @return Result constructed into a JSON object.
    */
-  public JSONObject parseQueryResult(String queryResult) {
+  public <T> T parseQueryResult(String queryResult) {
+    // TODO look into container factories for the parsing.
     JSONParser parser = new JSONParser();
-    JSONObject result;
+    T result;
     try {
-      result = (JSONObject) parser.parse(queryResult);
+      result = (T) parser.parse(queryResult);
       return result;
     } catch (ParseException e) {
       Logger.getLogger(this.getClass().getSimpleName()).log(Level.WARNING,
           "buildAndSendApiRequest::Error parsing the response. Response received: " + queryResult);
-      return result = new JSONObject();
+      return result = null;
     }
   }
 

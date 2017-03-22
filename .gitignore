@@ -1,5 +1,7 @@
 *.class
 bin/
+.classpath
+.vscode/
 
 # Eclipse generated files
 .project
