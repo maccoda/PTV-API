@@ -122,6 +122,7 @@ public class PtvRequest {
   /**
    * Issue "Lines by Mode" request as per PTV API. This request returns the lines for a selected mode of transport.
    * The name parameter is optional, allowing the results to be filtered.
+   * TODO Need to consider if the name field returns no reults
    *
    * @param mode - Transportation mode
    * @param name - Name to filter on a specific line
@@ -136,6 +137,64 @@ public class PtvRequest {
 
     PtvLine result;
     try {
+      // FIXME This actually returns an array not an object
+      JSONObject object = buildAndSendApiRequest(uri.toString());
+
+      // Decode the object returned
+      Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "Populating fields");
+      result = new PtvLine(object);
+
+    } catch (Exception e) {
+      throw new RequestException("performLinesByModeRequest::Unable to build and send API request");
+    }
+
+    return result;
+  }
+
+  /**
+   * TODO Document me
+   * @param searchString
+   * @return
+   * @throws RequestException
+   */
+  public PtvLine performSearchRequest(String searchString) throws RequestException {
+    // Request URL = /v2/search/%@?
+    StringBuilder uri = new StringBuilder().append("/v2");
+    uri.append("/search/" + searchString + "?");
+
+    PtvLine result;
+    try {
+      // FIXME This actually returns an array not an object
+      JSONObject object = buildAndSendApiRequest(uri.toString());
+
+      // Decode the object returned
+      Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "Populating fields");
+      result = new PtvLine(object);
+
+    } catch (Exception e) {
+      throw new RequestException("performLinesByModeRequest::Unable to build and send API request");
+    }
+
+    return result;
+  }
+
+  /**
+   * TODO Document me
+   * @param type
+   * @param lineId
+   * @return
+   * @throws RequestException
+   */
+  public PtvLine performStopsOnALineRequest(PtvRouteType type, int lineId) throws RequestException {
+    // Request URL = /v2/mode/%@/line/%@/stops-for-line?
+    StringBuilder uri = new StringBuilder().append("/v2");
+    uri.append("/mode/" + type.getId());
+    uri.append("/line/" + lineId);
+    uri.append("/stops-for-line");
+
+    PtvLine result;
+    try {
+      // FIXME This actually returns an array not an object
       JSONObject object = buildAndSendApiRequest(uri.toString());
 
       // Decode the object returned
