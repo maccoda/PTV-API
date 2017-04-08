@@ -11,38 +11,38 @@ import util.JSONHelper;
  */
 public class PtvHealth implements PtvObject {
 
-  private boolean securityToken, clientClock, memcache, database;
+    private boolean securityToken, clientClock, memcache, database;
 
-  public PtvHealth(JSONObject object) {
-    populateFields(object);
-  }
+    public PtvHealth(JSONObject object) {
+        populateFields(object);
+    }
 
-  public boolean isSecurityToken() {
-    return securityToken;
-  }
+    public boolean isSecurityToken() {
+        return securityToken;
+    }
 
-  public boolean isClientClock() {
-    return clientClock;
-  }
+    public boolean isClientClock() {
+        return clientClock;
+    }
 
-  public boolean isMemcache() {
-    return memcache;
-  }
+    public boolean isMemcache() {
+        return memcache;
+    }
 
-  public boolean isDatabase() {
-    return database;
-  }
+    public boolean isDatabase() {
+        return database;
+    }
 
-  public boolean isAllGood() {
-    return securityToken && clientClock && memcache && database;
-  }
+    public boolean isAllGood() {
+        return securityToken && clientClock && memcache && database;
+    }
 
-  private void populateFields(JSONObject object) {
-    securityToken = JSONHelper.parseBooleanValue(object, "securityTokenOK");
-    clientClock = JSONHelper.parseBooleanValue(object, "clientClockOK");
-    memcache = JSONHelper.parseBooleanValue(object, "memcacheOK");
-    database = JSONHelper.parseBooleanValue(object, "databaseOK");
+    private void populateFields(JSONObject object) {
+        securityToken = JSONHelper.parseBooleanValue(object, "securityTokenOK");
+        clientClock = JSONHelper.parseBooleanValue(object, "clientClockOK");
+        memcache = JSONHelper.parseBooleanValue(object, "memcacheOK");
+        database = JSONHelper.parseBooleanValue(object, "databaseOK");
 
-  }
+    }
 
 }

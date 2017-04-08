@@ -1,1 +1,6 @@
-{"securityTokenOK":false,"clientClockOK":false,"memcacheOK":true,"databaseOK":true,}
+{
+  "securityTokenOK": false,
+  "clientClockOK": false,
+  "memcacheOK": true,
+  "databaseOK": true,
+}

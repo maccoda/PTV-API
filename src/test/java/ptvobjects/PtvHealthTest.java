@@ -1,77 +1,76 @@
 package ptvobjects;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 /**
  * @author D. Maccora
- *
  */
 public class PtvHealthTest {
 
-  private String testString = "{\"securityTokenOK\":false,\"clientClockOK\":false," + "\"memcacheOK\":true,"
-      + "\"databaseOK\":true}";
+    private String testString = "{\"securityTokenOK\":false,\"clientClockOK\":false," + "\"memcacheOK\":true,"
+            + "\"databaseOK\":true}";
 
-  @Test
-  public void populateFieldtest() {
+    @Test
+    public void populateFieldtest() {
 
-    JSONParser parser = new JSONParser();
-    JSONObject object = new JSONObject();
-    try {
-      object = (JSONObject) parser.parse(testString);
-    } catch (ParseException e) {
-      fail("Parse Exception");
+        JSONParser parser = new JSONParser();
+        JSONObject object = new JSONObject();
+        try {
+            object = (JSONObject) parser.parse(testString);
+        } catch (ParseException e) {
+            fail("Parse Exception");
+        }
+        PtvHealth health = new PtvHealth(object);
+
+        assertTrue(!health.isSecurityToken());
+        assertTrue(!health.isClientClock());
+        assertTrue(health.isMemcache());
+        assertTrue(health.isDatabase());
+        assertTrue(!health.isAllGood());
     }
-    PtvHealth health = new PtvHealth(object);
 
-    assertTrue(!health.isSecurityToken());
-    assertTrue(!health.isClientClock());
-    assertTrue(health.isMemcache());
-    assertTrue(health.isDatabase());
-    assertTrue(!health.isAllGood());
-  }
+    @SuppressWarnings("unchecked")
+    @Test
+    public void isAllGoodBranchesTest() {
 
-  @SuppressWarnings("unchecked")
-  @Test
-  public void isAllGoodBranchesTest() {
+        JSONObject object = new JSONObject();
+        object.put("securityTokenOK", true);
+        object.put("databaseOK", true);
+        object.put("clientClockOK", true);
+        object.put("memcacheOK", true);
+        PtvHealth health = new PtvHealth(object);
 
-    JSONObject object = new JSONObject();
-    object.put("securityTokenOK", true);
-    object.put("databaseOK", true);
-    object.put("clientClockOK", true);
-    object.put("memcacheOK", true);
-    PtvHealth health = new PtvHealth(object);
+        assertTrue(health.isAllGood());
 
-    assertTrue(health.isAllGood());
+        object.put("securityTokenOK", false);
 
-    object.put("securityTokenOK", false);
+        health = new PtvHealth(object);
+        assertTrue(!health.isAllGood());
 
-    health = new PtvHealth(object);
-    assertTrue(!health.isAllGood());
+        object.put("securityTokenOK", true);
+        object.put("databaseOK", false);
 
-    object.put("securityTokenOK", true);
-    object.put("databaseOK", false);
+        health = new PtvHealth(object);
+        assertTrue(!health.isAllGood());
 
-    health = new PtvHealth(object);
-    assertTrue(!health.isAllGood());
+        object.put("databaseOK", true);
+        object.put("clientClockOK", false);
 
-    object.put("databaseOK", true);
-    object.put("clientClockOK", false);
+        health = new PtvHealth(object);
+        assertTrue(!health.isAllGood());
 
-    health = new PtvHealth(object);
-    assertTrue(!health.isAllGood());
+        object.put("clientClockOK", true);
+        object.put("memcacheOK", false);
 
-    object.put("clientClockOK", true);
-    object.put("memcacheOK", false);
+        health = new PtvHealth(object);
+        assertTrue(!health.isAllGood());
 
-    health = new PtvHealth(object);
-    assertTrue(!health.isAllGood());
-
-  }
+    }
 
 }
