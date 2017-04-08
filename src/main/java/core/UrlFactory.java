@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.logging.Logger;
 
 /**
  * Not quite a factory for creating all of the URLs for the API requests.
@@ -19,6 +20,9 @@ import java.util.TimeZone;
  * @author D. Maccora
  */
 class UrlFactory {
+    /** Logger for loggy logs */
+    private final Logger logger = Logger.getLogger(UrlFactory.class.getSimpleName());
+
     enum ApiVersion {
         /** Version 2 */
         V2("v2"),
@@ -38,9 +42,7 @@ class UrlFactory {
             this.uri = aUri;
         }
 
-        /**
-         * @return version as URI
-         */
+        /** @return version as URI */
         String toUri() {
             return uri;
         }
@@ -166,10 +168,11 @@ class UrlFactory {
      * @return - Full URL with Signature
      */
     private String generateCompleteURLWithSignature(final String uri) {
-
-        final String baseURL = "http://timetableapi.ptv.vic.gov.au/" + version.toUri();
-        final StringBuffer url = new StringBuffer(baseURL).append(uri).append(uri.contains("?") ? "&" : "?")
-                .append("devid=" + developerId).append("&signature=" + generateSignature(uri));
+        final String versionedUri = "/" + version.toUri() + uri;
+        final String baseURL = "http://timetableapi.ptv.vic.gov.au";
+        final StringBuffer url = new StringBuffer(baseURL).append(versionedUri).append(versionedUri.contains("?") ? "&" : "?")
+                .append("devid=" + developerId).append("&signature=" + generateSignature(versionedUri));
+        logger.info("Building query " + url.toString());
         return url.toString();
 
     }

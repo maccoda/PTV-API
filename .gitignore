@@ -2,6 +2,7 @@
 bin/
 .classpath
 .vscode/
+out/
 
 # Eclipse generated files
 .project

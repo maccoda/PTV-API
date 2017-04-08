@@ -1,5 +1,6 @@
 package util;
 
+import core.QueryHandler;
 import org.json.simple.JSONObject;
 import org.junit.*;
 
@@ -44,16 +45,9 @@ public class QueryHandlerTest {
     }
 
     @Test
-    public void buildQueryTest() {
-        final String correctQuery = "http://timetableapi.ptv.vic.gov.au/v2/mode/2/line/787/stops-for-line?devid=2&signature=1FD3AC2EC7FE0EA39D7D5EF44A23B89AA7974B41";
-        final String result = new QueryHandler(key, developerId).buildQuery(url);
-        assertTrue(result.equals(correctQuery));
-    }
-
-    @Test
     public void parseQueryTest() {
         final String input = "{\"securityTokenOK\":false,\n\"clientClockOK\":false,\n\"memcacheOK\":true,\n\"databaseOK\":true,}";
-        final JSONObject result = new QueryHandler(key, developerId).parseQueryResult(input);
+        final JSONObject result = QueryHandler.parseQueryResult(input);
         assertTrue(result.get("securityTokenOK").toString().equals("false"));
         assertTrue(result.get("clientClockOK").toString().equals("false"));
         assertTrue(result.get("memcacheOK").toString().equals("true"));
@@ -62,10 +56,9 @@ public class QueryHandlerTest {
 
     @Test
     public void sendQueryTest() {
-        QueryHandler handler = new QueryHandler(key, developerId);
-        String rootDir = System.getProperty("user.dir");
-        String result = handler.sendQuery("file://" + rootDir + "/src/test/resources/testResponse.json");
-        final String input = "{\"securityTokenOK\":false,\"clientClockOK\":false,\"memcacheOK\":true,\"databaseOK\":true,}";
+        final String rootDir = System.getProperty("user.dir");
+        final String result = QueryHandler.sendQuery("file://" + rootDir + "/src/test/resources/testResponse.json");
+        final String input = "{  \"securityTokenOK\": false,  \"clientClockOK\": false,  \"memcacheOK\": true,  \"databaseOK\": true,}";
         assertTrue(input.equals(result));
     }
 
