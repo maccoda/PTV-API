@@ -1,7 +1,5 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
-import util.JSONHelper;
 
 public class PtvLine implements PtvObject {
 
@@ -12,9 +10,6 @@ public class PtvLine implements PtvObject {
     private String lineNameShort;
     private String lineNumberLong;
 
-    public PtvLine(JSONObject object) {
-        populateFields(object);
-    }
 
     public PtvRouteType getRouteType() {
         return routeType;
@@ -40,15 +35,5 @@ public class PtvLine implements PtvObject {
         return lineNumberLong;
     }
 
-
-    private void populateFields(JSONObject object) {
-        routeType = JSONHelper.getRouteTypeFromObject(object);
-        lineId = JSONHelper.parseIntegerValue(object, "line_id");
-        lineName = JSONHelper.parseStringValue(object, "line_name");
-        lineNumber = JSONHelper.parseStringValue(object, "line_number");
-        lineNameShort = JSONHelper.parseStringValue(object, "line_name_short");
-        lineNumberLong = JSONHelper.parseStringValue(object, "line_number_long");
-
-    }
 
 }

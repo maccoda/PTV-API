@@ -1,7 +1,6 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.google.gson.Gson;
 import org.junit.*;
 
 import java.util.GregorianCalendar;
@@ -15,7 +14,8 @@ public class PtvTimetableTest {
     /**
      * Create mock JSON object.
      *
-     * @throws Exception fucked up
+     * @throws Exception
+     *         fucked up
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -50,14 +50,14 @@ public class PtvTimetableTest {
     @Test
     public void testPopulateFields() throws Exception {
 
-        JSONParser parser = new JSONParser();
-        JSONObject object = (JSONObject) parser.parse(testString);
+        final Gson gson = new Gson();
 
-        PtvTimetable timetable = new PtvTimetable(object);
 
-        PtvPlatform platform = timetable.getPlatform();
+        final PtvTimetable timetable = gson.fromJson(testString, PtvTimetable.class);
+
+        final PtvPlatform platform = timetable.getPlatform();
         assertEquals(0, platform.getRealtimeId());
-        PtvStop stop = platform.getStop();
+        final PtvStop stop = platform.getStop();
         assertEquals(0.0, stop.getDistance(), 0.1);
         assertTrue(stop.getSuburb().equals("East Melbourne"));
         assertTrue(stop.getRouteType().equals(PtvRouteType.Train));
@@ -66,11 +66,11 @@ public class PtvTimetableTest {
         assertEquals(-37.81653, stop.getLat(), 0.1);
         assertEquals(144.9841, stop.getLon(), 0.1);
 
-        PtvDirection direction = platform.getDirection();
+        final PtvDirection direction = platform.getDirection();
         assertEquals(38, direction.getLineDirId());
         assertEquals(5, direction.getDirectionId());
         assertTrue(direction.getDirectionName().equals("South Morang"));
-        PtvLine line = direction.getLine();
+        final PtvLine line = direction.getLine();
         assertTrue(line.getRouteType().equals(PtvRouteType.Train));
         assertEquals(5, line.getLineId());
         assertTrue(line.getLineName().equals("South Morang"));

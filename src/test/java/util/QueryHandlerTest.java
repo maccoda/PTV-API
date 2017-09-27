@@ -1,9 +1,10 @@
 package util;
 
 import core.QueryHandler;
-import org.json.simple.JSONObject;
 import org.junit.*;
+import ptvobjects.PtvHealth;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -47,11 +48,11 @@ public class QueryHandlerTest {
     @Test
     public void parseQueryTest() {
         final String input = "{\"securityTokenOK\":false,\n\"clientClockOK\":false,\n\"memcacheOK\":true,\n\"databaseOK\":true,}";
-        final JSONObject result = QueryHandler.parseQueryResult(input);
-        assertTrue(result.get("securityTokenOK").toString().equals("false"));
-        assertTrue(result.get("clientClockOK").toString().equals("false"));
-        assertTrue(result.get("memcacheOK").toString().equals("true"));
-        assertTrue(result.get("databaseOK").toString().equals("true"));
+        final PtvHealth result = QueryHandler.parseQueryResult(input, PtvHealth.class);
+        assertFalse(result.isSecurityToken());
+        assertFalse(result.isClientClock());
+        assertTrue(result.isMemcache());
+        assertTrue(result.isDatabase());
     }
 
     @Test

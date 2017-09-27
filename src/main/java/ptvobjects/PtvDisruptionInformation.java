@@ -1,6 +1,5 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
 
 import java.util.Date;
 
@@ -18,9 +17,6 @@ public class PtvDisruptionInformation implements PtvObject {
     private Date toDate;
     private String serviceTime;
 
-    PtvDisruptionInformation(JSONObject object) {
-        populateFields(object);
-    }
 
     public String getDistuptionId() {
         return distuptionId;
@@ -64,11 +60,6 @@ public class PtvDisruptionInformation implements PtvObject {
 
     public String getServiceTime() {
         return serviceTime;
-    }
-
-    public void populateFields(JSONObject object) {
-        // TODO Need to implement
-
     }
 
 }

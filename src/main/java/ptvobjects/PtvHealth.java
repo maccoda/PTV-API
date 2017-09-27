@@ -1,7 +1,5 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
-import util.JSONHelper;
 
 /**
  * Health object as defined by PTV. This object is used to check the connection with the API as well
@@ -13,9 +11,6 @@ public class PtvHealth implements PtvObject {
 
     private boolean securityToken, clientClock, memcache, database;
 
-    public PtvHealth(JSONObject object) {
-        populateFields(object);
-    }
 
     public boolean isSecurityToken() {
         return securityToken;
@@ -37,12 +32,5 @@ public class PtvHealth implements PtvObject {
         return securityToken && clientClock && memcache && database;
     }
 
-    private void populateFields(JSONObject object) {
-        securityToken = JSONHelper.parseBooleanValue(object, "securityTokenOK");
-        clientClock = JSONHelper.parseBooleanValue(object, "clientClockOK");
-        memcache = JSONHelper.parseBooleanValue(object, "memcacheOK");
-        database = JSONHelper.parseBooleanValue(object, "databaseOK");
-
-    }
 
 }

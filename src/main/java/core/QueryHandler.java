@@ -1,19 +1,27 @@
 package core;
 
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * @author D. Maccora
  */
-public class QueryHandler {
+public final class QueryHandler {
+    /** Logger */
+    private static final Logger LOGGER = Logger.getLogger(QueryHandler.class.getSimpleName());
+
+    /**
+     * Empty constructor
+     */
+    private QueryHandler() {
+        // empty
+    }
 
     /**
      * Helper method to perform the HTTP GET request and write JSON object to String.
@@ -25,7 +33,7 @@ public class QueryHandler {
     public static String sendQuery(final String apiCall) {
         String line;
         final StringBuilder jsonResponse = new StringBuilder();
-        Logger.getLogger(QueryHandler.class.getSimpleName()).log(Level.INFO, "sendQuery::Sending query: " + apiCall);
+        LOGGER.info("sendQuery::Sending query: " + apiCall);
 
         try {
             final URL url = new URL(apiCall);
@@ -35,8 +43,7 @@ public class QueryHandler {
                 jsonResponse.append(line);
             }
         } catch (final IOException e) {
-            Logger.getLogger(QueryHandler.class.getSimpleName()).log(Level.SEVERE,
-                    "sendQueryToApi::Error obtaining API response");
+            LOGGER.severe("sendQueryToApi::Error obtaining API response");
         }
 
         return jsonResponse.toString();
@@ -48,20 +55,14 @@ public class QueryHandler {
      *
      * @param queryResult
      *         - Result from API request.
+     * @param clazz
+     *         - Data type to convert to
      * @return Result constructed into a JSON object.
      */
-    public static <T> T parseQueryResult(final String queryResult) {
+    public static <T> T parseQueryResult(final String queryResult, final Class<T> clazz) {
         // TODO look into container factories for the parsing.
-        final JSONParser parser = new JSONParser();
-        final T result;
-        try {
-            result = (T) parser.parse(queryResult);
-            return result;
-        } catch (final ParseException e) {
-            Logger.getLogger(QueryHandler.class.getClass().getSimpleName()).log(Level.WARNING,
-                    "buildAndSendApiRequest::Error parsing the response. Response received: " + queryResult);
-            return null;
-        }
+        final Gson gson = new Gson();
+        return gson.fromJson(queryResult, clazz);
     }
 
 

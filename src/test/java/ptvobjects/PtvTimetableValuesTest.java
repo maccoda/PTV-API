@@ -1,7 +1,7 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+
+import com.google.gson.Gson;
 import org.junit.*;
 
 import static org.junit.Assert.assertEquals;
@@ -41,16 +41,15 @@ public class PtvTimetableValuesTest {
     @Test
     public void test() throws Exception {
 
-        JSONParser parser = new JSONParser();
-        JSONObject object = (JSONObject) parser.parse(testString);
+        final Gson gson = new Gson();
 
-        PtvTimetableValues values = new PtvTimetableValues(object);
+        final PtvTimetableValues values = gson.fromJson(testString, PtvTimetableValues.class);
 
-        PtvTimetable timetable = values.getTimetable(0);
+        final PtvTimetable timetable = values.getTimetable(0);
 
-        PtvPlatform platform = timetable.getPlatform();
+        final PtvPlatform platform = timetable.getPlatform();
         assertEquals(0, platform.getRealtimeId());
-        PtvStop stop = platform.getStop();
+        final PtvStop stop = platform.getStop();
         assertEquals(0.0, stop.getDistance(), 0.1);
         assertTrue(stop.getSuburb().equals("East Melbourne"));
         assertTrue(stop.getRouteType().equals(PtvRouteType.Train));
@@ -59,11 +58,11 @@ public class PtvTimetableValuesTest {
         assertEquals(-37.81653, stop.getLat(), 0.1);
         assertEquals(144.9841, stop.getLon(), 0.1);
 
-        PtvDirection direction = platform.getDirection();
+        final PtvDirection direction = platform.getDirection();
         assertEquals(38, direction.getLineDirId());
         assertEquals(5, direction.getDirectionId());
         assertTrue(direction.getDirectionName().equals("South Morang"));
-        PtvLine line = direction.getLine();
+        final PtvLine line = direction.getLine();
         assertTrue(line.getRouteType().equals(PtvRouteType.Train));
         assertEquals(5, line.getLineId());
         assertTrue(line.getLineName().equals("South Morang"));

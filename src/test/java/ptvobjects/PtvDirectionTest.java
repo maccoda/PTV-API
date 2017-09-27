@@ -1,7 +1,6 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.google.gson.Gson;
 import org.junit.*;
 
 import static org.junit.Assert.assertEquals;
@@ -14,7 +13,8 @@ public class PtvDirectionTest {
     /**
      * Create mock JSON object.
      *
-     * @throws Exception fucked up
+     * @throws Exception
+     *         fucked up
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -38,16 +38,14 @@ public class PtvDirectionTest {
 
     @Test
     public void testPopulateFields() throws Exception {
-
-        JSONParser parser = new JSONParser();
-        JSONObject object = (JSONObject) parser.parse(testString);
-        PtvDirection dir = new PtvDirection(object);
+        final Gson gson = new Gson();
+        final PtvDirection dir = gson.fromJson(testString, PtvDirection.class);
 
         assertEquals(0, dir.getLineDirId());
         assertEquals(6, dir.getDirectionId());
         assertTrue(dir.getDirectionName().equals("Frankston"));
 
-        PtvLine line = dir.getLine();
+        final PtvLine line = dir.getLine();
         assertTrue(line.getRouteType().equals(PtvRouteType.Train));
         assertEquals(6, line.getLineId());
         assertTrue(line.getLineName().equals("Frankston"));

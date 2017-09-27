@@ -1,7 +1,5 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
-import util.JSONHelper;
 
 public class PtvDirection implements PtvObject {
 
@@ -10,9 +8,6 @@ public class PtvDirection implements PtvObject {
     private String directionName;
     private PtvLine line;
 
-    PtvDirection(JSONObject object) {
-        populateFields(object);
-    }
 
     public int getLineDirId() {
         return lineDirId;
@@ -30,10 +25,4 @@ public class PtvDirection implements PtvObject {
         return line;
     }
 
-    private void populateFields(JSONObject object) {
-        lineDirId = JSONHelper.parseIntegerValue(object, "linedir_id");
-        directionId = JSONHelper.parseIntegerValue(object, "direction_id");
-        directionName = object.get("direction_name").toString();
-        line = new PtvLine((JSONObject) object.get("line"));
-    }
 }

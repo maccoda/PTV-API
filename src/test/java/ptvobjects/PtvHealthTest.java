@@ -1,32 +1,31 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 /**
  * @author D. Maccora
  */
 public class PtvHealthTest {
 
-    private String testString = "{\"securityTokenOK\":false,\"clientClockOK\":false," + "\"memcacheOK\":true,"
+    private final String testString = "{\"securityTokenOK\":false,\"clientClockOK\":false," + "\"memcacheOK\":true,"
             + "\"databaseOK\":true}";
+
+    private static Gson gson;
+
+    @BeforeClass
+    public static void beforeClass() {
+        gson = new Gson();
+    }
 
     @Test
     public void populateFieldtest() {
 
-        JSONParser parser = new JSONParser();
-        JSONObject object = new JSONObject();
-        try {
-            object = (JSONObject) parser.parse(testString);
-        } catch (ParseException e) {
-            fail("Parse Exception");
-        }
-        PtvHealth health = new PtvHealth(object);
+        final PtvHealth health = gson.fromJson(testString, PtvHealth.class);
 
         assertTrue(!health.isSecurityToken());
         assertTrue(!health.isClientClock());
@@ -39,36 +38,37 @@ public class PtvHealthTest {
     @Test
     public void isAllGoodBranchesTest() {
 
-        JSONObject object = new JSONObject();
-        object.put("securityTokenOK", true);
-        object.put("databaseOK", true);
-        object.put("clientClockOK", true);
-        object.put("memcacheOK", true);
-        PtvHealth health = new PtvHealth(object);
+        final JsonObject object = new JsonObject();
+        object.addProperty("securityTokenOK", true);
+        object.addProperty("clientClockOK", true);
+        object.addProperty("memcacheOK", true);
+        object.addProperty("databaseOK", true);
+
+        PtvHealth health = gson.fromJson(object, PtvHealth.class);
 
         assertTrue(health.isAllGood());
 
-        object.put("securityTokenOK", false);
+        object.addProperty("securityTokenOK", false);
 
-        health = new PtvHealth(object);
+        health = gson.fromJson(object, PtvHealth.class);
         assertTrue(!health.isAllGood());
 
-        object.put("securityTokenOK", true);
-        object.put("databaseOK", false);
+        object.addProperty("securityTokenOK", true);
+        object.addProperty("databaseOK", false);
 
-        health = new PtvHealth(object);
+        health = gson.fromJson(object, PtvHealth.class);
         assertTrue(!health.isAllGood());
 
-        object.put("databaseOK", true);
-        object.put("clientClockOK", false);
+        object.addProperty("databaseOK", true);
+        object.addProperty("clientClockOK", false);
 
-        health = new PtvHealth(object);
+        health = gson.fromJson(object, PtvHealth.class);
         assertTrue(!health.isAllGood());
 
-        object.put("clientClockOK", true);
-        object.put("memcacheOK", false);
+        object.addProperty("clientClockOK", true);
+        object.addProperty("memcacheOK", false);
 
-        health = new PtvHealth(object);
+        health = gson.fromJson(object, PtvHealth.class);
         assertTrue(!health.isAllGood());
 
     }
