@@ -2,16 +2,24 @@ package ptvobjects;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class PtvTimetable implements PtvObject {
 
     private PtvPlatform platform;
     private PtvRun run;
     private String flags;
+    private String time_timetable_utc;
+    private String time_realtime_utc;
     private Calendar timetableUtc;
     private Calendar realtimeUtc;
-    private PtvDisruptionInformation[] disruptions;
+    private List<PtvDisruptionInformation> disruptions;
 
+
+    public PtvTimetable() {
+        timetableUtc = null;
+        realtimeUtc = null;
+    }
 
     public PtvPlatform getPlatform() {
         return platform;
@@ -26,14 +34,20 @@ public class PtvTimetable implements PtvObject {
     }
 
     public Calendar getTimeTimetableUtc() {
+        if (timetableUtc == null) {
+            timetableUtc = parseCalendarTime(time_timetable_utc);
+        }
         return timetableUtc;
     }
 
     public Calendar getRealtimeUtc() {
+        if (realtimeUtc == null) {
+            realtimeUtc = parseCalendarTime(time_realtime_utc);
+        }
         return realtimeUtc;
     }
 
-    public PtvDisruptionInformation[] getDisruptions() {
+    public List<PtvDisruptionInformation> getDisruptions() {
         return disruptions;
     }
 

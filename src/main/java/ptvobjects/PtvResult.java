@@ -1,5 +1,8 @@
 package ptvobjects;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 public class PtvResult {
 
     /**
@@ -9,31 +12,41 @@ public class PtvResult {
         STOP, LINE,
     }
 
-    PtvObject obj;
-    ResultType result;
+    PtvObject result;
+    ResultType type;
 
-//    public PtvResult(JSONObject object) {
-//        result = ResultType.valueOf(JSONHelper.parseStringValue(object, "type").toUpperCase());
-//        // TODO Need to build the type we need
-//        // Cannot be bothered looking into reflection just going to do a case
-//        switch (result) {
-//            case STOP:
-//                obj = new PtvStop((JSONObject) object.get("result"));
-//                break;
-//            case LINE:
-//                obj = new PtvLine((JSONObject) object.get("result"));
-//                break;
-//            default:
-//                throw new RuntimeException("Unknown reuslt type");
-//        }
-//    }
-
-    public String getType() {
-        return result.name().toLowerCase();
+    public PtvResult(final JsonObject object) {
+        type = ResultType.valueOf(object.get("type").getAsString().toUpperCase());
+        switch (type) {
+            case LINE:
+                result = new Gson().fromJson(object.get("result"), PtvLine.class);
+                break;
+            case STOP:
+                result = new Gson().fromJson(object.get("result"), PtvStop.class);
+                break;
+            default:
+                throw new IllegalArgumentException("Unexpected type");
+        }
     }
 
-    public PtvObject getObject() {
-        return obj;
+    public String getType() {
+        return type.name().toLowerCase();
+    }
+
+    public PtvStop getObjectAsStop() throws IllegalAccessException {
+        if (type == ResultType.STOP) {
+            return (PtvStop) result;
+        } else {
+            throw new IllegalAccessException("Not correct type");
+        }
+    }
+
+    public PtvLine getObjectAsLine() throws IllegalAccessException {
+        if (type == ResultType.LINE) {
+            return (PtvLine) result;
+        } else {
+            throw new IllegalAccessException("Not correct type");
+        }
     }
 
 }

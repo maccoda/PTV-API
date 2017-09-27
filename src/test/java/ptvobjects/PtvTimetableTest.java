@@ -15,7 +15,6 @@ public class PtvTimetableTest {
      * Create mock JSON object.
      *
      * @throws Exception
-     *         fucked up
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -31,7 +30,7 @@ public class PtvTimetableTest {
                 + "}" + "}" + "}," + "\"run\":{" + "\"transport_type\":\"train\"," + "\"route_type\":0," + "\"run_id\":15716,"
                 + "\"num_skipped\":0," + "\"destination_id\":1041," + "\"destination_name\":\"Clifton Hill\"" + "},"
                 + "\"time_timetable_utc\": \"2016-03-16T01:51:00Z\"," + "\"time_realtime_utc\": \"2016-03-16T01:53:00Z\","
-                + "\"flags\":\"\"," + "\"disruptions\":\"\"" + "}";
+                + "\"flags\":\"\"," + "\"disruptions\":[]" + "}";
 
     }
 

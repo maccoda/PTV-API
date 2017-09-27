@@ -28,7 +28,7 @@ public class PtvHealthTest {
         final PtvHealth health = gson.fromJson(testString, PtvHealth.class);
 
         assertTrue(!health.isSecurityToken());
-        assertTrue(!health.isClientClock());
+        assertTrue(!health.isClientClockOK());
         assertTrue(health.isMemcache());
         assertTrue(health.isDatabase());
         assertTrue(!health.isAllGood());

@@ -2,13 +2,13 @@ package ptvobjects;
 
 public class PtvPlatform implements PtvObject {
 
-    private int realtimeId;
+    private int realtime_id;
     private PtvStop stop;
     private PtvDirection direction;
 
 
     public int getRealtimeId() {
-        return realtimeId;
+        return realtime_id;
     }
 
     public PtvStop getStop() {

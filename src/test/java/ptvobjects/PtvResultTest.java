@@ -1,6 +1,7 @@
 package ptvobjects;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -14,11 +15,11 @@ public class PtvResultTest {
                 "\"lat\":-37.809,\"lon\":144.992},\"type\":\"stop\"}";
 
         final Gson gson = new Gson();
-        final PtvResult result = gson.fromJson(testString, PtvResult.class);
+        final PtvResult result = new PtvResult(gson.fromJson(testString, JsonObject.class));
 
         assertEquals(result.getType(), "stop");
 
-        final PtvStop stop = (PtvStop) result.getObject();
+        final PtvStop stop = result.getObjectAsStop();
         assertEquals(stop.getDistance(), 0.0, 0.001);
         assertEquals(stop.getSuburb(), "Abbotsford");
         assertEquals(stop.getRouteType(), PtvRouteType.Tram);
@@ -32,17 +33,17 @@ public class PtvResultTest {
     @Test
     public void testLineType() throws Exception {
         final String testString = "{\"result\":{\"transport_type\":\"tram\"," +
-                "\"route_type\":1,\"line_name\":\"Route 78 North Richmond via Balaclava\", \"line_id\":976" +
+                "\"route_type\":1,\"line_name\":\"Route 78 North Richmond via Balaclava\", \"line_id\":976," +
                 "\"line_number\":\"Route 78\", \"line_name_short\":\"North Richmond\", \"line_number_long\":\"78\"}," +
                 "\"type\":\"line\"}";
 
         final Gson gson = new Gson();
 
-        final PtvResult result = gson.fromJson(testString, PtvResult.class);
+        final PtvResult result = new PtvResult(gson.fromJson(testString, JsonObject.class));
 
         assertEquals(result.getType(), "line");
 
-        final PtvLine line = (PtvLine) result.getObject();
+        final PtvLine line = result.getObjectAsLine();
         assertEquals(line.getRouteType(), PtvRouteType.Tram);
         assertEquals(line.getLineId(), 976);
         assertEquals(line.getLineName(), "Route 78 North Richmond via Balaclava");

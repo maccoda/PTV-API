@@ -3,22 +3,22 @@ package ptvobjects;
 
 public class PtvDirection implements PtvObject {
 
-    private int lineDirId;
-    private int directionId;
-    private String directionName;
+    private int linedir_id;
+    private int direction_id;
+    private String direction_name;
     private PtvLine line;
 
 
     public int getLineDirId() {
-        return lineDirId;
+        return linedir_id;
     }
 
     public int getDirectionId() {
-        return directionId;
+        return direction_id;
     }
 
     public String getDirectionName() {
-        return directionName;
+        return direction_name;
     }
 
     public PtvLine getLine() {

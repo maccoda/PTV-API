@@ -9,27 +9,27 @@ package ptvobjects;
  */
 public class PtvHealth implements PtvObject {
 
-    private boolean securityToken, clientClock, memcache, database;
+    private boolean securityTokenOK, clientClockOK, memcacheOK, databaseOK;
 
 
     public boolean isSecurityToken() {
-        return securityToken;
+        return securityTokenOK;
     }
 
-    public boolean isClientClock() {
-        return clientClock;
+    public boolean isClientClockOK() {
+        return clientClockOK;
     }
 
     public boolean isMemcache() {
-        return memcache;
+        return memcacheOK;
     }
 
     public boolean isDatabase() {
-        return database;
+        return databaseOK;
     }
 
     public boolean isAllGood() {
-        return securityToken && clientClock && memcache && database;
+        return securityTokenOK && clientClockOK && memcacheOK && databaseOK;
     }
 
 

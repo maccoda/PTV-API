@@ -47,10 +47,10 @@ public class QueryHandlerTest {
 
     @Test
     public void parseQueryTest() {
-        final String input = "{\"securityTokenOK\":false,\n\"clientClockOK\":false,\n\"memcacheOK\":true,\n\"databaseOK\":true,}";
+        final String input = "{\"securityTokenOK\":false,\n\"clientClockOK\":false,\n\"memcacheOK\":true,\n\"databaseOK\":true}";
         final PtvHealth result = QueryHandler.parseQueryResult(input, PtvHealth.class);
         assertFalse(result.isSecurityToken());
-        assertFalse(result.isClientClock());
+        assertFalse(result.isClientClockOK());
         assertTrue(result.isMemcache());
         assertTrue(result.isDatabase());
     }

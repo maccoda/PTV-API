@@ -5,9 +5,9 @@ public class PtvStop implements PtvObject {
 
     private float distance;
     private String suburb;
-    private PtvRouteType routeType;
-    private int stopId;
-    private String locationName;
+    private int route_type;
+    private int stop_id;
+    private String location_name;
     private float lat;
     private float lon;
 
@@ -21,15 +21,15 @@ public class PtvStop implements PtvObject {
     }
 
     public PtvRouteType getRouteType() {
-        return routeType;
+        return PtvRouteType.values()[route_type];
     }
 
     public int getStopId() {
-        return stopId;
+        return stop_id;
     }
 
     public String getLocationName() {
-        return locationName;
+        return location_name;
     }
 
     public float getLat() {
