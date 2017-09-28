@@ -1,0 +1,12 @@
+{
+  "result": {
+    "transport_type": "tram",
+    "route_type": 1,
+    "line_name": "Route 78 North Richmond via Balaclava",
+    "line_id": 976,
+    "line_number": "Route 78",
+    "line_name_short": "North Richmond",
+    "line_number_long": "78"
+  },
+  "type": "line"
+}
