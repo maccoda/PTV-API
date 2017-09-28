@@ -3,16 +3,23 @@ package ptvobjects;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-public class PtvResult {
+/**
+ * Result data type which can be obtained from several different queries. It is represented as a union type which
+ * can have either a {@link PtvStop} or {@link PtvLine} payload.
+ */
+public class PtvResult implements PtvUnionObject {
 
     /**
      * The types of results that can be returned. This dictates what type of object needs to be created.
      */
     enum ResultType {
-        STOP, LINE,
+        /** Data type is a PtvStop object */
+        STOP,
+        /** Data type is a PtvLine object */
+        LINE,
     }
 
-    PtvObject result;
+    PtvBasicObject result;
     ResultType type;
 
     public PtvResult(final JsonObject object) {

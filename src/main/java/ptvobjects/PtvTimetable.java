@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class PtvTimetable implements PtvObject {
+public class PtvTimetable implements PtvBasicObject {
 
     private PtvPlatform platform;
     private PtvRun run;

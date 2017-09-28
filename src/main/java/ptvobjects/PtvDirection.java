@@ -1,7 +1,7 @@
 package ptvobjects;
 
 
-public class PtvDirection implements PtvObject {
+public class PtvDirection implements PtvBasicObject {
 
     private int linedir_id;
     private int direction_id;

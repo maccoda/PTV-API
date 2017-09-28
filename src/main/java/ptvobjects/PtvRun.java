@@ -1,6 +1,6 @@
 package ptvobjects;
 
-public class PtvRun implements PtvObject {
+public class PtvRun implements PtvBasicObject {
 
     private PtvRouteType routeType;
     private int runId;

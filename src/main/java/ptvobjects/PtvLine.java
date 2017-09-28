@@ -1,7 +1,7 @@
 package ptvobjects;
 
 
-public class PtvLine implements PtvObject {
+public class PtvLine implements PtvBasicObject {
 
     private int route_type;
     private int line_id;

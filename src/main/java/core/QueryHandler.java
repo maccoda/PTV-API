@@ -1,6 +1,9 @@
 package core;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import ptvobjects.PtvBasicObject;
+import ptvobjects.PtvResult;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +18,8 @@ import java.util.logging.Logger;
 public final class QueryHandler {
     /** Logger */
     private static final Logger LOGGER = Logger.getLogger(QueryHandler.class.getSimpleName());
+
+    private static Gson gson;
 
     /**
      * Empty constructor
@@ -59,10 +64,19 @@ public final class QueryHandler {
      *         - Data type to convert to
      * @return Result constructed into a JSON object.
      */
-    public static <T> T parseQueryResult(final String queryResult, final Class<T> clazz) {
-        // TODO look into container factories for the parsing.
-        final Gson gson = new Gson();
-        return gson.fromJson(queryResult, clazz);
+    public static <T extends PtvBasicObject> T parseQueryResult(final String queryResult, final Class<T> clazz) {
+        return gson().fromJson(queryResult, clazz);
+    }
+
+    public static PtvResult parseResultUnionQuery(final String queryResult) {
+        return new PtvResult(gson().fromJson(queryResult, JsonObject.class));
+    }
+
+    private static Gson gson() {
+        if (gson == null) {
+            gson = new Gson();
+        }
+        return gson;
     }
 
 

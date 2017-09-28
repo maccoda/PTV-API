@@ -1,7 +1,7 @@
 package ptvobjects;
 
 
-public class PtvStop implements PtvObject {
+public class PtvStop implements PtvBasicObject {
 
     private float distance;
     private String suburb;

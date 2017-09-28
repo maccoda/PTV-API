@@ -8,7 +8,7 @@ import java.util.List;
  * This class is just a wrapper of the array that holds each of the Timetable entries
  */
 
-public class PtvTimetableValues implements PtvObject {
+public class PtvTimetableValues implements PtvBasicObject {
 
     private final List<PtvTimetable> values;
     private int currentIndex;

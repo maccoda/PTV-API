@@ -1,6 +1,6 @@
 package ptvobjects;
 
-public class PtvPlatform implements PtvObject {
+public class PtvPlatform implements PtvBasicObject {
 
     private int realtime_id;
     private PtvStop stop;
