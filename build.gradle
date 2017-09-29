@@ -1,6 +1,11 @@
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+}
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
+
 // Added to provide compatibility with Android 4.x.x
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -19,5 +24,33 @@ jacocoTestReport {
         xml.enabled true
         html.enabled true
         csv.enabled false
+    }
+}
+
+def publishVerion = 'v0.1.0'
+
+publishing
+        {
+            publications {
+                MyPublication(MavenPublication) {
+                    from components.java
+                    groupId 'org.maccoda'
+                    artifactId 'ptv-api'
+                    version "$publishVerion"
+                }
+            }
+        }
+
+bintray {
+    user = bintrayuser
+    key = bintraykey
+    publications = ['MyPublication']
+    pkg {
+        repo = 'maven'
+        name = 'PTV-API'
+        version {
+            name = "$publishVerion"
+            vcsTag = "$publishVerion"
+        }
     }
 }
