@@ -27,7 +27,7 @@ jacocoTestReport {
     }
 }
 
-def publishVerion = 'v0.1.0'
+def publishVerion = 'v0.2.0'
 
 publishing
         {
