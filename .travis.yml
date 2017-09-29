@@ -1,7 +1,7 @@
 language: java
 jdk:
     - openjdk7
-before_script:
+before_install:
     - gradle wrapper
 script:
     - ./gradlew check
