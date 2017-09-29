@@ -1,77 +1,76 @@
 package ptvobjects;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import util.TestUtils;
+
+import java.io.FileReader;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author D. Maccora
- *
  */
 public class PtvHealthTest {
 
-  private String testString = "{\"securityTokenOK\":false,\"clientClockOK\":false," + "\"memcacheOK\":true,"
-      + "\"databaseOK\":true}";
+    private static Gson gson;
 
-  @Test
-  public void populateFieldtest() {
-
-    JSONParser parser = new JSONParser();
-    JSONObject object = new JSONObject();
-    try {
-      object = (JSONObject) parser.parse(testString);
-    } catch (ParseException e) {
-      fail("Parse Exception");
+    @BeforeClass
+    public static void beforeClass() {
+        gson = new Gson();
     }
-    PtvHealth health = new PtvHealth(object);
 
-    assertTrue(!health.isSecurityToken());
-    assertTrue(!health.isClientClock());
-    assertTrue(health.isMemcache());
-    assertTrue(health.isDatabase());
-    assertTrue(!health.isAllGood());
-  }
+    @Test
+    public void populateFieldtest() throws Exception {
+        final String testString = TestUtils.getResourcePath("testHealth.json");
+        final PtvHealth health = gson.fromJson(new FileReader(testString), PtvHealth.class);
 
-  @SuppressWarnings("unchecked")
-  @Test
-  public void isAllGoodBranchesTest() {
+        assertTrue(!health.isSecurityToken());
+        assertTrue(!health.isClientClockOK());
+        assertTrue(health.isMemcache());
+        assertTrue(health.isDatabase());
+        assertTrue(!health.isAllGood());
+    }
 
-    JSONObject object = new JSONObject();
-    object.put("securityTokenOK", true);
-    object.put("databaseOK", true);
-    object.put("clientClockOK", true);
-    object.put("memcacheOK", true);
-    PtvHealth health = new PtvHealth(object);
+    @SuppressWarnings("unchecked")
+    @Test
+    public void isAllGoodBranchesTest() {
 
-    assertTrue(health.isAllGood());
+        final JsonObject object = new JsonObject();
+        object.addProperty("securityTokenOK", true);
+        object.addProperty("clientClockOK", true);
+        object.addProperty("memcacheOK", true);
+        object.addProperty("databaseOK", true);
 
-    object.put("securityTokenOK", false);
+        PtvHealth health = gson.fromJson(object, PtvHealth.class);
 
-    health = new PtvHealth(object);
-    assertTrue(!health.isAllGood());
+        assertTrue(health.isAllGood());
 
-    object.put("securityTokenOK", true);
-    object.put("databaseOK", false);
+        object.addProperty("securityTokenOK", false);
 
-    health = new PtvHealth(object);
-    assertTrue(!health.isAllGood());
+        health = gson.fromJson(object, PtvHealth.class);
+        assertTrue(!health.isAllGood());
 
-    object.put("databaseOK", true);
-    object.put("clientClockOK", false);
+        object.addProperty("securityTokenOK", true);
+        object.addProperty("databaseOK", false);
 
-    health = new PtvHealth(object);
-    assertTrue(!health.isAllGood());
+        health = gson.fromJson(object, PtvHealth.class);
+        assertTrue(!health.isAllGood());
 
-    object.put("clientClockOK", true);
-    object.put("memcacheOK", false);
+        object.addProperty("databaseOK", true);
+        object.addProperty("clientClockOK", false);
 
-    health = new PtvHealth(object);
-    assertTrue(!health.isAllGood());
+        health = gson.fromJson(object, PtvHealth.class);
+        assertTrue(!health.isAllGood());
 
-  }
+        object.addProperty("clientClockOK", true);
+        object.addProperty("memcacheOK", false);
+
+        health = gson.fromJson(object, PtvHealth.class);
+        assertTrue(!health.isAllGood());
+
+    }
 
 }

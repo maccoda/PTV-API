@@ -1,59 +1,43 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
 
-import util.JSONHelper;
+public class PtvStop implements PtvBasicObject {
 
-public class PtvStop implements PtvObject {
+    private float distance;
+    private String suburb;
+    private int route_type;
+    private int stop_id;
+    private String location_name;
+    private float lat;
+    private float lon;
 
-  private float distance;
-  private String suburb;
-  private PtvRouteType routeType;
-  private int stopId;
-  private String locationName;
-  private float lat;
-  private float lon;
 
-  PtvStop(JSONObject object) {
-    populateFields(object);
-  }
+    public float getDistance() {
+        return distance;
+    }
 
-  public float getDistance() {
-    return distance;
-  }
+    public String getSuburb() {
+        return suburb;
+    }
 
-  public String getSuburb() {
-    return suburb;
-  }
+    public PtvRouteType getRouteType() {
+        return PtvRouteType.values()[route_type];
+    }
 
-  public PtvRouteType getRouteType() {
-    return routeType;
-  }
+    public int getStopId() {
+        return stop_id;
+    }
 
-  public int getStopId() {
-    return stopId;
-  }
+    public String getLocationName() {
+        return location_name;
+    }
 
-  public String getLocationName() {
-    return locationName;
-  }
+    public float getLat() {
+        return lat;
+    }
 
-  public float getLat() {
-    return lat;
-  }
-
-  public float getLon() {
-    return lon;
-  }
-
-  private void populateFields(JSONObject object) {
-    distance = JSONHelper.parseFloatValue(object, "distance");
-    suburb = JSONHelper.parseStringValue(object, "suburb");
-    routeType = JSONHelper.getRouteTypeFromObject(object);
-    stopId = JSONHelper.parseIntegerValue(object, "stop_id");
-    locationName = JSONHelper.parseStringValue(object, "location_name");
-    lat = JSONHelper.parseFloatValue(object, "lat");
-    lon = JSONHelper.parseFloatValue(object, "lon");
-  }
+    public float getLon() {
+        return lon;
+    }
 
 }

@@ -1,40 +1,28 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
 
-import util.JSONHelper;
+public class PtvDirection implements PtvBasicObject {
 
-public class PtvDirection implements PtvObject {
+    private int linedir_id;
+    private int direction_id;
+    private String direction_name;
+    private PtvLine line;
 
-  private int lineDirId;
-  private int directionId;
-  private String directionName;
-  private PtvLine line;
 
-  PtvDirection(JSONObject object) {
-    populateFields(object);
-  }
+    public int getLineDirId() {
+        return linedir_id;
+    }
 
-  public int getLineDirId() {
-    return lineDirId;
-  }
+    public int getDirectionId() {
+        return direction_id;
+    }
 
-  public int getDirectionId() {
-    return directionId;
-  }
+    public String getDirectionName() {
+        return direction_name;
+    }
 
-  public String getDirectionName() {
-    return directionName;
-  }
+    public PtvLine getLine() {
+        return line;
+    }
 
-  public PtvLine getLine() {
-    return line;
-  }
-
-  private void populateFields(JSONObject object) {
-    lineDirId = JSONHelper.parseIntegerValue(object, "linedir_id");
-    directionId = JSONHelper.parseIntegerValue(object, "direction_id");
-    directionName = object.get("direction_name").toString();
-    line = new PtvLine((JSONObject) object.get("line"));
-  }
 }

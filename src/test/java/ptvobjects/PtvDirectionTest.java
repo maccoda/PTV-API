@@ -1,65 +1,35 @@
 package ptvobjects;
 
+import com.google.gson.Gson;
+import org.junit.Test;
+import util.TestUtils;
+
+import java.io.FileReader;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 public class PtvDirectionTest {
 
-  static String testString;
 
-  /**
-   * Create mock JSON object.
-   *
-   * @throws Exception
-   *           fucked up
-   */
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
-    testString = "{\"linedir_id\": 0, \"direction_id\": 6, \"direction_name\":\"Frankston\", "
-        + "\"line\":{\"route_type\": 0, \"line_id\": 6, "
-        + "\"line_name\": \"Frankston\", \"line_number\": \"Frankston\", "
-        + "\"line_name_short\": \"Frankston\", \"line_number_long\": \"\"}}";
-  }
+    @Test
+    public void testPopulateFields() throws Exception {
+        final String filePath = TestUtils.getResourcePath("testDirection.json");
+        final Gson gson = new Gson();
+        final PtvDirection dir = gson.fromJson(new FileReader(filePath), PtvDirection.class);
 
-  @AfterClass
-  public static void tearDownAfterClass() throws Exception {
-  }
+        assertEquals(0, dir.getLineDirId());
+        assertEquals(6, dir.getDirectionId());
+        assertTrue(dir.getDirectionName().equals("Frankston"));
 
-  @Before
-  public void setUp() throws Exception {
-  }
+        final PtvLine line = dir.getLine();
+        assertTrue(line.getRouteType().equals(PtvRouteType.Train));
+        assertEquals(6, line.getLineId());
+        assertTrue(line.getLineName().equals("Frankston"));
+        assertTrue(line.getLineNumber().equals("Frankston"));
+        assertTrue(line.getLineNameShort().equals("Frankston"));
+        assertTrue(line.getLineNumberLong().equals(""));
 
-  @After
-  public void tearDown() throws Exception {
-  }
-
-  @Test
-  public void testPopulateFields() throws Exception {
-
-    JSONParser parser = new JSONParser();
-    JSONObject object = (JSONObject) parser.parse(testString);
-    PtvDirection dir = new PtvDirection(object);
-
-    assertEquals(0, dir.getLineDirId());
-    assertEquals(6, dir.getDirectionId());
-    assertTrue(dir.getDirectionName().equals("Frankston"));
-
-    PtvLine line = dir.getLine();
-    assertTrue(line.getRouteType().equals(PtvRouteType.Train));
-    assertEquals(6, line.getLineId());
-    assertTrue(line.getLineName().equals("Frankston"));
-    assertTrue(line.getLineNumber().equals("Frankston"));
-    assertTrue(line.getLineNameShort().equals("Frankston"));
-    assertTrue(line.getLineNumberLong().equals(""));
-
-  }
+    }
 
 }

@@ -1,35 +1,22 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
+public class PtvPlatform implements PtvBasicObject {
 
-import util.JSONHelper;
+    private int realtime_id;
+    private PtvStop stop;
+    private PtvDirection direction;
 
-public class PtvPlatform implements PtvObject {
 
-  private int realtimeId;
-  private PtvStop stop;
-  private PtvDirection direction;
+    public int getRealtimeId() {
+        return realtime_id;
+    }
 
-  PtvPlatform(JSONObject object) {
-    populateFields(object);
-  }
+    public PtvStop getStop() {
+        return stop;
+    }
 
-  public int getRealtimeId() {
-    return realtimeId;
-  }
-
-  public PtvStop getStop() {
-    return stop;
-  }
-
-  public PtvDirection getDirection() {
-    return direction;
-  }
-
-  private void populateFields(JSONObject object) {
-    realtimeId = JSONHelper.parseIntegerValue(object, "realtime_id");
-    stop = new PtvStop((JSONObject) object.get("stop"));
-    direction = new PtvDirection((JSONObject) object.get("direction"));
-  }
+    public PtvDirection getDirection() {
+        return direction;
+    }
 
 }

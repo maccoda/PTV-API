@@ -1,7 +1,5 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
-import util.JSONHelper;
 
 /**
  * Health object as defined by PTV. This object is used to check the connection with the API as well
@@ -9,40 +7,30 @@ import util.JSONHelper;
  *
  * @author D. Maccora
  */
-public class PtvHealth implements PtvObject {
+public class PtvHealth implements PtvBasicObject {
 
-  private boolean securityToken, clientClock, memcache, database;
+    private boolean securityTokenOK, clientClockOK, memcacheOK, databaseOK;
 
-  public PtvHealth(JSONObject object) {
-    populateFields(object);
-  }
 
-  public boolean isSecurityToken() {
-    return securityToken;
-  }
+    public boolean isSecurityToken() {
+        return securityTokenOK;
+    }
 
-  public boolean isClientClock() {
-    return clientClock;
-  }
+    public boolean isClientClockOK() {
+        return clientClockOK;
+    }
 
-  public boolean isMemcache() {
-    return memcache;
-  }
+    public boolean isMemcache() {
+        return memcacheOK;
+    }
 
-  public boolean isDatabase() {
-    return database;
-  }
+    public boolean isDatabase() {
+        return databaseOK;
+    }
 
-  public boolean isAllGood() {
-    return securityToken && clientClock && memcache && database;
-  }
+    public boolean isAllGood() {
+        return securityTokenOK && clientClockOK && memcacheOK && databaseOK;
+    }
 
-  private void populateFields(JSONObject object) {
-    securityToken = JSONHelper.parseBooleanValue(object, "securityTokenOK");
-    clientClock = JSONHelper.parseBooleanValue(object, "clientClockOK");
-    memcache = JSONHelper.parseBooleanValue(object, "memcacheOK");
-    database = JSONHelper.parseBooleanValue(object, "databaseOK");
-
-  }
 
 }

@@ -2,5 +2,5 @@
   "securityTokenOK": false,
   "clientClockOK": false,
   "memcacheOK": true,
-  "databaseOK": true,
+  "databaseOK": true
 }

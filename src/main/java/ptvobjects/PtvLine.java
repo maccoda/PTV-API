@@ -1,55 +1,39 @@
 package ptvobjects;
 
-import org.json.simple.JSONObject;
 
-import util.JSONHelper;
+public class PtvLine implements PtvBasicObject {
 
-public class PtvLine implements PtvObject {
-
-  private PtvRouteType routeType;
-  private int lineId;
-  private String lineName;
-  private String lineNumber;
-  private String lineNameShort;
-  private String lineNumberLong;
-
-  public PtvLine(JSONObject object) {
-    populateFields(object);
-  }
-
-  public PtvRouteType getRouteType() {
-    return routeType;
-  }
-
-  public int getLineId() {
-    return lineId;
-  }
-
-  public String getLineName() {
-    return lineName;
-  }
-
-  public String getLineNumber() {
-    return lineNumber;
-  }
-
-  public String getLineNameShort() {
-    return lineNameShort;
-  }
-
-  public String getLineNumberLong() {
-    return lineNumberLong;
-  }
+    private int route_type;
+    private int line_id;
+    private String line_name;
+    private String line_number;
+    private String line_name_short;
+    private String line_number_long;
 
 
-  private void populateFields(JSONObject object) {
-    routeType = JSONHelper.getRouteTypeFromObject(object);
-    lineId = JSONHelper.parseIntegerValue(object, "line_id");
-    lineName = JSONHelper.parseStringValue(object, "line_name");
-    lineNumber = JSONHelper.parseStringValue(object, "line_number");
-    lineNameShort = JSONHelper.parseStringValue(object, "line_name_short");
-    lineNumberLong = JSONHelper.parseStringValue(object, "line_number_long");
+    public PtvRouteType getRouteType() {
+        return PtvRouteType.values()[route_type];
+    }
 
-  }
+    public int getLineId() {
+        return line_id;
+    }
+
+    public String getLineName() {
+        return line_name;
+    }
+
+    public String getLineNumber() {
+        return line_number;
+    }
+
+    public String getLineNameShort() {
+        return line_name_short;
+    }
+
+    public String getLineNumberLong() {
+        return line_number_long;
+    }
+
 
 }
