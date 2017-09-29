@@ -27,10 +27,6 @@ jacocoTestReport {
     }
 }
 
-wrapper {
-    version = '4.0.1'
-}
-
 def publishVerion = 'v0.2.0'
 
 publishing
