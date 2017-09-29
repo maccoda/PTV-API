@@ -1,8 +1,10 @@
 language: java
 jdk:
     - openjdk7
+before_script:
+    - gradle wrapper
 script:
-    - gradle check
-    - gradle jacocoTestReport
+    - ./gradlew check
+    - ./gradlew jacocoTestReport
 after_success:
   - bash <(curl -s https://codecov.io/bash)
