@@ -9,10 +9,13 @@ import core.url.RequestUrlBuilder;
 import core.url.SearchUrlBuilder;
 import core.url.StopsNearbyUrlBuilder;
 import core.url.StopsOnALineUrlBuilder;
+import core.url.TransportPoiByMap;
 import ptvobjects.PtvBasicObject;
 import ptvobjects.PtvHealth;
 import ptvobjects.PtvLine;
+import ptvobjects.PtvLocationCluster;
 import ptvobjects.PtvObject;
+import ptvobjects.PtvPoi;
 import ptvobjects.PtvResult;
 import ptvobjects.PtvRouteType;
 import ptvobjects.PtvTimetableValues;
@@ -123,6 +126,29 @@ public final class PtvRequest {
      */
     public List<PtvLine> performStopsOnALineRequest(final PtvRouteType type, final int lineId) {
         return sendListApiRequest(new StopsOnALineUrlBuilder(type, lineId), new LinesListBuilder());
+    }
+
+    /**
+     * Issues a <i>transportPoiByMap</i> request.
+     *
+     * @param poi
+     *         - list of POIs
+     * @param latitude1
+     *         - top left latitude
+     * @param longitude1
+     *         - top left longitude
+     * @param latitude2
+     *         - bottom right latitude
+     * @param longitude2
+     *         - bottom right longitude
+     * @param gridDepth
+     *         - grid depth
+     * @param limit
+     *         - limit for cluster
+     * @return PtvLocationCluster Object
+     */
+    public PtvLocationCluster performTransportPoiByMap(final PtvPoi poi, final double latitude1, final double longitude1, final double latitude2, final double longitude2, final byte gridDepth, final int limit) {
+        return sendApiRequest(new TransportPoiByMap(poi, latitude1, longitude1, latitude2, longitude2, gridDepth, limit), PtvLocationCluster.class);
     }
 
     /**
