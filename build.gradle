@@ -34,7 +34,7 @@ publishing
                     from components.java
                     groupId 'org.maccoda'
                     artifactId 'ptv-api'
-                    version System.genEnv('TRAVIS_TAG')
+                    version System.getenv('TRAVIS_TAG') == null ? "" : System.getenv('TRAVIS_TAG')
                 }
             }
         }
@@ -47,8 +47,8 @@ bintray {
         repo = 'maven'
         name = 'PTV-API'
         version {
-            name = "${System.genEnv('TRAVIS_TAG')}"
-            vcsTag = "${System.genEnv('TRAVIS_TAG')}"
+            name = "${System.getenv('TRAVIS_TAG') == null ? "" : System.getenv('TRAVIS_TAG')}"
+            vcsTag = "${System.getenv('TRAVIS_TAG') == null ? "" : System.getenv('TRAVIS_TAG')}"
         }
     }
 }
