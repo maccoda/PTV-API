@@ -27,8 +27,6 @@ jacocoTestReport {
     }
 }
 
-def publishVerion = 'v0.2.0'
-
 publishing
         {
             publications {
@@ -36,7 +34,7 @@ publishing
                     from components.java
                     groupId 'org.maccoda'
                     artifactId 'ptv-api'
-                    version "$publishVerion"
+                    version project.property('travisTag')
                 }
             }
         }
@@ -49,8 +47,8 @@ bintray {
         repo = 'maven'
         name = 'PTV-API'
         version {
-            name = "$publishVerion"
-            vcsTag = "$publishVerion"
+            name = "${project.property('travisTag')}"
+            vcsTag = "${project.property('travisTag')}"
         }
     }
 }
