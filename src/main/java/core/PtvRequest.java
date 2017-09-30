@@ -7,6 +7,7 @@ import core.url.HealthRequestUrlBuilder;
 import core.url.LinesByModeUrlBuilder;
 import core.url.RequestUrlBuilder;
 import core.url.SearchUrlBuilder;
+import core.url.SpecificNextDeparturesUrlBuilder;
 import core.url.StopsNearbyUrlBuilder;
 import core.url.StopsOnALineUrlBuilder;
 import core.url.TransportPoiByMap;
@@ -149,6 +150,10 @@ public final class PtvRequest {
      */
     public PtvLocationCluster performTransportPoiByMap(final PtvPoi poi, final double latitude1, final double longitude1, final double latitude2, final double longitude2, final byte gridDepth, final int limit) {
         return sendApiRequest(new TransportPoiByMap(poi, latitude1, longitude1, latitude2, longitude2, gridDepth, limit), PtvLocationCluster.class);
+    }
+
+    public PtvTimetableValues performSpecificNexDeparture(final PtvRouteType type, final int lineId, final int stopId, final int directionId, final int limit, final String forUtc) {
+        return sendApiRequest(new SpecificNextDeparturesUrlBuilder(type, lineId, stopId, directionId, limit, forUtc), PtvTimetableValues.class);
     }
 
     /**

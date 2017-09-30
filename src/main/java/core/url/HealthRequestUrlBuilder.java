@@ -23,7 +23,7 @@ public final class HealthRequestUrlBuilder implements RequestUrlBuilder {
      *
      * @return Current time in ISO-8061 format.
      */
-    private String getCurrentTimeIso8061Utc() {
+    static String getCurrentTimeIso8061Utc() {
         final TimeZone tz = TimeZone.getTimeZone("UTC");
         final DateFormat format = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss'Z'");
         format.setTimeZone(tz);
