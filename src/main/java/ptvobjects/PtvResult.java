@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /**
- * Result data type which can be obtained from several different queries. It is represented as a union type which
- * can have either a {@link PtvStop} or {@link PtvLine} payload.
+ * Result data type which can be obtained from several different queries. It is represented as a union type which can
+ * have either a {@link PtvStop} or {@link PtvLine} payload.
  */
 public class PtvResult implements PtvUnionObject {
 
@@ -22,6 +22,13 @@ public class PtvResult implements PtvUnionObject {
     PtvBasicObject result;
     ResultType type;
 
+    /**
+     * Constructor. Builds the union type from the provided JSON object. It assumes the object has keys <b>type</b> and
+     * <b>result</b>
+     *
+     * @param object
+     *         - JSON Object received
+     */
     public PtvResult(final JsonObject object) {
         type = ResultType.valueOf(object.get("type").getAsString().toUpperCase());
         switch (type) {
@@ -36,10 +43,19 @@ public class PtvResult implements PtvUnionObject {
         }
     }
 
+    /**
+     * @return type descriminator of the result union type
+     */
     public String getType() {
         return type.name().toLowerCase();
     }
 
+    /**
+     * @return result object as a {@link PtvStop}
+     *
+     * @throws IllegalAccessException
+     *         when type is not STOP
+     */
     public PtvStop getObjectAsStop() throws IllegalAccessException {
         if (type == ResultType.STOP) {
             return (PtvStop) result;
@@ -48,6 +64,12 @@ public class PtvResult implements PtvUnionObject {
         }
     }
 
+    /**
+     * @return result object as a {@link PtvLine}
+     *
+     * @throws IllegalAccessException
+     *         when type is not LINE
+     */
     public PtvLine getObjectAsLine() throws IllegalAccessException {
         if (type == ResultType.LINE) {
             return (PtvLine) result;

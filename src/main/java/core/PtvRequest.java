@@ -2,10 +2,22 @@ package core;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import core.url.BroadNextDepartureUrlBuilder;
+import core.url.HealthRequestUrlBuilder;
+import core.url.LinesByModeUrlBuilder;
+import core.url.RequestUrlBuilder;
+import core.url.SearchUrlBuilder;
+import core.url.SpecificNextDeparturesUrlBuilder;
+import core.url.StoppingPatternUrlBuilder;
+import core.url.StopsNearbyUrlBuilder;
+import core.url.StopsOnALineUrlBuilder;
+import core.url.TransportPoiByMap;
 import ptvobjects.PtvBasicObject;
 import ptvobjects.PtvHealth;
 import ptvobjects.PtvLine;
+import ptvobjects.PtvLocationCluster;
 import ptvobjects.PtvObject;
+import ptvobjects.PtvPoi;
 import ptvobjects.PtvResult;
 import ptvobjects.PtvRouteType;
 import ptvobjects.PtvTimetableValues;
@@ -47,7 +59,7 @@ public final class PtvRequest {
      * @return Health status report of the PTV services.
      */
     public PtvHealth performHealthCheck() {
-        return sendApiRequest(urls.healthCheck(), PtvHealth.class);
+        return sendApiRequest(new HealthRequestUrlBuilder(), PtvHealth.class);
     }
 
     /**
@@ -63,7 +75,7 @@ public final class PtvRequest {
      * @return - List of PTVTimetables for each departure
      */
     public PtvTimetableValues performBroadNextDepartureRequest(final PtvRouteType mode, final int stopId, final int limit) {
-        return sendApiRequest(urls.broadNextDeparture(mode, stopId, limit), PtvTimetableValues.class);
+        return sendApiRequest(new BroadNextDepartureUrlBuilder(mode, stopId, limit), PtvTimetableValues.class);
     }
 
     /**
@@ -76,7 +88,7 @@ public final class PtvRequest {
      * @return List of {@link PtvResult}
      */
     public List<PtvResult> performStopsNearbyRequest(final double latitude, final double longitude) {
-        return sendListApiRequest(urls.stopsNearby(latitude, longitude), new ResultListBuilder());
+        return sendListApiRequest(new StopsNearbyUrlBuilder(latitude, longitude), new ResultListBuilder());
     }
 
     /**
@@ -90,7 +102,7 @@ public final class PtvRequest {
      * @return - List of PtvLine objects for each line matching
      */
     public List<PtvLine> performLinesByModeRequest(final PtvRouteType mode, final String name) {
-        return sendListApiRequest(urls.linesByMode(mode, name), new LinesListBuilder());
+        return sendListApiRequest(new LinesByModeUrlBuilder(mode, name), new LinesListBuilder());
     }
 
     /**
@@ -101,7 +113,7 @@ public final class PtvRequest {
      * @return List of matching results
      */
     public List<PtvResult> performSearchRequest(final String searchString) {
-        return sendListApiRequest(urls.search(searchString), new ResultListBuilder());
+        return sendListApiRequest(new SearchUrlBuilder(searchString), new ResultListBuilder());
     }
 
     /**
@@ -115,20 +127,52 @@ public final class PtvRequest {
      * @return List of all stops on the line
      */
     public List<PtvLine> performStopsOnALineRequest(final PtvRouteType type, final int lineId) {
-        return sendListApiRequest(urls.stopsOnALine(type, lineId), new LinesListBuilder());
+        return sendListApiRequest(new StopsOnALineUrlBuilder(type, lineId), new LinesListBuilder());
+    }
+
+    /**
+     * Issues a <i>transportPoiByMap</i> request.
+     *
+     * @param poi
+     *         - list of POIs
+     * @param latitude1
+     *         - top left latitude
+     * @param longitude1
+     *         - top left longitude
+     * @param latitude2
+     *         - bottom right latitude
+     * @param longitude2
+     *         - bottom right longitude
+     * @param gridDepth
+     *         - grid depth
+     * @param limit
+     *         - limit for cluster
+     * @return PtvLocationCluster Object
+     */
+    public PtvLocationCluster performTransportPoiByMap(final PtvPoi poi, final double latitude1, final double longitude1, final double latitude2, final double longitude2, final byte gridDepth, final int limit) {
+        return sendApiRequest(new TransportPoiByMap(poi, latitude1, longitude1, latitude2, longitude2, gridDepth, limit), PtvLocationCluster.class);
+    }
+
+    public PtvTimetableValues performSpecificNexDeparture(final PtvRouteType type, final int lineId, final int stopId, final int directionId, final int limit, final String forUtc) {
+        return sendApiRequest(new SpecificNextDeparturesUrlBuilder(type, lineId, stopId, directionId, limit, forUtc), PtvTimetableValues.class);
+    }
+
+    public PtvTimetableValues performStoppingPattern(final PtvRouteType mode, final int runId, final int stopId, final String forUtc) {
+        return sendApiRequest(new StoppingPatternUrlBuilder(mode, runId, stopId, forUtc), PtvTimetableValues.class);
     }
 
     /**
      * Build the complete API query by appending the developer ID and signature for any request. It then sends this
      * query to the API and parses the response into the specified type.
      *
-     * @param uri
-     *         - Request to be sent.
+     * @param urlBuilder
+     *         - Request builder.
      * @param clazz
      *         - Data type to return
      * @return - JSON object response.
      */
-    private <T extends PtvBasicObject> T sendApiRequest(final String uri, final Class<T> clazz) {
+    private <T extends PtvBasicObject> T sendApiRequest(final RequestUrlBuilder urlBuilder, final Class<T> clazz) {
+        final String uri = urls.buildUrl(urlBuilder);
         final String response = QueryHandler.sendQuery(uri);
         return QueryHandler.parseQueryResult(response, clazz);
     }
@@ -138,13 +182,14 @@ public final class PtvRequest {
      * collection being returned. It then sends this query to the API and parses the response into a collection of
      * {@link PtvObject}.
      *
-     * @param uri
-     *         - Request to be sent.
+     * @param urlBuilder
+     *         - Request builder.
      * @param builder
      *         - list builder for the type
      * @return - JSON object response.
      */
-    private <T extends PtvObject> List<T> sendListApiRequest(final String uri, final PtvListObjectBuilder<T> builder) {
+    private <T extends PtvObject> List<T> sendListApiRequest(final RequestUrlBuilder urlBuilder, final PtvListObjectBuilder<T> builder) {
+        final String uri = urls.buildUrl(urlBuilder);
         final String response = QueryHandler.sendQuery(uri);
         return builder.populateList(new Gson().fromJson(response, JsonArray.class));
     }

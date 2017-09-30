@@ -43,6 +43,13 @@ public class PtvTimetableValuesTest {
         assertTrue(line.getLineNumber().equals("South Morang"));
         assertTrue(line.getLineNameShort().equals("South Morang"));
         assertTrue(line.getLineNumberLong().equals(""));
+
+        final PtvRun run = timetable.getRun();
+        assertEquals(PtvRouteType.Train, run.getRouteType());
+        assertEquals(1041, run.getDestinationId());
+        assertEquals("Clifton Hill", run.getDestinationName());
+        assertEquals(0, run.getNumSkipped());
+        assertEquals(15716, run.getRunId());
     }
 
 }

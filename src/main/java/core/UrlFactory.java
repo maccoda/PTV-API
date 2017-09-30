@@ -1,6 +1,6 @@
 package core;
 
-import ptvobjects.PtvRouteType;
+import core.url.RequestUrlBuilder;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -8,10 +8,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
 import java.util.logging.Logger;
 
 /**
@@ -72,92 +68,14 @@ class UrlFactory {
     }
 
     /**
-     * Builds health check URL.
+     * Build the full URL with the provided {@link RequestUrlBuilder}
      *
-     * @return API URL
+     * @param urlBuilder
+     *         - request builder
+     * @return as above
      */
-    String healthCheck() {
-        String uri = "/healthcheck";
-        uri += "?timestamp=";
-        uri += getCurrentTimeIso8061Utc();
-
-        return generateCompleteURLWithSignature(uri);
-    }
-
-    /**
-     * Builds <i>broad next departure</i> URL.
-     *
-     * @param aMode
-     *         - mode  of transport
-     * @param aStopId
-     *         - stop ID
-     * @param aLimit
-     *         - limit of values to return
-     * @return API URL
-     */
-    String broadNextDeparture(final PtvRouteType aMode, final int aStopId, final int aLimit) {
-        // Request URL = /v2/mode/%@/stop/%@/departures/by-destination/limit/%
-        // Add the transport mode as the index value
-        String uri = "/mode/" + aMode.getId();
-        // Add the stop id
-        uri += "/stop/" + aStopId;
-        // Add the other part
-        uri += "/departures/by-destination";
-        // Add the limit of services to show
-        uri += "/limit/" + aLimit;
-
-        return generateCompleteURLWithSignature(uri);
-    }
-
-    /**
-     * Builds <i>stops nearby</i> URL
-     *
-     * @param latitude
-     * @param longitude
-     * @return API URL
-     */
-    String stopsNearby(final double latitude, final double longitude) {
-        String uri = "/nearme";
-        uri += "/latitude/" + latitude;
-        uri += "/longitude/" + longitude;
-
-        return generateCompleteURLWithSignature(uri);
-    }
-
-    String linesByMode(final PtvRouteType mode, final String name) {
-        // Request URL = /v2/lines/mode/%@?name=%@
-        String uri = "/lines/mode/" + mode.getId() + "?";
-        uri += "name=" + name.trim();
-
-        return generateCompleteURLWithSignature(uri);
-    }
-
-    String search(final String searchString) {
-        // Request URL = /v2/search/%@?
-        final String uri = "/search/" + searchString + "?";
-
-        return generateCompleteURLWithSignature(uri);
-    }
-
-    String stopsOnALine(final PtvRouteType mode, final int lineId) {
-        // Request URL = /v2/mode/%@/line/%@/stops-for-line?
-        String uri = ("/mode/" + mode.getId());
-        uri += ("/line/" + lineId);
-        uri += ("/stops-for-line");
-
-        return generateCompleteURLWithSignature(uri);
-    }
-
-    /**
-     * Method to format the current UTC time into the expected format for API which is ISO-8061.
-     *
-     * @return Current time in ISO-8061 format.
-     */
-    private String getCurrentTimeIso8061Utc() {
-        final TimeZone tz = TimeZone.getTimeZone("UTC");
-        final DateFormat format = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss'Z'");
-        format.setTimeZone(tz);
-        return format.format(new Date());
+    String buildUrl(final RequestUrlBuilder urlBuilder) {
+        return generateCompleteURLWithSignature(urlBuilder.buildUrl());
     }
 
     /**

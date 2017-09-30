@@ -27,8 +27,6 @@ jacocoTestReport {
     }
 }
 
-def publishVerion = 'v0.2.0'
-
 publishing
         {
             publications {
@@ -36,21 +34,26 @@ publishing
                     from components.java
                     groupId 'org.maccoda'
                     artifactId 'ptv-api'
-                    version "$publishVerion"
+                    version System.getenv('TRAVIS_TAG') == null ? "" : System.getenv('TRAVIS_TAG')
                 }
             }
         }
 
 bintray {
-    user = bintrayuser
-    key = bintraykey
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_API')
     publications = ['MyPublication']
     pkg {
         repo = 'maven'
         name = 'PTV-API'
         version {
-            name = "$publishVerion"
-            vcsTag = "$publishVerion"
+            name = "${System.getenv('TRAVIS_TAG') == null ? "" : System.getenv('TRAVIS_TAG')}"
+            vcsTag = "${System.getenv('TRAVIS_TAG') == null ? "" : System.getenv('TRAVIS_TAG')}"
         }
     }
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
 }

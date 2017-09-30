@@ -1,0 +1,54 @@
+{
+  "minLat": -37.81959,
+  "minLong": 144.979126,
+  "maxLat": -37.8157463,
+  "maxLong": 144.984818,
+  "weightedLat": -37.81705,
+  "weightedLong": 144.981964,
+  "totalLocations": 4,
+  "locations": [
+    {
+      "distance": 251.748337,
+      "suburb": "East Melbourne",
+      "transport_type": "train",
+      "route_type": 0,
+      "stop_id": 1104,
+      "location_name": "Jolimont-MCG ",
+      "lat": -37.81653,
+      "lon": 144.9841
+    },
+    {
+      "distance": 303.16217,
+      "suburb": "Melbourne City",
+      "transport_type": "tram",
+      "route_type": 1,
+      "stop_id": 2171,
+      "location_name": "7B-Rod Laver Arena/Melbourne Park ",
+      "lat": -37.81959,
+      "lon": 144.979126
+    },
+    {
+      "distance": 312.730438,
+      "suburb": "East Melbourne",
+      "transport_type": "tram",
+      "route_type": 1,
+      "stop_id": 2823,
+      "location_name": "Jolimont Rd/Wellington Pde #10 ",
+      "lat": -37.8157463,
+      "lon": 144.979782
+    },
+    {
+      "distance": 314.507355,
+      "suburb": "East Melbourne",
+      "transport_type": "tram",
+      "route_type": 1,
+      "stop_id": 2825,
+      "location_name": "Clarendon St/Wellington Pde #11 ",
+      "lat": -37.8163376,
+      "lon": 144.984818
+    }
+  ],
+  "clusters": [],
+  "MaxLocations": 1000,
+  "LimitByDistance": true
+}
