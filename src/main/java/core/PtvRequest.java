@@ -8,6 +8,7 @@ import core.url.LinesByModeUrlBuilder;
 import core.url.RequestUrlBuilder;
 import core.url.SearchUrlBuilder;
 import core.url.SpecificNextDeparturesUrlBuilder;
+import core.url.StoppingPatternUrlBuilder;
 import core.url.StopsNearbyUrlBuilder;
 import core.url.StopsOnALineUrlBuilder;
 import core.url.TransportPoiByMap;
@@ -154,6 +155,10 @@ public final class PtvRequest {
 
     public PtvTimetableValues performSpecificNexDeparture(final PtvRouteType type, final int lineId, final int stopId, final int directionId, final int limit, final String forUtc) {
         return sendApiRequest(new SpecificNextDeparturesUrlBuilder(type, lineId, stopId, directionId, limit, forUtc), PtvTimetableValues.class);
+    }
+
+    public PtvTimetableValues performStoppingPattern(final PtvRouteType mode, final int runId, final int stopId, final String forUtc) {
+        return sendApiRequest(new StoppingPatternUrlBuilder(mode, runId, stopId, forUtc), PtvTimetableValues.class);
     }
 
     /**
