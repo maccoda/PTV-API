@@ -18,7 +18,7 @@ public final class SpecificNextDeparturesUrlBuilder implements RequestUrlBuilder
         this.stopId = stopId;
         this.directionId = directionId;
         this.limit = limit;
-        this.forUtc = forUtc == "" ? HealthRequestUrlBuilder.getCurrentTimeIso8061Utc() : forUtc;
+        this.forUtc = forUtc;
     }
 
     @Override
@@ -29,7 +29,9 @@ public final class SpecificNextDeparturesUrlBuilder implements RequestUrlBuilder
         uri += "/directionid/" + directionId;
         uri += "/departures/all";
         uri += "/limit/" + limit;
-        uri += "?for_utc=" + forUtc;
+        if (forUtc != "") {
+            uri += "?for_utc=" + forUtc;
+        }
         return uri;
     }
 }

@@ -13,7 +13,7 @@ public final class StoppingPatternUrlBuilder implements RequestUrlBuilder {
         this.mode = mode;
         this.runId = runId;
         this.stopId = stopId;
-        this.forUtc = forUtc == "" ? HealthRequestUrlBuilder.getCurrentTimeIso8061Utc() : forUtc;
+        this.forUtc = forUtc;
     }
 
     @Override
@@ -22,7 +22,9 @@ public final class StoppingPatternUrlBuilder implements RequestUrlBuilder {
         uri += "/run/" + runId;
         uri += "/stop/" + stopId;
         uri += "/stopping-pattern";
-        uri += "?for_utc=" + forUtc;
+        if (forUtc != "") {
+            uri += "?for_utc=" + forUtc;
+        }
         return uri;
     }
 }
