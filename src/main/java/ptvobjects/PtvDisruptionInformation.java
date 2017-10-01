@@ -3,7 +3,7 @@ package ptvobjects;
 
 import java.util.Date;
 
-public class PtvDisruptionInformation implements PtvObject {
+public class PtvDisruptionInformation implements PtvBasicObject {
 
     private String distuptionId;
     private String title;

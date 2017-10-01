@@ -3,6 +3,9 @@ package ptvobjects;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.junit.Test;
+import util.TestUtils;
+
+import java.io.FileReader;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,12 +13,10 @@ public class PtvResultTest {
 
     @Test
     public void testStopType() throws Exception {
-        final String testString = "{\"result\":{\"distance\":0.0,\"suburb\":\"Abbotsford\",\"transport_type\":\"tram\"," +
-                "\"route_type\":1,\"stop_id\":2470,\"location_name\":\"North Richmond Railway Station\"," +
-                "\"lat\":-37.809,\"lon\":144.992},\"type\":\"stop\"}";
 
         final Gson gson = new Gson();
-        final PtvResult result = new PtvResult(gson.fromJson(testString, JsonObject.class));
+        final String resourcePath = TestUtils.getResourcePath("testResultStop.json");
+        final PtvResult result = new PtvResult(gson.fromJson(new FileReader(resourcePath), JsonObject.class));
 
         assertEquals(result.getType(), "stop");
 
@@ -32,14 +33,10 @@ public class PtvResultTest {
 
     @Test
     public void testLineType() throws Exception {
-        final String testString = "{\"result\":{\"transport_type\":\"tram\"," +
-                "\"route_type\":1,\"line_name\":\"Route 78 North Richmond via Balaclava\", \"line_id\":976," +
-                "\"line_number\":\"Route 78\", \"line_name_short\":\"North Richmond\", \"line_number_long\":\"78\"}," +
-                "\"type\":\"line\"}";
 
         final Gson gson = new Gson();
-
-        final PtvResult result = new PtvResult(gson.fromJson(testString, JsonObject.class));
+        final String resourcePath = TestUtils.getResourcePath("testResultLine.json");
+        final PtvResult result = new PtvResult(gson.fromJson(new FileReader(resourcePath), JsonObject.class));
 
         assertEquals(result.getType(), "line");
 

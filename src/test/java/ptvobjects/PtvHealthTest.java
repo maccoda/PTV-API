@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import util.TestUtils;
+
+import java.io.FileReader;
 
 import static org.junit.Assert.assertTrue;
 
@@ -11,9 +14,6 @@ import static org.junit.Assert.assertTrue;
  * @author D. Maccora
  */
 public class PtvHealthTest {
-
-    private final String testString = "{\"securityTokenOK\":false,\"clientClockOK\":false," + "\"memcacheOK\":true,"
-            + "\"databaseOK\":true}";
 
     private static Gson gson;
 
@@ -23,9 +23,9 @@ public class PtvHealthTest {
     }
 
     @Test
-    public void populateFieldtest() {
-
-        final PtvHealth health = gson.fromJson(testString, PtvHealth.class);
+    public void populateFieldtest() throws Exception {
+        final String testString = TestUtils.getResourcePath("testHealth.json");
+        final PtvHealth health = gson.fromJson(new FileReader(testString), PtvHealth.class);
 
         assertTrue(!health.isSecurityToken());
         assertTrue(!health.isClientClockOK());

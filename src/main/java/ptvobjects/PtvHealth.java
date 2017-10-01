@@ -7,7 +7,7 @@ package ptvobjects;
  *
  * @author D. Maccora
  */
-public class PtvHealth implements PtvObject {
+public class PtvHealth implements PtvBasicObject {
 
     private boolean securityTokenOK, clientClockOK, memcacheOK, databaseOK;
 

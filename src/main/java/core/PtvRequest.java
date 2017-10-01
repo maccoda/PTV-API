@@ -1,7 +1,31 @@
 package core;
 
-import exception.RequestException;
-import ptvobjects.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import core.url.BroadNextDepartureUrlBuilder;
+import core.url.HealthRequestUrlBuilder;
+import core.url.LinesByModeUrlBuilder;
+import core.url.RequestUrlBuilder;
+import core.url.SearchUrlBuilder;
+import core.url.SpecificNextDeparturesUrlBuilder;
+import core.url.StoppingPatternUrlBuilder;
+import core.url.StopsNearbyUrlBuilder;
+import core.url.StopsOnALineUrlBuilder;
+import core.url.TransportPoiByMap;
+import ptvobjects.PtvBasicObject;
+import ptvobjects.PtvHealth;
+import ptvobjects.PtvLine;
+import ptvobjects.PtvLocationCluster;
+import ptvobjects.PtvObject;
+import ptvobjects.PtvPoi;
+import ptvobjects.PtvResult;
+import ptvobjects.PtvRouteType;
+import ptvobjects.PtvTimetableValues;
+import ptvobjects.builders.LinesListBuilder;
+import ptvobjects.builders.PtvListObjectBuilder;
+import ptvobjects.builders.ResultListBuilder;
+
+import java.util.List;
 
 /**
  * Class to form required data for sending of PTV API request.
@@ -11,33 +35,36 @@ import ptvobjects.*;
 public final class PtvRequest {
 
     /**
-     * URL factory for creation of API requests
+     * URL factory for creation of API requests.
      */
     private final UrlFactory urls;
 
+    /**
+     * Constructor. Builds context from provided data for generation of API requests.
+     *
+     * @param privateKey
+     *         - user private key
+     * @param developerId
+     *         - developer ID
+     */
     public PtvRequest(final String privateKey, final int developerId) {
         // TODO Change this when able to support multiple versions
         urls = new UrlFactory(UrlFactory.ApiVersion.V2, privateKey, developerId);
     }
 
     /**
-     * Issue 'Health Check' request as per PTV API. This should be called every time a sequence of
-     * calls are made to the API to ensure results are as expected.
+     * Issue 'Health Check' request as per PTV API. This should be called every time a sequence of calls are made to the
+     * API to ensure results are as expected.
      *
      * @return Health status report of the PTV services.
      */
-    public PtvHealth performHealthCheck() throws RequestException {
-        final PtvHealth result;
-        try {
-            return sendApiRequest(urls.healthCheck(), PtvHealth.class);
-        } catch (final Exception e) {
-            throw new RequestException("performHealthCheck::unable to build and send request");
-        }
+    public PtvHealth performHealthCheck() {
+        return sendApiRequest(new HealthRequestUrlBuilder(), PtvHealth.class);
     }
 
     /**
-     * Issue "Broad Next Departures" request as per PTV API. This request returns the next departure
-     * times at a prescribed stop irrespective of the line and direction of the service.
+     * Issue "Broad Next Departures" request as per PTV API. This request returns the next departure times at a
+     * prescribed stop irrespective of the line and direction of the service.
      *
      * @param mode
      *         - Transportation mode as specified by PTV
@@ -45,25 +72,23 @@ public final class PtvRequest {
      *         - ID of the stop for which want to obtain the next stops
      * @param limit
      *         - Upper limit on departures returned
-     * @return - Array of PTVTimetables for each departure
+     * @return - List of PTVTimetables for each departure
      */
-    public PtvTimetableValues performBroadNextDepartureRequest(final PtvRouteType mode, final int stopId, final int limit)
-            throws RequestException {
-        try {
-            return sendApiRequest(urls.broadNextDeparture(mode, stopId, limit), PtvTimetableValues.class);
-        } catch (final Exception e) {
-            throw new RequestException("performBroadNextDepartureRequest::Unable to build and send API request");
-        }
+    public PtvTimetableValues performBroadNextDepartureRequest(final PtvRouteType mode, final int stopId, final int limit) {
+        return sendApiRequest(new BroadNextDepartureUrlBuilder(mode, stopId, limit), PtvTimetableValues.class);
     }
 
-    public PtvResultList performStopsNearbyRequest(final double latitude, final double longitude) throws RequestException {
-        final PtvResultList result;
-        try {
-            return sendApiRequest(urls.stopsNearby(latitude, longitude), PtvResultList.class);
-
-        } catch (final Exception e) {
-            throw new RequestException("performBroadNextDepartureRequest::Unable to build and send API request");
-        }
+    /**
+     * Issue "Stops Nearby" request as per PTV API. This request returns stops nearest to the specified location.
+     *
+     * @param latitude
+     *         - latitude of location
+     * @param longitude
+     *         - longitude of location
+     * @return List of {@link PtvResult}
+     */
+    public List<PtvResult> performStopsNearbyRequest(final double latitude, final double longitude) {
+        return sendListApiRequest(new StopsNearbyUrlBuilder(latitude, longitude), new ResultListBuilder());
     }
 
     /**
@@ -74,15 +99,10 @@ public final class PtvRequest {
      *         - Transportation mode
      * @param name
      *         - Name to filter on a specific line, empty string if not required
-     * @return - Collection of PtvLine objects for each line matching
+     * @return - List of PtvLine objects for each line matching
      */
-    public PtvLineList performLinesByModeRequest(final PtvRouteType mode, final String name) throws RequestException {
-        try {
-            // TODO Make a list wrapper class
-            return sendApiRequest(urls.linesByMode(mode, name), PtvLineList.class);
-        } catch (final Exception e) {
-            throw new RequestException("performLinesByModeRequest::Unable to build and send API request");
-        }
+    public List<PtvLine> performLinesByModeRequest(final PtvRouteType mode, final String name) {
+        return sendListApiRequest(new LinesByModeUrlBuilder(mode, name), new LinesListBuilder());
     }
 
     /**
@@ -91,54 +111,87 @@ public final class PtvRequest {
      * @param searchString
      *         - String to search
      * @return List of matching results
-     *
-     * @throws RequestException
-     *         if unable to perform request
      */
-    public PtvResultList performSearchRequest(final String searchString) throws RequestException {
-        try {
-            return sendApiRequest(urls.search(searchString), PtvResultList.class);
-        } catch (final Exception e) {
-            throw new RequestException("performSearchRequest::Unable to build and send API request");
-        }
+    public List<PtvResult> performSearchRequest(final String searchString) {
+        return sendListApiRequest(new SearchUrlBuilder(searchString), new ResultListBuilder());
     }
 
     /**
-     * Issues a <i>stopsOnALine</i> request. This returns a list of all stops on the requested line.
-     * This will be ordered by location name.
+     * Issues a <i>stopsOnALine</i> request. This returns a list of all stops on the requested line. This will be
+     * ordered by location name.
      *
      * @param type
      *         - {@link PtvRouteType} for the line
      * @param lineId
      *         - ID of the line to query
      * @return List of all stops on the line
-     *
-     * @throws RequestException
-     *         if unable to perform request
      */
-    public PtvLineList performStopsOnALineRequest(final PtvRouteType type, final int lineId) throws RequestException {
-        try {
-            return sendApiRequest(urls.stopsOnALine(type, lineId), PtvLineList.class);
-        } catch (final Exception e) {
-            throw new RequestException("performLinesByModeRequest::Unable to build and send API request");
-        }
-
+    public List<PtvLine> performStopsOnALineRequest(final PtvRouteType type, final int lineId) {
+        return sendListApiRequest(new StopsOnALineUrlBuilder(type, lineId), new LinesListBuilder());
     }
 
     /**
-     * Build the complete API query by appending the developer ID and signature for any request. It
-     * then sends this query to the API and parses the response into a JSON object. In the case of a
-     * failed parsing it will return an empty JSON object.
+     * Issues a <i>transportPoiByMap</i> request.
      *
-     * @param uri
-     *         - Request to be sent.
+     * @param poi
+     *         - list of POIs
+     * @param latitude1
+     *         - top left latitude
+     * @param longitude1
+     *         - top left longitude
+     * @param latitude2
+     *         - bottom right latitude
+     * @param longitude2
+     *         - bottom right longitude
+     * @param gridDepth
+     *         - grid depth
+     * @param limit
+     *         - limit for cluster
+     * @return PtvLocationCluster Object
+     */
+    public PtvLocationCluster performTransportPoiByMap(final PtvPoi poi, final double latitude1, final double longitude1, final double latitude2, final double longitude2, final byte gridDepth, final int limit) {
+        return sendApiRequest(new TransportPoiByMap(poi, latitude1, longitude1, latitude2, longitude2, gridDepth, limit), PtvLocationCluster.class);
+    }
+
+    public PtvTimetableValues performSpecificNexDeparture(final PtvRouteType type, final int lineId, final int stopId, final int directionId, final int limit, final String forUtc) {
+        return sendApiRequest(new SpecificNextDeparturesUrlBuilder(type, lineId, stopId, directionId, limit, forUtc), PtvTimetableValues.class);
+    }
+
+    public PtvTimetableValues performStoppingPattern(final PtvRouteType mode, final int runId, final int stopId, final String forUtc) {
+        return sendApiRequest(new StoppingPatternUrlBuilder(mode, runId, stopId, forUtc), PtvTimetableValues.class);
+    }
+
+    /**
+     * Build the complete API query by appending the developer ID and signature for any request. It then sends this
+     * query to the API and parses the response into the specified type.
+     *
+     * @param urlBuilder
+     *         - Request builder.
      * @param clazz
      *         - Data type to return
      * @return - JSON object response.
      */
-    private <T> T sendApiRequest(final String uri, final Class<T> clazz) {
+    private <T extends PtvBasicObject> T sendApiRequest(final RequestUrlBuilder urlBuilder, final Class<T> clazz) {
+        final String uri = urls.buildUrl(urlBuilder);
         final String response = QueryHandler.sendQuery(uri);
         return QueryHandler.parseQueryResult(response, clazz);
+    }
+
+    /**
+     * Build the complete API query by appending the developer ID and signature for any request that results in a
+     * collection being returned. It then sends this query to the API and parses the response into a collection of
+     * {@link PtvObject}.
+     *
+     * @param urlBuilder
+     *         - Request builder.
+     * @param builder
+     *         - list builder for the type
+     * @return - JSON object response.
+     */
+    private <T extends PtvObject> List<T> sendListApiRequest(final RequestUrlBuilder urlBuilder, final PtvListObjectBuilder<T> builder) {
+        final String uri = urls.buildUrl(urlBuilder);
+        final String response = QueryHandler.sendQuery(uri);
+        return builder.populateList(new Gson().fromJson(response, JsonArray.class));
     }
 
 }

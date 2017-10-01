@@ -1,0 +1,40 @@
+[
+  {
+    "result": {
+      "transport_type": "train",
+      "route_type": 0,
+      "line_id": 6,
+      "line_name": "Frankston Line",
+      "line_number": "Frankston Line",
+      "line_name_short": "Frankston Line",
+      "line_number_long": ""
+    },
+    "type": "line"
+  },
+  {
+    "result": {
+      "distance": 0.0,
+      "suburb": "Carrum Downs",
+      "transport_type": "bus",
+      "route_type": 2,
+      "stop_id": 24155,
+      "location_name": "102 Lyrebird Dr ",
+      "lat": -38.10806,
+      "lon": 145.179932
+    },
+    "type": "stop"
+  },
+  {
+    "result": {
+      "distance": 0.0,
+      "suburb": "Carrum Downs",
+      "transport_type": "bus",
+      "route_type": 2,
+      "stop_id": 20019,
+      "location_name": "105 Lyrebird Dr ",
+      "lat": -38.107914,
+      "lon": 145.17981
+    },
+    "type": "stop"
+  }
+]
