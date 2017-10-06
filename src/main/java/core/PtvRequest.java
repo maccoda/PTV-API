@@ -10,6 +10,7 @@ import core.url.LinesByModeUrlBuilder;
 import core.url.RequestUrlBuilder;
 import core.url.SearchUrlBuilder;
 import core.url.SpecificNextDeparturesUrlBuilder;
+import core.url.StopFacilitiesUrlBuilder;
 import core.url.StoppingPatternUrlBuilder;
 import core.url.StopsNearbyUrlBuilder;
 import core.url.StopsOnALineUrlBuilder;
@@ -22,6 +23,7 @@ import ptvobjects.PtvLocationCluster;
 import ptvobjects.PtvObject;
 import ptvobjects.PtvResult;
 import ptvobjects.PtvRouteType;
+import ptvobjects.PtvStopFacilities;
 import ptvobjects.PtvTimetableValues;
 import ptvobjects.builders.LinesListBuilder;
 import ptvobjects.builders.PtvListObjectBuilder;
@@ -170,6 +172,10 @@ public final class PtvRequest {
         final String uri = urls.buildUrl(new DisruptionsUrlBuilder(mode));
         final String response = QueryHandler.sendQuery(uri);
         return new PtvDisruptionModes(new Gson().fromJson(response, JsonObject.class));
+    }
+
+    public PtvStopFacilities performStopFacilities(final int stopId, final PtvRouteType type, final boolean location, final boolean amenity, final boolean accessibility) {
+        return sendApiRequest(new StopFacilitiesUrlBuilder(stopId, type, location, amenity, accessibility), PtvStopFacilities.class);
     }
 
     /**

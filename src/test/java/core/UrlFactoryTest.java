@@ -6,6 +6,7 @@ import core.url.HealthRequestUrlBuilder;
 import core.url.LinesByModeUrlBuilder;
 import core.url.SearchUrlBuilder;
 import core.url.SpecificNextDeparturesUrlBuilder;
+import core.url.StopFacilitiesUrlBuilder;
 import core.url.StoppingPatternUrlBuilder;
 import core.url.StopsNearbyUrlBuilder;
 import core.url.StopsOnALineUrlBuilder;
@@ -115,4 +116,12 @@ public class UrlFactoryTest {
         final String result = tester.buildUrl(new DisruptionsUrlBuilder(mode));
         assertEquals("http://timetableapi.ptv.vic.gov.au/v2/disruptions/modes/general,metro-train?devid=2&signature=53D313557AF9D912459F5A3261E8E466AD132543", result);
     }
+
+    @Test
+    public void testStopFacilities() throws Exception {
+        final String result = tester.buildUrl(new StopFacilitiesUrlBuilder(1162, PtvRouteType.Train, true, true, false));
+        assertEquals("http://timetableapi.ptv.vic.gov.au/v2/stops/?stop_id=1162&route_type=0&location=1&amenity=1&accessibility=0&devid=2&signature=550A884C089485C277750A62E8E5C874489B50FB", result);
+    }
 }
+
+
