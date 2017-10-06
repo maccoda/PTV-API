@@ -1,17 +1,20 @@
 package core;
 
 import core.url.BroadNextDepartureUrlBuilder;
+import core.url.DisruptionsUrlBuilder;
 import core.url.HealthRequestUrlBuilder;
 import core.url.LinesByModeUrlBuilder;
 import core.url.SearchUrlBuilder;
 import core.url.SpecificNextDeparturesUrlBuilder;
+import core.url.StopFacilitiesUrlBuilder;
 import core.url.StoppingPatternUrlBuilder;
 import core.url.StopsNearbyUrlBuilder;
 import core.url.StopsOnALineUrlBuilder;
 import core.url.TransportPoiByMap;
 import org.junit.Test;
-import ptvobjects.PtvPoi;
 import ptvobjects.PtvRouteType;
+import ptvobjects.input.PtvDisruptionMode;
+import ptvobjects.input.PtvPoi;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -106,4 +109,19 @@ public class UrlFactoryTest {
         result = tester.buildUrl(new StoppingPatternUrlBuilder(PtvRouteType.Train, 21173, 1104, "abcd"));
         assertEquals("http://timetableapi.ptv.vic.gov.au/v2/mode/0/run/21173/stop/1104/stopping-pattern?for_utc=abcd&devid=2&signature=23F068474D2E0BA9D03459B2E2C851E424D0A90F", result);
     }
+
+    @Test
+    public void testDisruptions() throws Exception {
+        final PtvDisruptionMode mode = new PtvDisruptionMode().setMode(PtvDisruptionMode.DisruptionModes.GENERAL).setMode(PtvDisruptionMode.DisruptionModes.METRO_TRAIN);
+        final String result = tester.buildUrl(new DisruptionsUrlBuilder(mode));
+        assertEquals("http://timetableapi.ptv.vic.gov.au/v2/disruptions/modes/general,metro-train?devid=2&signature=53D313557AF9D912459F5A3261E8E466AD132543", result);
+    }
+
+    @Test
+    public void testStopFacilities() throws Exception {
+        final String result = tester.buildUrl(new StopFacilitiesUrlBuilder(1162, PtvRouteType.Train, true, true, false));
+        assertEquals("http://timetableapi.ptv.vic.gov.au/v2/stops/?stop_id=1162&route_type=0&location=1&amenity=1&accessibility=0&devid=2&signature=550A884C089485C277750A62E8E5C874489B50FB", result);
+    }
 }
+
+

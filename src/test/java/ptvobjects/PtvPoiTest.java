@@ -1,6 +1,7 @@
 package ptvobjects;
 
 import org.junit.Test;
+import ptvobjects.input.PtvPoi;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,4 +1,4 @@
-package ptvobjects;
+package ptvobjects.input;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -7,7 +7,7 @@ import java.util.Map;
  * Position of interest types. Can be represented as multiple in the single request. That is the POI does not just need
  * to be Train but can be Train AND Tram.
  */
-public final class PtvPoi {
+public final class PtvPoi implements RequestInput {
     public enum PtvPoiTypes {
         TRAIN(0), TRAM(1), BUS(2), VLINE(3), NIGHT_BUS(4), TICKET_OUTLET(100);
         /** Integer representation in the API request */
@@ -52,6 +52,7 @@ public final class PtvPoi {
      *
      * @return as above
      */
+    @Override
     public String toUriRepresentation() {
         final StringBuilder builder = new StringBuilder();
         for (final PtvPoiTypes type : values.keySet()) {

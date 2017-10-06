@@ -1,25 +1,26 @@
 package ptvobjects;
 
 
-import java.util.Date;
+import java.util.List;
 
 public class PtvDisruptionInformation implements PtvBasicObject {
 
-    private String distuptionId;
+    private int disruption_id;
     private String title;
     private String url;
     private String description;
     private String status;
     private String type;
-    private Date publishedOn;
-    private Date lastUpdated;
-    private Date fromDate;
-    private Date toDate;
+    private String publishedOn;
+    private String lastUpdated;
+    private String fromDate;
+    private String toDate;
     private String serviceTime;
+    private List<PtvLine> lines;
 
 
-    public String getDistuptionId() {
-        return distuptionId;
+    public int getDistuptionId() {
+        return disruption_id;
     }
 
     public String getTitle() {
@@ -42,19 +43,19 @@ public class PtvDisruptionInformation implements PtvBasicObject {
         return type;
     }
 
-    public Date getPublishedOn() {
+    public String getPublishedOn() {
         return publishedOn;
     }
 
-    public Date getLastUpdated() {
+    public String getLastUpdated() {
         return lastUpdated;
     }
 
-    public Date getFromDate() {
+    public String getFromDate() {
         return fromDate;
     }
 
-    public Date getToDate() {
+    public String getToDate() {
         return toDate;
     }
 
@@ -62,4 +63,7 @@ public class PtvDisruptionInformation implements PtvBasicObject {
         return serviceTime;
     }
 
+    public List<PtvLine> getLines() {
+        return lines;
+    }
 }

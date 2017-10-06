@@ -1,0 +1,41 @@
+{
+  "stop_id": 1162,
+  "stop_mode_id": 2,
+  "stop_type": "Premium Station",
+  "stop_type_description": "The customer service centre is staffed from first to last train, 7 days a week. Protective Services Officers are generally present from 6pm to last train Sunday to Thursday and overnight on Fridays and Saturdays.",
+  "location": {
+    "suburb": "Richmond",
+    "gps": {
+      "longitude": 144.990158,
+      "latitude": -37.8240738
+    },
+    "postcode": 3121,
+    "municipality": "Yarra",
+    "municipality_id": 53,
+    "primary_stop_name": "Punt",
+    "road_type_primary": "Rd",
+    "second_stop_name": "Swan",
+    "road_type_second": "St",
+    "bay_nbr": 0
+  },
+  "amenity": {
+    "toilet": true,
+    "taxi_rank": false,
+    "car_parking": "0",
+    "cctv": true
+  },
+  "accessibility": {
+    "lighting": true,
+    "stairs": true,
+    "escalator": false,
+    "lifts": false,
+    "hearing_loop": false,
+    "tactile_tiles": true,
+    "wheelchair": {
+      "accessible_ramp": false,
+      "accessible_parking": false,
+      "accessible_phone": true,
+      "accessible_toilet": true
+    }
+  }
+}

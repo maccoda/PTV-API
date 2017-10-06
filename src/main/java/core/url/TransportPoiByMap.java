@@ -1,6 +1,6 @@
 package core.url;
 
-import ptvobjects.PtvPoi;
+import ptvobjects.input.PtvPoi;
 
 public final class TransportPoiByMap implements RequestUrlBuilder {
     public static final int GRID_DEPTH_MAX = 20;

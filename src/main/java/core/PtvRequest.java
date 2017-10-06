@@ -2,28 +2,34 @@ package core;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import core.url.BroadNextDepartureUrlBuilder;
+import core.url.DisruptionsUrlBuilder;
 import core.url.HealthRequestUrlBuilder;
 import core.url.LinesByModeUrlBuilder;
 import core.url.RequestUrlBuilder;
 import core.url.SearchUrlBuilder;
 import core.url.SpecificNextDeparturesUrlBuilder;
+import core.url.StopFacilitiesUrlBuilder;
 import core.url.StoppingPatternUrlBuilder;
 import core.url.StopsNearbyUrlBuilder;
 import core.url.StopsOnALineUrlBuilder;
 import core.url.TransportPoiByMap;
 import ptvobjects.PtvBasicObject;
+import ptvobjects.PtvDisruptionModes;
 import ptvobjects.PtvHealth;
 import ptvobjects.PtvLine;
 import ptvobjects.PtvLocationCluster;
 import ptvobjects.PtvObject;
-import ptvobjects.PtvPoi;
 import ptvobjects.PtvResult;
 import ptvobjects.PtvRouteType;
+import ptvobjects.PtvStopFacilities;
 import ptvobjects.PtvTimetableValues;
 import ptvobjects.builders.LinesListBuilder;
 import ptvobjects.builders.PtvListObjectBuilder;
 import ptvobjects.builders.ResultListBuilder;
+import ptvobjects.input.PtvDisruptionMode;
+import ptvobjects.input.PtvPoi;
 
 import java.util.List;
 
@@ -159,6 +165,17 @@ public final class PtvRequest {
 
     public PtvTimetableValues performStoppingPattern(final PtvRouteType mode, final int runId, final int stopId, final String forUtc) {
         return sendApiRequest(new StoppingPatternUrlBuilder(mode, runId, stopId, forUtc), PtvTimetableValues.class);
+    }
+
+    public PtvDisruptionModes performDisruptions(final PtvDisruptionMode mode) {
+        // Has keys containing hyphens so need to do some special work
+        final String uri = urls.buildUrl(new DisruptionsUrlBuilder(mode));
+        final String response = QueryHandler.sendQuery(uri);
+        return new PtvDisruptionModes(new Gson().fromJson(response, JsonObject.class));
+    }
+
+    public PtvStopFacilities performStopFacilities(final int stopId, final PtvRouteType type, final boolean location, final boolean amenity, final boolean accessibility) {
+        return sendApiRequest(new StopFacilitiesUrlBuilder(stopId, type, location, amenity, accessibility), PtvStopFacilities.class);
     }
 
     /**
