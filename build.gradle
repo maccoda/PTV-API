@@ -55,8 +55,3 @@ bintray {
         }
     }
 }
-
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.4'
-}
