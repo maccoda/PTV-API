@@ -38,6 +38,7 @@ import java.util.List;
  *
  * @author D. Maccora
  */
+@Deprecated
 public final class PtvRequest {
 
     /**
