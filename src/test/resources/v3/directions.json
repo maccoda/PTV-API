@@ -1,0 +1,17 @@
+{
+  "directions": [
+    {
+      "direction_id": 1,
+      "direction_name": "City (Flinders Street)",
+      "route_id": 6,
+      "route_type": 0
+    },
+    {
+      "direction_id": 5,
+      "direction_name": "Frankston",
+      "route_id": 6,
+      "route_type": 0
+    }
+  ],
+  "status": { "version": "3.0", "health": 1 }
+}

@@ -1,0 +1,43 @@
+{
+  "routes": [
+    {
+      "route_type": 0,
+      "route_id": 1,
+      "route_name": "Alamein",
+      "route_number": "",
+      "route_gtfs_id": "2-ALM"
+    },
+    {
+      "route_type": 0,
+      "route_id": 2,
+      "route_name": "Belgrave",
+      "route_number": "",
+      "route_gtfs_id": "2-BEL"
+    },
+    {
+      "route_type": 0,
+      "route_id": 3,
+      "route_name": "Craigieburn",
+      "route_number": "",
+      "route_gtfs_id": "2-B31"
+    },
+    {
+      "route_type": 0,
+      "route_id": 4,
+      "route_name": "Cranbourne",
+      "route_number": "",
+      "route_gtfs_id": "2-CRB"
+    },
+    {
+      "route_type": 0,
+      "route_id": 5,
+      "route_name": "Mernda",
+      "route_number": "",
+      "route_gtfs_id": "2-MER"
+    }
+  ],
+  "status": {
+    "version": "3.0",
+    "health": 1
+  }
+}
