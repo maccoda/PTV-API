@@ -6,9 +6,8 @@ apply plugin: 'eclipse'
 apply plugin: 'jacoco'
 apply plugin: 'maven-publish'
 
-// Added to provide compatibility with Android 4.x.x
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 // Add dependencies for unit test
 repositories {
     mavenCentral()
