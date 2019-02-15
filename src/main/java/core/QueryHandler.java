@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 /**
  * @author D. Maccora
  */
+@Deprecated
 public final class QueryHandler {
     /** Logger */
     private static final Logger LOGGER = Logger.getLogger(QueryHandler.class.getSimpleName());
