@@ -20,15 +20,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * UrlFactory Tester.
+ * UrlSignatureDecorator Tester.
  *
  * @author D. Maccora
  * @version 1.0
  * @since <pre>Apr 8, 2017</pre>
  */
-public class UrlFactoryTest {
+public class UrlSignatureDecoratorTest {
 
-    UrlFactory tester = new UrlFactory(UrlFactory.ApiVersion.V2, "9c132d31-6a30-4cac-8d8b-8a1970834799", 2);
+    UrlSignatureDecorator tester = new UrlSignatureDecorator(UrlSignatureDecorator.ApiVersion.V2, "9c132d31-6a30-4cac-8d8b-8a1970834799", 2);
 
     /**
      * Method: healthCheck()

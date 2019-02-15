@@ -15,9 +15,9 @@ import java.util.logging.Logger;
  *
  * @author D. Maccora
  */
-class UrlFactory {
+class UrlSignatureDecorator {
     /** Logger for loggy logs */
-    private final Logger logger = Logger.getLogger(UrlFactory.class.getSimpleName());
+    private final Logger logger = Logger.getLogger(UrlSignatureDecorator.class.getSimpleName());
 
     enum ApiVersion {
         /** Version 2 */
@@ -61,7 +61,7 @@ class UrlFactory {
      * @param aDeveloperId
      *         - developer ID from PTV
      */
-    UrlFactory(final ApiVersion aVersion, final String aPrivateKey, final int aDeveloperId) {
+    UrlSignatureDecorator(final ApiVersion aVersion, final String aPrivateKey, final int aDeveloperId) {
         this.version = aVersion;
         this.privateKey = aPrivateKey;
         this.developerId = aDeveloperId;
@@ -85,7 +85,7 @@ class UrlFactory {
      *         - request uri (Example :"/v2/mode/2/line/787/stops-for-line)
      * @return - Full URL with Signature
      */
-    private String generateCompleteURLWithSignature(final String uri) {
+    public String generateCompleteURLWithSignature(final String uri) {
         final String versionedUri = "/" + version.toUri() + uri;
         final String baseURL = "http://timetableapi.ptv.vic.gov.au";
         final StringBuffer url = new StringBuffer(baseURL).append(versionedUri).append(versionedUri.contains("?") ? "&" : "?")

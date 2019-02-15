@@ -44,7 +44,7 @@ public final class PtvRequest {
     /**
      * URL factory for creation of API requests.
      */
-    private final UrlFactory urls;
+    private final UrlSignatureDecorator urls;
 
     /**
      * Constructor. Builds context from provided data for generation of API requests.
@@ -56,7 +56,7 @@ public final class PtvRequest {
      */
     public PtvRequest(final String privateKey, final int developerId) {
         // TODO Change this when able to support multiple versions
-        urls = new UrlFactory(UrlFactory.ApiVersion.V2, privateKey, developerId);
+        urls = new UrlSignatureDecorator(UrlSignatureDecorator.ApiVersion.V2, privateKey, developerId);
     }
 
     /**

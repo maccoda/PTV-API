@@ -32,5 +32,14 @@ public class PtvHealth implements PtvBasicObject {
         return securityTokenOK && clientClockOK && memcacheOK && databaseOK;
     }
 
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("PtvHealth{");
+        sb.append("securityTokenOK=").append(securityTokenOK);
+        sb.append(", clientClockOK=").append(clientClockOK);
+        sb.append(", memcacheOK=").append(memcacheOK);
+        sb.append(", databaseOK=").append(databaseOK);
+        sb.append('}');
+        return sb.toString();
+    }
 }
