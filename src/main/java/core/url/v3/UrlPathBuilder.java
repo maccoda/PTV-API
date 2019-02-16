@@ -1,19 +1,22 @@
 package core.url.v3;
 
 public class UrlPathBuilder {
-    private StringBuilder builder;
+    private final StringBuilder builder;
     private boolean hasQueryParams;
 
     public UrlPathBuilder() {
         builder = new StringBuilder();
     }
 
-    public void appendPathSegment(String segment) {
-        builder.append("/").append(segment);
+    public void appendPathSegment(final String segment) {
+        if (!segment.startsWith("/")) {
+            builder.append("/");
+        }
+        builder.append(segment);
     }
 
 
-    public void appendQueryParam(String key, String value) {
+    public void appendQueryParam(final String key, final String value) {
         if (hasQueryParams) {
             builder.append("&");
         } else {

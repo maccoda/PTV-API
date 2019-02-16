@@ -3,7 +3,7 @@ package core.url.v3;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UrlPathBuilderTest {
     private UrlPathBuilder builder;
@@ -43,5 +43,12 @@ public class UrlPathBuilderTest {
         builder.appendQueryParam("another", "one");
 
         assertEquals("/path?key=value&another=one", builder.build());
+    }
+
+    @Test
+    public void shouldOnlyPrependPathWithOneForwardSlash() {
+        builder.appendPathSegment("/hello/there/everyone");
+
+        assertEquals("/hello/there/everyone", builder.build());
     }
 }
