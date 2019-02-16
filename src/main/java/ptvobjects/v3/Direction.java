@@ -1,6 +1,6 @@
 package ptvobjects.v3;
 
-import ptvobjects.PtvRouteType;
+import ptvobjects.RouteType;
 
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -9,7 +9,7 @@ public class Direction {
     private int directionId;
     private String directionName;
     private int routeId;
-    private PtvRouteType routeType;
+    private RouteType routeType;
 
     public int getDirectionId() {
         return directionId;
@@ -23,15 +23,19 @@ public class Direction {
         return routeId;
     }
 
-    public PtvRouteType getRouteType() {
+    public RouteType getRouteType() {
         return routeType;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Direction direction = (Direction) o;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Direction direction = (Direction) o;
         return directionId == direction.directionId &&
                 routeId == direction.routeId &&
                 Objects.equals(directionName, direction.directionName) &&

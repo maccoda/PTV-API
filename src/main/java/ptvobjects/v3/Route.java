@@ -1,18 +1,18 @@
 package ptvobjects.v3;
 
-import ptvobjects.PtvRouteType;
+import ptvobjects.RouteType;
 
 import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Route {
-    private PtvRouteType routeType;
+    private RouteType routeType;
     private int routeId;
     private String routeName;
     private String routeNumber;
     private String routeGtfsId;
 
-    public PtvRouteType getRouteType() {
+    public RouteType getRouteType() {
         return routeType;
     }
 
@@ -33,10 +33,14 @@ public class Route {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Route route = (Route) o;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Route route = (Route) o;
         return routeType == route.routeType &&
                 routeId == route.routeId &&
                 Objects.equals(routeName, route.routeName) &&

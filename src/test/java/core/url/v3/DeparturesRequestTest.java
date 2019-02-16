@@ -1,7 +1,7 @@
 package core.url.v3;
 
 import org.junit.Test;
-import ptvobjects.PtvRouteType;
+import ptvobjects.RouteType;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,7 +9,7 @@ public class DeparturesRequestTest {
 
     @Test
     public void shouldBuildCorrectUrl() {
-        final DeparturesRequest request = new DeparturesRequest(PtvRouteType.Tram, 12);
+        final DeparturesRequest request = new DeparturesRequest(RouteType.Tram, 12);
 
         final String url = request.toUrl();
 

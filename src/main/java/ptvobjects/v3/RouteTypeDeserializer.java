@@ -4,13 +4,13 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import ptvobjects.PtvRouteType;
+import ptvobjects.RouteType;
 
 import java.lang.reflect.Type;
 
-public class RouteTypeDeserializer implements JsonDeserializer<PtvRouteType> {
+public class RouteTypeDeserializer implements JsonDeserializer<RouteType> {
     @Override
-    public PtvRouteType deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        return PtvRouteType.valueOfInt(json.getAsInt());
+    public RouteType deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException {
+        return RouteType.valueOfInt(json.getAsInt());
     }
 }

@@ -5,7 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import factory.GsonFactory;
 import org.junit.Before;
 import org.junit.Test;
-import ptvobjects.PtvRouteType;
+import ptvobjects.RouteType;
 import ptvobjects.v3.Route;
 
 import java.lang.reflect.Type;
@@ -33,7 +33,7 @@ public class RouteDeserializerTest {
 
         assertEquals(5, result.size());
         final Route first = result.iterator().next();
-        assertEquals(PtvRouteType.Train, first.getRouteType());
+        assertEquals(RouteType.Train, first.getRouteType());
         assertEquals(1, first.getRouteId());
         assertEquals("Alamein", first.getRouteName());
         assertEquals("", first.getRouteNumber());
