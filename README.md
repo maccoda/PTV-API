@@ -7,11 +7,56 @@
 
 A library to make simple interface to the Public Transport Victoria API in Java.
 
+## UNDER RENOVATIONS!
+
+PTV has now shut down V2 API. Currently putting together V3 of the API from their [Swagger](http://timetableapi.ptv.vic.gov.au/swagger/ui/index#/).
+
+### Current Status
+- [ ] Departures
+    - [X] route type + stop id
+    - [X] route type + stop id + route id
+    - [ ] query parameters
+- [ ] Directions
+    - [X] route id
+    - [ ] direction id
+    - [ ] direction id + route type
+- [ ] Disruptions
+    - [ ] view all
+    - [ ] route id
+    - [ ] route id + stop id
+    - [ ] stop id
+    - [ ] disruption id
+    - [ ] modes
+- [ ] Outlets
+    - [ ] all
+    - [ ] lat + lon
+- [ ] Patterns
+    - [ ] run id + route type
+- [ ] Routes
+    - [X] all
+    - [X] route id
+    - [ ] query parameters
+- [ ] Route Types
+    - [ ] all
+- [ ] Runs
+    - [ ] route id
+    - [ ] route id + route type
+    - [ ] run id
+    - [ ] run id + route type
+- [ ] Search
+    - [ ] search term
+- [ ] Stops
+    - [ ] stop id + route type
+    - [ ] route id + route type
+    - [ ] lat + lon
+    
+ 
 ## Build
-Build is done by Gradle. `gradle build` in the root directory will do the job.
+Build is done by Gradle. `./gradlew build` in the root directory will do the job.
 The jar is created in the default directory of `build/libs/PTV-API.jar`.
 
 ## Usage
+
 To use this library will first need to obtain the developer ID and private key
 from PTV,
 [here](https://www.ptv.vic.gov.au/about-ptv/ptv-data-and-reports/digital-products/ptv-timetable-api/)
@@ -24,6 +69,8 @@ The artifacts are published to
 build tool of choice.
 
 ### Code
+
+*This was V2 API, V3 API will be documented once more has been completed*
 
 Once you've got these you can create a `PtvRequest` object and that is all you
 need to obtain the information from PTV. This will build your request and return
