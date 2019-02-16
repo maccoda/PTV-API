@@ -1,9 +1,9 @@
 package core.url.v3;
 
-public class DirectionsRequest implements Request {
+public class DirectionsOnRouteRequest implements Request {
     private final int routeId;
 
-    private DirectionsRequest(final int routeId) {
+    private DirectionsOnRouteRequest(final int routeId) {
         this.routeId = routeId;
     }
 
@@ -27,8 +27,8 @@ public class DirectionsRequest implements Request {
             return this;
         }
 
-        public DirectionsRequest build() {
-            return new DirectionsRequest(routeId);
+        public DirectionsOnRouteRequest build() {
+            return new DirectionsOnRouteRequest(routeId);
         }
     }
 }

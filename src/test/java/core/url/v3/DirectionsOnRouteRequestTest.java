@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class DirectionsRequestTest {
+public class DirectionsOnRouteRequestTest {
     @Test
     public void shouldBuildCorrectUrl() {
-        final DirectionsRequest request = new DirectionsRequest(34);
+        final DirectionsOnRouteRequest request = new DirectionsOnRouteRequest(34);
 
         final String url = request.toUrl();
 
