@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.logging.Logger;
 
-public class ApiClient {
-    private static final Logger LOGGER = Logger.getLogger(QueryHandler.class.getSimpleName());
+class HttpClient {
+    private static final Logger LOGGER = Logger.getLogger(HttpClient.class.getSimpleName());
 
-    public String send(String apiCall) {
+    String send(final String apiCall) {
         String line;
         final StringBuilder jsonResponse = new StringBuilder();
         LOGGER.info("sendQuery::Sending query: " + apiCall);

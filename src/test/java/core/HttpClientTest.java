@@ -3,19 +3,19 @@ package core;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class ApiClientTest {
-    private ApiClient client;
+public class HttpClientTest {
+    private HttpClient client;
 
     @Before
     public void setUp()  {
-        client = new ApiClient();
+        client = new HttpClient();
     }
 
     @Test
     public void sendQueryTest() {
-        String path = ClassLoader.getSystemResource("testResponse.json").getPath();
+        final String path = ClassLoader.getSystemResource("testResponse.json").getPath();
         final String fileLocation = "file://" + path;
 
         final String result = client.send(fileLocation);
