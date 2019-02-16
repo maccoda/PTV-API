@@ -13,7 +13,7 @@ public class HttpClientImpl implements Sender {
     public String send(final String apiCall) {
         String line;
         final StringBuilder jsonResponse = new StringBuilder();
-        LOGGER.info("sendQuery::Sending query: " + apiCall);
+        LOGGER.fine("Sending query: " + apiCall);
 
         try {
             final URL url = new URL(apiCall);
@@ -23,7 +23,7 @@ public class HttpClientImpl implements Sender {
                 jsonResponse.append(line);
             }
         } catch (final IOException e) {
-            LOGGER.severe("sendQueryToApi::Error obtaining API response");
+            LOGGER.severe("Error obtaining API response");
         }
 
         return jsonResponse.toString();

@@ -28,9 +28,7 @@ public class UrlSignatureDecorator {
         final String baseURL = "http://timetableapi.ptv.vic.gov.au";
         final String pathSegments = appendDevIdAndSignature(uri);
 
-        final String url = baseURL + pathSegments;
-        logger.info("Building query " + url);
-        return url;
+        return baseURL + pathSegments;
     }
 
     private String appendDevIdAndSignature(final String uri) {
