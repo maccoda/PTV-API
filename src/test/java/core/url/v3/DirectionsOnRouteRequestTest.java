@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class DirectionsOnRouteRequestTest {
     @Test
     public void shouldBuildCorrectUrl() {
-        final DirectionsOnRouteRequest request = new DirectionsOnRouteRequest(34);
+        final DirectionsOnRouteRequest request = DirectionsOnRouteRequest.builder().withRouteId(34).build();
 
         final String url = request.toUrl();
 

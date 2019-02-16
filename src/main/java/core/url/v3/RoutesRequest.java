@@ -4,7 +4,7 @@ public class RoutesRequest implements Request {
 
     private final Integer routeId;
 
-    RoutesRequest(final Integer routeId) {
+    private RoutesRequest(final Integer routeId) {
         this.routeId = routeId;
     }
 
