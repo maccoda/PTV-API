@@ -1,7 +1,6 @@
 package core;
 
 import auth.Authentication;
-import core.url.RequestUrlBuilder;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -62,7 +61,7 @@ public class UrlSignatureDecorator {
      * @param aDeveloperId
      *         - developer ID from PTV
      */
-    public UrlSignatureDecorator(final ApiVersion aVersion, final String aPrivateKey, final int aDeveloperId) {
+    UrlSignatureDecorator(final ApiVersion aVersion, final String aPrivateKey, final int aDeveloperId) {
         version = aVersion;
         privateKey = aPrivateKey;
         developerId = aDeveloperId;
@@ -72,17 +71,6 @@ public class UrlSignatureDecorator {
         version = aVersion;
         privateKey = auth.getPrivateKey().asString();
         developerId = auth.getDeveloperId().asInteger();
-    }
-
-    /**
-     * Build the full URL with the provided {@link RequestUrlBuilder}
-     *
-     * @param urlBuilder
-     *         - request builder
-     * @return as above
-     */
-    String buildUrl(final RequestUrlBuilder urlBuilder) {
-        return generateCompleteURLWithSignature(urlBuilder.buildUrl());
     }
 
     /**
