@@ -2,14 +2,12 @@ package core.url.v3;
 
 import ptvobjects.RouteType;
 
-import java.util.Optional;
-
 public class DeparturesRequest implements Request {
     private final RouteType routeType;
     private final int stopId;
-    private final Optional<Integer> routeId;
+    private final Integer routeId;
 
-    private DeparturesRequest(final RouteType routeType, final int stopId, final Optional<Integer> routeId) {
+    private DeparturesRequest(final RouteType routeType, final int stopId, final Integer routeId) {
         this.routeType = routeType;
         this.stopId = stopId;
         this.routeId = routeId;
@@ -24,10 +22,10 @@ public class DeparturesRequest implements Request {
         builder.appendPathSegment(routeType.getId());
         builder.appendPathSegment("stop");
         builder.appendPathSegment(stopId);
-        routeId.ifPresent(id -> {
+        if (routeId != null) {
             builder.appendPathSegment("route");
-            builder.appendPathSegment(id);
-        });
+            builder.appendPathSegment(routeId);
+        }
         return builder.build();
     }
 
@@ -38,11 +36,7 @@ public class DeparturesRequest implements Request {
     public static class Builder {
         private RouteType routeType;
         private int stopId;
-        private Optional<Integer> routeId;
-
-        Builder() {
-            routeId = Optional.empty();
-        }
+        private Integer routeId;
 
         public Builder withRouteType(final RouteType type) {
             routeType = type;
@@ -55,7 +49,7 @@ public class DeparturesRequest implements Request {
         }
 
         public Builder withRouteId(final int routeId) {
-            this.routeId = Optional.of(routeId);
+            this.routeId = routeId;
             return this;
         }
 
