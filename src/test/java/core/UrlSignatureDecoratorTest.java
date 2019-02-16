@@ -1,5 +1,8 @@
 package core;
 
+import auth.Authentication;
+import auth.DeveloperId;
+import auth.PrivateKey;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,7 +16,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class UrlSignatureDecoratorTest {
 
-    private final UrlSignatureDecorator tester = new UrlSignatureDecorator(UrlSignatureDecorator.ApiVersion.V2, "9c132d31-6a30-4cac-8d8b-8a1970834799", 2);
+    private final UrlSignatureDecorator tester = new UrlSignatureDecorator(UrlSignatureDecorator.ApiVersion.V2, new Authentication(PrivateKey.from("9c132d31-6a30-4cac-8d8b-8a1970834799"), DeveloperId.from(2)));
 
     @Test
     public void shouldAddSignature() {

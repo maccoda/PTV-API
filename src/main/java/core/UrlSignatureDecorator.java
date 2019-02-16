@@ -16,29 +16,20 @@ import java.util.logging.Logger;
  * @author D. Maccora
  */
 public class UrlSignatureDecorator {
-    /** Logger for loggy logs */
+    // TODO: THis class needs some love and attention
+
     private final Logger logger = Logger.getLogger(UrlSignatureDecorator.class.getSimpleName());
 
     public enum ApiVersion {
-        /** Version 2 */
         V2("v2"),
-        /** Version 3 */
         V3("v3");
 
-        /** Representation in the uri */
         private final String uri;
 
-        /**
-         * Constructor.
-         *
-         * @param aUri
-         *         uri
-         */
         ApiVersion(final String aUri) {
             uri = aUri;
         }
 
-        /** @return version as URI */
         String toUri() {
             return uri;
         }
@@ -51,21 +42,6 @@ public class UrlSignatureDecorator {
     /** Developer ID */
     private final int developerId;
 
-    /**
-     * Constructor
-     *
-     * @param aVersion
-     *         - version of API to use
-     * @param aPrivateKey
-     *         - private key of developer from PTV
-     * @param aDeveloperId
-     *         - developer ID from PTV
-     */
-    UrlSignatureDecorator(final ApiVersion aVersion, final String aPrivateKey, final int aDeveloperId) {
-        version = aVersion;
-        privateKey = aPrivateKey;
-        developerId = aDeveloperId;
-    }
 
     public UrlSignatureDecorator(final ApiVersion aVersion, final Authentication auth) {
         version = aVersion;

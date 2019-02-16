@@ -1,5 +1,8 @@
 package core;
 
+import auth.Authentication;
+import auth.DeveloperId;
+import auth.PrivateKey;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -11,7 +14,7 @@ public class ApiClientTest {
     public void shouldCallHttpClientWithGeneratedSignature() {
         final SenderMock http = new SenderMock();
         // TODO: This constructor is a problem
-        final ApiClient client = new ApiClient(new UrlSignatureDecorator(UrlSignatureDecorator.ApiVersion.V3, "key", 1), http);
+        final ApiClient client = new ApiClient(new UrlSignatureDecorator(UrlSignatureDecorator.ApiVersion.V3, new Authentication(PrivateKey.from("key"), DeveloperId.from(1))), http);
 
         client.send("/call/with/this");
 
@@ -28,8 +31,8 @@ public class ApiClientTest {
             response = "response";
         }
 
-        SenderMock(String resonse) {
-            this.response = resonse;
+        SenderMock(final String resonse) {
+            response = resonse;
         }
 
         @Override
