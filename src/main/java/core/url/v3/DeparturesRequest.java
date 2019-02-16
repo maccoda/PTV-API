@@ -14,6 +14,7 @@ public class DeparturesRequest implements Request {
     @Override
     public String toUrl() {
         final UrlPathBuilder builder = new UrlPathBuilder();
+        builder.appendPathSegment("v3");
         builder.appendPathSegment("departures");
         builder.appendPathSegment("route_type");
         builder.appendPathSegment(Integer.toString(routeType.getId()));

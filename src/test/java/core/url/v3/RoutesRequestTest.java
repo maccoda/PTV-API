@@ -8,10 +8,10 @@ public class RoutesRequestTest {
 
     @Test
     public void shouldBuildCorrectUrl() {
-        RoutesRequest request = new RoutesRequest();
+        final RoutesRequest request = new RoutesRequest();
 
-        String url = request.toUrl();
+        final String url = request.toUrl();
 
-        assertEquals("/routes", url);
+        assertEquals("/v3/routes", url);
     }
 }

@@ -13,6 +13,6 @@ public class DeparturesRequestTest {
 
         final String url = request.toUrl();
 
-        assertEquals("/departures/route_type/1/stop/12", url);
+        assertEquals("/v3/departures/route_type/1/stop/12", url);
     }
 }

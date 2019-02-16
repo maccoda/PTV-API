@@ -8,28 +8,11 @@ import java.util.logging.Logger;
 public class UrlSignatureDecorator {
     private final Logger logger = Logger.getLogger(UrlSignatureDecorator.class.getSimpleName());
 
-    public enum ApiVersion {
-        V2("v2"),
-        V3("v3");
-
-        private final String uri;
-
-        ApiVersion(final String aUri) {
-            uri = aUri;
-        }
-
-        String toUri() {
-            return uri;
-        }
-    }
-
-    private final ApiVersion version;
     private final String privateKey;
     private final int developerId;
 
 
-    public UrlSignatureDecorator(final ApiVersion aVersion, final Authentication auth) {
-        version = aVersion;
+    public UrlSignatureDecorator(final Authentication auth) {
         privateKey = auth.getPrivateKey().asString();
         developerId = auth.getDeveloperId().asInteger();
     }
@@ -52,7 +35,6 @@ public class UrlSignatureDecorator {
 
     private String appendDevIdAndSignature(final String uri) {
         final UrlPathBuilder builder = new UrlPathBuilder();
-        builder.appendPathSegment(version.toUri());
         builder.appendPathSegment(uri);
         builder.appendQueryParam("devid", Integer.toString(developerId));
         final String withDevId = builder.build();

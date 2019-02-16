@@ -11,6 +11,6 @@ public class DirectionsRequestTest {
 
         final String url = request.toUrl();
 
-        assertEquals("/directions/route/34", url);
+        assertEquals("/v3/directions/route/34", url);
     }
 }

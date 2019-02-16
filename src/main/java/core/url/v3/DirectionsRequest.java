@@ -3,13 +3,14 @@ package core.url.v3;
 public class DirectionsRequest implements Request {
     private final int routeId;
 
-    public DirectionsRequest(int routeId) {
+    public DirectionsRequest(final int routeId) {
         this.routeId = routeId;
     }
 
     @Override
     public String toUrl() {
-        UrlPathBuilder builder = new UrlPathBuilder();
+        final UrlPathBuilder builder = new UrlPathBuilder();
+        builder.appendPathSegment("v3");
         builder.appendPathSegment("directions");
         builder.appendPathSegment("route");
         builder.appendPathSegment(Integer.toString(routeId));

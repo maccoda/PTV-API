@@ -13,13 +13,12 @@ public class ApiClientTest {
     @Test
     public void shouldCallHttpClientWithGeneratedSignature() {
         final SenderMock http = new SenderMock();
-        // TODO: This constructor is a problem
-        final ApiClient client = new ApiClient(new UrlSignatureDecorator(UrlSignatureDecorator.ApiVersion.V3, new Authentication(PrivateKey.from("key"), DeveloperId.from(1))), http);
+        final ApiClient client = new ApiClient(new UrlSignatureDecorator(new Authentication(PrivateKey.from("key"), DeveloperId.from(1))), http);
 
         client.send("/call/with/this");
 
         assertTrue(http.isCalled);
-        assertEquals("http://timetableapi.ptv.vic.gov.au/v3/call/with/this?devid=1&signature=299016E46F93B72DDDAEFAB50A51D5D3FCD394FE", http.calledValue);
+        assertEquals("http://timetableapi.ptv.vic.gov.au/call/with/this?devid=1&signature=1B659E5FDA9C96501E3F7D958CBA5674EDF9F500", http.calledValue);
     }
 
     static class SenderMock implements Sender {
@@ -31,8 +30,8 @@ public class ApiClientTest {
             response = "response";
         }
 
-        SenderMock(final String resonse) {
-            response = resonse;
+        SenderMock(final String response) {
+            this.response = response;
         }
 
         @Override
