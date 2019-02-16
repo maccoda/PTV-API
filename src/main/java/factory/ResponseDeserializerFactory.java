@@ -3,18 +3,13 @@ package factory;
 import com.google.gson.Gson;
 import deserialize.DepartureDeserializer;
 import deserialize.DirectionDeserializer;
-import deserialize.ResponseDeserializerWrapper;
 import deserialize.RouteDeserializer;
 import deserialize.StringDeserializer;
 
-public class DeserializerFactory {
-    private static Gson gson = GsonFactory.gson();
+public class ResponseDeserializerFactory {
+    private static final Gson gson = GsonFactory.gson();
 
-    private DeserializerFactory() {
-    }
-
-    public static ResponseDeserializerWrapper responseDeserializerWrapper() {
-        return new ResponseDeserializerWrapper(gson);
+    private ResponseDeserializerFactory() {
     }
 
     public static DepartureDeserializer departureDeserializer() {

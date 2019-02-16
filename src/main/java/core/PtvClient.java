@@ -1,30 +1,33 @@
 package core;
 
-import deserialize.ResponseDeserializer;
-import deserialize.ResponseDeserializerWrapper;
-import factory.DeserializerFactory;
+import auth.Authentication;
 import core.url.v3.Request;
+import deserialize.DeserializerWrapper;
+import deserialize.ResponseDeserializer;
+import factory.ApiClientFactory;
+import factory.ResponseDeserializerFactory;
+import factory.ResponseWrapperFactory;
 
 public class PtvClient {
-    private final String privateKey;
-    private final int developerId;
-    private final UrlSignatureDecorator.ApiVersion version = UrlSignatureDecorator.ApiVersion.V3;
-    private final ApiClient client;
+    private final Sender apiClient;
+    private final DeserializerWrapper wrapper;
 
-    public PtvClient(String privateKey, int developerId) {
-        this.privateKey = privateKey;
-        this.developerId = developerId;
-        client = new ApiClient();
+    PtvClient(final Sender apiClient, final DeserializerWrapper wrapper) {
+        this.apiClient = apiClient;
+        this.wrapper = wrapper;
     }
 
-    public <T> T executeRequest(Request request, ResponseDeserializer<T> deserializer) {
-        String url = new UrlSignatureDecorator(version, privateKey, developerId).generateCompleteURLWithSignature(request.toUrl());
-        String result = client.send(url);
-        ResponseDeserializerWrapper wrapper = DeserializerFactory.responseDeserializerWrapper();
+    // Public library entry point - hence have factories here not in main
+    public PtvClient(final Authentication auth) {
+        this(ApiClientFactory.v3ApiClient(auth), ResponseWrapperFactory.responseDeserializerWrapper());
+    }
+
+    public <T> T executeRequest(final Request request, final ResponseDeserializer<T> deserializer) {
+        final String result = apiClient.send(request.toUrl());
         return wrapper.deserialize(result, deserializer);
     }
 
-    public String executeRequest(Request request) {
-        return executeRequest(request, DeserializerFactory.stringDeserializer());
+    String executeRequest(final Request request) {
+        return executeRequest(request, ResponseDeserializerFactory.stringDeserializer());
     }
 }

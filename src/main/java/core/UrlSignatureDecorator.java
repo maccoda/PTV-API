@@ -1,5 +1,6 @@
 package core;
 
+import auth.Authentication;
 import core.url.RequestUrlBuilder;
 
 import javax.crypto.Mac;
@@ -15,11 +16,11 @@ import java.util.logging.Logger;
  *
  * @author D. Maccora
  */
-class UrlSignatureDecorator {
+public class UrlSignatureDecorator {
     /** Logger for loggy logs */
     private final Logger logger = Logger.getLogger(UrlSignatureDecorator.class.getSimpleName());
 
-    enum ApiVersion {
+    public enum ApiVersion {
         /** Version 2 */
         V2("v2"),
         /** Version 3 */
@@ -35,7 +36,7 @@ class UrlSignatureDecorator {
          *         uri
          */
         ApiVersion(final String aUri) {
-            this.uri = aUri;
+            uri = aUri;
         }
 
         /** @return version as URI */
@@ -61,10 +62,16 @@ class UrlSignatureDecorator {
      * @param aDeveloperId
      *         - developer ID from PTV
      */
-    UrlSignatureDecorator(final ApiVersion aVersion, final String aPrivateKey, final int aDeveloperId) {
-        this.version = aVersion;
-        this.privateKey = aPrivateKey;
-        this.developerId = aDeveloperId;
+    public UrlSignatureDecorator(final ApiVersion aVersion, final String aPrivateKey, final int aDeveloperId) {
+        version = aVersion;
+        privateKey = aPrivateKey;
+        developerId = aDeveloperId;
+    }
+
+    public UrlSignatureDecorator(final ApiVersion aVersion, final Authentication auth) {
+        version = aVersion;
+        privateKey = auth.getPrivateKey().asString();
+        developerId = auth.getDeveloperId().asInteger();
     }
 
     /**
@@ -85,7 +92,7 @@ class UrlSignatureDecorator {
      *         - request uri (Example :"/v2/mode/2/line/787/stops-for-line)
      * @return - Full URL with Signature
      */
-    public String generateCompleteURLWithSignature(final String uri) {
+    String generateCompleteURLWithSignature(final String uri) {
         final String versionedUri = "/" + version.toUri() + uri;
         final String baseURL = "http://timetableapi.ptv.vic.gov.au";
         final StringBuffer url = new StringBuffer(baseURL).append(versionedUri).append(versionedUri.contains("?") ? "&" : "?")
