@@ -36,8 +36,8 @@ PTV has now shut down V2 API. Currently putting together V3 of the API from thei
     - [X] all
     - [X] route id
     - [ ] query parameters
-- [ ] Route Types
-    - [ ] all
+- [X] Route Types
+    - [X] all
 - [ ] Runs
     - [ ] route id
     - [ ] route id + route type

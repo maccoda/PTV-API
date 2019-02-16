@@ -7,6 +7,7 @@ public class DeserializerRegister {
             Class.forName("deserialize.DepartureDeserializer");
             Class.forName("deserialize.DirectionDeserializer");
             Class.forName("deserialize.RouteDeserializer");
+            Class.forName("deserialize.RouteTypeDeserializer");
         } catch (final ClassNotFoundException any) {
             any.printStackTrace();
             throw new RuntimeException("Failed to load");
