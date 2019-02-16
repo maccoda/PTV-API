@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class HttpClientTest {
-    private HttpClient client;
+public class HttpClientImplTest {
+    private HttpClientImpl client;
 
     @Before
     public void setUp()  {
-        client = new HttpClient();
+        client = new HttpClientImpl();
     }
 
     @Test
