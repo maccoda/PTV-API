@@ -9,9 +9,9 @@ import factory.ResponseDeserializerFactory;
 import ptvobjects.v3.Departure;
 
 import java.lang.reflect.Type;
-import java.util.Collection;
+import java.util.List;
 
-public class DepartureDeserializer extends AbstractResponseDeserializer<Collection<Departure>> {
+public class DepartureDeserializer extends AbstractResponseDeserializer<List<Departure>> {
 
     static {
         ResponseDeserializerFactory.instance().registerDeserializer(DeparturesRequest.class, DepartureDeserializer.class);
@@ -28,7 +28,7 @@ public class DepartureDeserializer extends AbstractResponseDeserializer<Collecti
 
     @Override
     Type deserializeType() {
-        return new TypeToken<Collection<Departure>>() {
+        return new TypeToken<List<Departure>>() {
         }.getType();
     }
 }

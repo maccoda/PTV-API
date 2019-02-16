@@ -8,7 +8,7 @@ import org.junit.Test;
 import ptvobjects.v3.Direction;
 
 import java.lang.reflect.Type;
-import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,7 +33,7 @@ public class DirectionDeserializerTest {
     public void shouldHaveCollectionDirectionAsType() {
         final Type type = deserializer.deserializeType();
 
-        assertEquals(new TypeToken<Collection<Direction>>() {
+        assertEquals(new TypeToken<List<Direction>>() {
         }.getType(), type);
     }
 

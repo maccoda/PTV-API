@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,10 +29,10 @@ public class RouteDeserializerTest {
         final Path path = Paths.get(ClassLoader.getSystemResource("v3/routes.json").toURI());
         final String input = new String(Files.readAllBytes(path));
 
-        final Collection<Route> result = deserializer.deserialize(input);
+        final List<Route> result = deserializer.deserialize(input);
 
         assertEquals(5, result.size());
-        final Route first = result.iterator().next();
+        final Route first = result.get(0);
         assertEquals(RouteType.Train, first.getRouteType());
         assertEquals(1, first.getRouteId());
         assertEquals("Alamein", first.getRouteName());
@@ -51,7 +51,7 @@ public class RouteDeserializerTest {
     public void shouldHaveCollectionRouteAsType() {
         final Type type = deserializer.deserializeType();
 
-        assertEquals(new TypeToken<Collection<Route>>() {
+        assertEquals(new TypeToken<List<Route>>() {
         }.getType(), type);
     }
 }

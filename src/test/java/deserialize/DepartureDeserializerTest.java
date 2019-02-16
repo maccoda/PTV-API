@@ -8,7 +8,7 @@ import org.junit.Test;
 import ptvobjects.v3.Departure;
 
 import java.lang.reflect.Type;
-import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -32,7 +32,7 @@ public class DepartureDeserializerTest {
     public void shouldHaveCollectionDepartureAsType() {
         final Type type = deserializer.deserializeType();
 
-        assertEquals(new TypeToken<Collection<Departure>>() {
+        assertEquals(new TypeToken<List<Departure>>() {
         }.getType(), type);
     }
 }

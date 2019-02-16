@@ -9,9 +9,9 @@ import factory.ResponseDeserializerFactory;
 import ptvobjects.v3.Route;
 
 import java.lang.reflect.Type;
-import java.util.Collection;
+import java.util.List;
 
-public class RouteDeserializer extends AbstractResponseDeserializer<Collection<Route>> {
+public class RouteDeserializer extends AbstractResponseDeserializer<List<Route>> {
 
     static {
         ResponseDeserializerFactory.instance().registerDeserializer(RoutesRequest.class, RouteDeserializer.class);
@@ -28,7 +28,7 @@ public class RouteDeserializer extends AbstractResponseDeserializer<Collection<R
 
     @Override
     Type deserializeType() {
-        return new TypeToken<Collection<Route>>() {
+        return new TypeToken<List<Route>>() {
         }.getType();
     }
 }

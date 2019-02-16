@@ -9,9 +9,9 @@ import factory.ResponseDeserializerFactory;
 import ptvobjects.v3.Direction;
 
 import java.lang.reflect.Type;
-import java.util.Collection;
+import java.util.List;
 
-public class DirectionDeserializer extends AbstractResponseDeserializer<Collection<Direction>> {
+public class DirectionDeserializer extends AbstractResponseDeserializer<List<Direction>> {
 
     static {
         ResponseDeserializerFactory.instance().registerDeserializer(DirectionsOnRouteRequest.class, DirectionDeserializer.class);
@@ -28,7 +28,7 @@ public class DirectionDeserializer extends AbstractResponseDeserializer<Collecti
 
     @Override
     Type deserializeType() {
-        return new TypeToken<Collection<Direction>>() {
+        return new TypeToken<List<Direction>>() {
         }.getType();
     }
 }
