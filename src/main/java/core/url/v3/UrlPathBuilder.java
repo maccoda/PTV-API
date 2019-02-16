@@ -15,6 +15,10 @@ public class UrlPathBuilder {
         builder.append(segment);
     }
 
+    void appendPathSegment(final Integer i) {
+        appendPathSegment(Integer.toString(i));
+    }
+
 
     public void appendQueryParam(final String key, final String value) {
         if (hasQueryParams) {

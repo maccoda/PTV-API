@@ -8,11 +8,21 @@ import static org.junit.Assert.assertEquals;
 public class DeparturesRequestTest {
 
     @Test
-    public void shouldBuildCorrectUrl() {
-        final DeparturesRequest request = new DeparturesRequest(RouteType.Tram, 12);
+    public void shouldUseBuilderCorrectlyWithNoOptional() {
+        final DeparturesRequest request = DeparturesRequest.builder().withRouteType(RouteType.Bus).withStopId(45).build();
 
         final String url = request.toUrl();
 
-        assertEquals("/v3/departures/route_type/1/stop/12", url);
+        assertEquals("/v3/departures/route_type/2/stop/45", url);
+    }
+
+    @Test
+    public void shouldUseBuilderCorrectlyWithAllOptional() {
+        final DeparturesRequest request = DeparturesRequest.builder()
+                .withRouteType(RouteType.Bus).withStopId(45).withRouteId(23).build();
+
+        final String url = request.toUrl();
+
+        assertEquals("/v3/departures/route_type/2/stop/45/route/23", url);
     }
 }

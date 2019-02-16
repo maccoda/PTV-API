@@ -51,4 +51,12 @@ public class UrlPathBuilderTest {
 
         assertEquals("/hello/there/everyone", builder.build());
     }
+
+    @Test
+    public void shouldAcceptIntegerOnPathSegment() {
+        builder.appendPathSegment(12);
+        builder.appendPathSegment("time");
+
+        assertEquals("/12/time", builder.build());
+    }
 }
