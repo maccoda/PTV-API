@@ -8,19 +8,20 @@ public class UrlPathBuilder {
         builder = new StringBuilder();
     }
 
-    public void appendPathSegment(final String segment) {
+    public UrlPathBuilder appendPathSegment(final String segment) {
         if (!segment.startsWith("/")) {
             builder.append("/");
         }
         builder.append(segment);
+        return this;
     }
 
-    void appendPathSegment(final Integer i) {
-        appendPathSegment(Integer.toString(i));
+    UrlPathBuilder appendPathSegment(final Integer i) {
+        return appendPathSegment(Integer.toString(i));
     }
 
 
-    public void appendQueryParam(final String key, final String value) {
+    public UrlPathBuilder appendQueryParam(final String key, final String value) {
         if (hasQueryParams) {
             builder.append("&");
         } else {
@@ -28,6 +29,7 @@ public class UrlPathBuilder {
             hasQueryParams = true;
         }
         builder.append(key).append("=").append(value);
+        return this;
     }
 
     public String build() {

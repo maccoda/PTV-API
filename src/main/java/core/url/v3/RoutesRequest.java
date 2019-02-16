@@ -10,9 +10,7 @@ public class RoutesRequest implements Request {
 
     @Override
     public String toUrl() {
-        final UrlPathBuilder builder = new UrlPathBuilder();
-        builder.appendPathSegment("v3");
-        builder.appendPathSegment("routes");
+        final UrlPathBuilder builder = new UrlPathBuilder().appendPathSegment("v3").appendPathSegment("routes");
         if (routeId != null) {
             builder.appendPathSegment(routeId);
         }
